@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SOLECRAFT — Premium Footwear</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#0a0a0a;--white:#ffffff;--accent:#FF4D00;--gray:#f4f4f4;--muted:#888;--border:#e5e5e5}
+body{font-family:'Inter',sans-serif;color:var(--black);background:#fff;overflow-x:hidden}
+img{max-width:100%;display:block}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2.5rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:#fff;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.logo{font-size:1.3rem;font-weight:900;letter-spacing:-.02em}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;font-size:.88rem;font-weight:500}
+.nav-links a{color:var(--muted);transition:color .2s;text-decoration:none}
+.nav-links a:hover{color:var(--black)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.icon-btn{background:none;border:none;font-size:1.2rem;cursor:pointer;position:relative}
+.cart-count{position:absolute;top:-4px;right:-4px;background:var(--accent);color:#fff;border-radius:50%;width:16px;height:16px;font-size:.6rem;display:flex;align-items:center;justify-content:center;font-weight:700}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:88vh;overflow:hidden}
+.hero-left{background:var(--black);color:#fff;display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem;position:relative;overflow:hidden}
+.hero-left::before{content:'SOLE';position:absolute;font-size:16rem;font-weight:900;opacity:.04;right:-2rem;bottom:-2rem;line-height:1;pointer-events:none}
+.hero-eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.12em;color:var(--accent);margin-bottom:1.2rem;text-transform:uppercase}
+.hero-left h1{font-size:clamp(2.5rem,5vw,5rem);font-weight:900;line-height:1;letter-spacing:-.04em;margin-bottom:1.5rem}
+.hero-left h1 em{font-style:normal;color:var(--accent)}
+.hero-left p{color:#aaa;font-size:1rem;max-width:40ch;margin-bottom:2.5rem;line-height:1.65}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;border:none;padding:.9rem 2rem;font-weight:700;font-size:.9rem;border-radius:4px;cursor:pointer;transition:opacity .2s}
+.btn-primary:hover{opacity:.88}
+.btn-secondary{background:transparent;color:#fff;border:2px solid #333;padding:.9rem 2rem;font-weight:700;font-size:.9rem;border-radius:4px;cursor:pointer;transition:border-color .2s}
+.btn-secondary:hover{border-color:#666}
+
+/* 3D SHOE HERO SCENE */
+.hero-right{background:#f0ede8;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-right canvas{position:absolute;inset:0;width:100%!important;height:100%!important}
+.hero-badge{position:absolute;top:2rem;right:2rem;background:#fff;border-radius:50%;width:90px;height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;text-align:center;line-height:1.3;box-shadow:0 4px 20px rgba(0,0,0,.2);z-index:2}
+.hero-badge span{font-size:1.2rem;font-weight:900;color:var(--accent)}
+
+/* MARQUEE */
+.marquee{background:var(--accent);color:#fff;padding:.6rem 0;overflow:hidden;white-space:nowrap;font-size:.82rem;font-weight:700;letter-spacing:.06em}
+.marquee-inner{display:inline-block;animation:scroll 22s linear infinite}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.section{padding:4rem 2.5rem;max-width:1200px;margin:0 auto}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem}
+.section-head h2{font-size:1.8rem;font-weight:800;letter-spacing:-.02em}
+.see-all{font-size:.85rem;font-weight:600;color:var(--accent);text-decoration:none}
+
+/* CATEGORY CARDS with SVG shoes */
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.cat-card{border-radius:14px;overflow:hidden;aspect-ratio:3/4;position:relative;cursor:pointer;transition:transform .3s}
+.cat-card:hover{transform:scale(1.02)}
+.cat-bg{position:absolute;inset:0;width:100%;height:100%}
+.cat-shoe{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);width:75%;transition:transform .3s}
+.cat-card:hover .cat-shoe{transform:translate(-50%,-65%) scale(1.08)}
+.cat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 55%)}
+.cat-label{position:absolute;bottom:1rem;left:1rem;color:#fff;font-weight:800;font-size:1rem}
+.cat-count{position:absolute;bottom:2.5rem;left:1rem;color:rgba(255,255,255,.7);font-size:.78rem}
+
+/* PRODUCT GRID */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.8rem}
+.prod-card{cursor:pointer}
+.prod-img{position:relative;border-radius:14px;overflow:hidden;background:#f8f8f8;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+.prod-img svg{width:72%;height:72%;transition:transform .4s}
+.prod-card:hover .prod-img svg{transform:scale(1.08) rotate(-5deg)}
+.prod-tag{position:absolute;top:10px;left:10px;background:var(--black);color:#fff;font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:4px;letter-spacing:.04em}
+.prod-tag.sale{background:var(--accent)}
+.wishlist{position:absolute;top:10px;right:10px;background:#fff;border:none;border-radius:50%;width:32px;height:32px;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.12);transition:transform .2s}
+.wishlist:hover{transform:scale(1.1)}
+.prod-info{padding:.8rem .2rem 0}
+.prod-brand{font-size:.72rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.prod-name{font-size:.95rem;font-weight:700;margin:.2rem 0}
+.prod-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:.5rem}
+.prod-price{font-weight:800;font-size:1rem}
+.prod-rating{font-size:.78rem;color:var(--muted)}
+.sizes{display:flex;gap:.3rem;margin-top:.5rem;flex-wrap:wrap}
+.size{font-size:.72rem;padding:3px 8px;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all .2s;font-weight:500}
+.size:hover,.size.active{background:var(--black);color:#fff;border-color:var(--black)}
+.add-btn{background:var(--black);color:#fff;border:none;border-radius:8px;padding:.65rem 1.2rem;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;margin-top:.7rem;width:100%}
+.add-btn:hover{background:var(--accent)}
+.add-btn.added{background:#22c55e}
+
+/* FEATURED BANNER */
+.featured{margin:0;overflow:hidden;position:relative;height:400px;background:#111}
+.featured-scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding-right:5%}
+.featured-shoe-wrap{width:48%;height:100%;display:flex;align-items:center;justify-content:center}
+.featured-shoe-wrap svg{width:90%;max-height:320px;filter:drop-shadow(0 30px 40px rgba(255,77,0,.4));animation:floatShoe 3s ease-in-out infinite}
+@keyframes floatShoe{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-18px) rotate(-2deg)}}
+.featured-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.85) 45%,transparent);display:flex;align-items:center;padding:3rem 4rem}
+.featured-text{color:#fff;max-width:420px}
+.featured-text h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-.03em;margin-bottom:.8rem}
+.featured-text p{color:#aaa;margin-bottom:1.8rem;line-height:1.65}
+
+footer{background:var(--black);color:#fff;padding:3rem 2.5rem 1.5rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;max-width:1200px;margin:0 auto 2rem}
+.footer-brand p{color:#666;font-size:.85rem;margin-top:.8rem;max-width:28ch;line-height:1.65}
+footer h4{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem;color:#888}
+footer a{display:block;color:#666;font-size:.85rem;margin-bottom:.5rem;text-decoration:none;transition:color .2s}
+footer a:hover{color:#fff}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:1.5rem;border-top:1px solid #222;display:flex;justify-content:space-between;font-size:.78rem;color:#555;flex-wrap:wrap;gap:.5rem}
+
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{height:300px}
+  .cat-grid{grid-template-columns:1fr 1fr}
+  nav .nav-links{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .featured-overlay{padding:2rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">SOLE<span>CRAFT</span></div>
+  <div class="nav-links">
+    <a href="#">Men</a><a href="#">Women</a><a href="#">Kids</a><a href="#">Sale</a><a href="#">New Arrivals</a>
+  </div>
+  <div class="nav-right">
+    <button class="icon-btn">🔍</button>
+    <button class="icon-btn">🤍</button>
+    <button class="icon-btn">🛒<span class="cart-count" id="cartCount">0</span></button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">New Season 2025</div>
+    <h1>Step into the <em>Future</em></h1>
+    <p>Premium footwear engineered for performance, designed for style. Find your perfect pair.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now →</button>
+      <button class="btn-secondary">View Lookbook</button>
+    </div>
+  </div>
+  <div class="hero-right" id="heroScene">
+    <div class="hero-badge"><span>₱2K</span>OFF<br/>Today Only</div>
+  </div>
+</div>
+
+<div class="marquee">
+  <div class="marquee-inner">FREE SHIPPING ON ORDERS OVER ₱3,000 &nbsp;·&nbsp; NEW ARRIVALS EVERY FRIDAY &nbsp;·&nbsp; MEMBERS GET 20% OFF &nbsp;·&nbsp; FREE RETURNS &nbsp;·&nbsp; FREE SHIPPING ON ORDERS OVER ₱3,000 &nbsp;·&nbsp; NEW ARRIVALS EVERY FRIDAY &nbsp;·&nbsp; MEMBERS GET 20% OFF &nbsp;·&nbsp; FREE RETURNS &nbsp;·&nbsp;</div>
+</div>
+
+<div class="section">
+  <div class="section-head"><h2>Shop by Category</h2><a href="#" class="see-all">See all →</a></div>
+  <div class="cat-grid" id="catGrid"></div>
+</div>
+
+<div class="section" id="products" style="padding-top:0">
+  <div class="section-head"><h2>New Arrivals</h2><a href="#" class="see-all">See all →</a></div>
+  <div class="prod-grid" id="prodGrid"></div>
+</div>
+
+<div class="featured">
+  <div class="featured-scene">
+    <div class="featured-shoe-wrap">
+      <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="featGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FF4D00"/>
+            <stop offset="100%" style="stop-color:#ff8800"/>
+          </linearGradient>
+          <linearGradient id="featSole" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#333"/>
+            <stop offset="100%" style="stop-color:#111"/>
+          </linearGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <!-- Sole -->
+        <path d="M30 185 Q200 205 370 185 L375 200 Q200 225 25 200 Z" fill="url(#featSole)"/>
+        <!-- Main upper -->
+        <path d="M45 185 Q80 100 160 80 Q240 60 310 90 Q350 110 365 155 Q350 170 300 175 L80 185 Z" fill="url(#featGrad)"/>
+        <!-- Toe cap -->
+        <path d="M45 185 Q65 155 100 140 Q130 130 155 140 Q140 165 110 178 Z" fill="#cc3800" opacity=".8"/>
+        <!-- Laces area -->
+        <path d="M160 80 Q200 72 240 78 L235 130 Q200 125 165 130 Z" fill="#fff" opacity=".25"/>
+        <!-- Laces -->
+        <line x1="170" y1="88" x2="230" y2="84" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".8"/>
+        <line x1="168" y1="98" x2="228" y2="94" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
+        <line x1="167" y1="108" x2="226" y2="105" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".6"/>
+        <line x1="166" y1="118" x2="225" y2="116" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+        <!-- Heel counter -->
+        <path d="M300 175 Q340 160 365 155 Q360 170 335 180 Z" fill="#cc3800" opacity=".7"/>
+        <!-- Brand swoosh -->
+        <path d="M200 145 Q240 120 290 130 Q260 150 215 155 Z" fill="#fff" opacity=".35" filter="url(#glow)"/>
+        <!-- Air unit -->
+        <ellipse cx="310" cy="182" rx="40" ry="8" fill="#FF4D00" opacity=".6"/>
+        <text x="310" y="185" text-anchor="middle" fill="#fff" font-size="6" font-weight="bold" opacity=".9">AIR MAX</text>
+      </svg>
+    </div>
+  </div>
+  <div class="featured-overlay">
+    <div class="featured-text">
+      <h2>Built for the streets.</h2>
+      <p>The new Urban Collection is here. Minimal design, maximum comfort. Limited pairs available.</p>
+      <button class="btn-primary" style="font-size:.95rem;padding:.85rem 2rem">Shop the Collection →</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="font-size:1.4rem;font-weight:900;color:#fff">SOLE<span style="color:var(--accent)">CRAFT</span></div>
+      <p>Premium footwear for every step of your journey.</p>
+    </div>
+    <div><h4>Shop</h4><a href="#">Men's</a><a href="#">Women's</a><a href="#">Kids'</a><a href="#">Sale</a></div>
+    <div><h4>Help</h4><a href="#">Size Guide</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a></div>
+    <div><h4>Company</h4><a href="#">About Us</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Sustainability</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 SOLECRAFT. All rights reserved.</span>
+    <span>Privacy · Terms</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ── SVG SHOE DEFINITIONS ── */
+const SHOES = {
+  orange:`<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="og1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FF6B35"/><stop offset="100%" style="stop-color:#FF4D00"/></linearGradient></defs><path d="M30 155 Q180 175 290 155 L295 168 Q180 190 25 168 Z" fill="#222"/><path d="M40 155 Q70 85 140 65 Q210 48 268 78 Q298 96 310 132 Q295 148 250 152 L70 158 Z" fill="url(#og1)"/><path d="M40 155 Q58 128 88 116 Q115 108 138 116 Q124 140 95 152 Z" fill="#cc3500" opacity=".8"/><path d="M140 65 Q180 56 218 62 L213 108 Q180 103 143 108 Z" fill="#fff" opacity=".2"/><line x1="148" y1="72" x2="208" y2="68" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".9"/><line x1="147" y1="82" x2="207" y2="78" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".8"/><line x1="146" y1="92" x2="206" y2="89" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".7"/><path d="M170 120 Q210 98 258 108 Q232 128 185 132 Z" fill="#fff" opacity=".3"/></svg>`,
+
+  blue:`<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bl1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#4facfe"/><stop offset="100%" style="stop-color:#00f2fe"/></linearGradient></defs><path d="M30 155 Q180 175 290 155 L295 168 Q180 190 25 168 Z" fill="#1a1a2e"/><path d="M40 155 Q70 85 140 65 Q210 48 268 78 Q298 96 310 132 Q295 148 250 152 L70 158 Z" fill="url(#bl1)"/><path d="M40 155 Q58 128 88 116 Q115 108 138 116 Q124 140 95 152 Z" fill="#0080cc" opacity=".8"/><path d="M140 65 Q180 56 218 62 L213 108 Q180 103 143 108 Z" fill="#fff" opacity=".25"/><line x1="148" y1="72" x2="208" y2="68" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="147" y1="82" x2="207" y2="78" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="146" y1="92" x2="206" y2="89" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M170 120 Q210 98 258 108 Q232 128 185 132 Z" fill="#fff" opacity=".25"/><ellipse cx="265" cy="152" rx="32" ry="6" fill="#4facfe" opacity=".5"/></svg>`,
+
+  black:`<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bk1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#2d2d2d"/><stop offset="100%" style="stop-color:#111"/></linearGradient></defs><path d="M30 155 Q180 175 290 155 L295 168 Q180 190 25 168 Z" fill="#000"/><path d="M40 155 Q70 85 140 65 Q210 48 268 78 Q298 96 310 132 Q295 148 250 152 L70 158 Z" fill="url(#bk1)"/><path d="M40 155 Q58 128 88 116 Q115 108 138 116 Q124 140 95 152 Z" fill="#444" opacity=".9"/><path d="M140 65 Q180 56 218 62 L213 108 Q180 103 143 108 Z" fill="#fff" opacity=".08"/><line x1="148" y1="72" x2="208" y2="68" stroke="#FF4D00" stroke-width="2.5" stroke-linecap="round"/><line x1="147" y1="82" x2="207" y2="78" stroke="#FF4D00" stroke-width="2.5" stroke-linecap="round"/><line x1="146" y1="92" x2="206" y2="89" stroke="#FF4D00" stroke-width="2" stroke-linecap="round"/><path d="M170 120 Q210 98 258 108 Q232 128 185 132 Z" fill="#FF4D00" opacity=".4"/><ellipse cx="265" cy="152" rx="32" ry="6" fill="#FF4D00" opacity=".6"/></svg>`,
+
+  white:`<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="wh1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#f8f8f8"/><stop offset="100%" style="stop-color:#e0e0e0"/></linearGradient></defs><path d="M30 155 Q180 175 290 155 L295 168 Q180 190 25 168 Z" fill="#888"/><path d="M40 155 Q70 85 140 65 Q210 48 268 78 Q298 96 310 132 Q295 148 250 152 L70 158 Z" fill="url(#wh1)" stroke="#ddd" stroke-width="1"/><path d="M40 155 Q58 128 88 116 Q115 108 138 116 Q124 140 95 152 Z" fill="#ccc" opacity=".8"/><path d="M140 65 Q180 56 218 62 L213 108 Q180 103 143 108 Z" fill="#aaa" opacity=".3"/><line x1="148" y1="72" x2="208" y2="68" stroke="#999" stroke-width="2.5" stroke-linecap="round"/><line x1="147" y1="82" x2="207" y2="78" stroke="#999" stroke-width="2.5" stroke-linecap="round"/><line x1="146" y1="92" x2="206" y2="89" stroke="#999" stroke-width="2" stroke-linecap="round"/><path d="M170 120 Q210 98 258 108 Q232 128 185 132 Z" fill="#bbb" opacity=".5"/></svg>`,
+
+  purple:`<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pu1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#a855f7"/><stop offset="100%" style="stop-color:#6C63FF"/></linearGradient></defs><path d="M30 155 Q180 175 290 155 L295 168 Q180 190 25 168 Z" fill="#1a1030"/><path d="M40 155 Q70 85 140 65 Q210 48 268 78 Q298 96 310 132 Q295 148 250 152 L70 158 Z" fill="url(#pu1)"/><path d="M40 155 Q58 128 88 116 Q115 108 138 116 Q124 140 95 152 Z" fill="#7c3aed" opacity=".8"/><path d="M140 65 Q180 56 218 62 L213 108 Q180 103 143 108 Z" fill="#fff" opacity=".2"/><line x1="148" y1="72" x2="208" y2="68" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="147" y1="82" x2="207" y2="78" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="146" y1="92" x2="206" y2="89" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M170 120 Q210 98 258 108 Q232 128 185 132 Z" fill="#fff" opacity=".25"/></svg>`,
+
+  green:`<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gr1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#43e97b"/><stop offset="100%" style="stop-color:#0a8f4a"/></linearGradient></defs><path d="M30 155 Q180 175 290 155 L295 168 Q180 190 25 168 Z" fill="#0a2010"/><path d="M40 155 Q70 85 140 65 Q210 48 268 78 Q298 96 310 132 Q295 148 250 152 L70 158 Z" fill="url(#gr1)"/><path d="M40 155 Q58 128 88 116 Q115 108 138 116 Q124 140 95 152 Z" fill="#0a7a38" opacity=".8"/><path d="M140 65 Q180 56 218 62 L213 108 Q180 103 143 108 Z" fill="#fff" opacity=".2"/><line x1="148" y1="72" x2="208" y2="68" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="147" y1="82" x2="207" y2="78" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="146" y1="92" x2="206" y2="89" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M170 120 Q210 98 258 108 Q232 128 185 132 Z" fill="#fff" opacity=".25"/></svg>`
+};
+
+/* ── THREE.JS HERO SCENE ── */
+(function(){
+  const container = document.getElementById('heroScene');
+  const W = container.clientWidth, H = container.clientHeight;
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xf0ede8);
+
+  const camera = new THREE.PerspectiveCamera(45, W/H, 0.1, 100);
+  camera.position.set(0, 1.2, 5);
+
+  const renderer = new THREE.WebGLRenderer({antialias:true});
+  renderer.setSize(W, H);
+  renderer.shadowMap.enabled = true;
+  container.appendChild(renderer.domElement);
+
+  // Lights
+  const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+  scene.add(ambient);
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+  dirLight.position.set(5, 8, 5);
+  dirLight.castShadow = true;
+  scene.add(dirLight);
+  const pointLight = new THREE.PointLight(0xFF4D00, 1.5, 20);
+  pointLight.position.set(-3, 2, 3);
+  scene.add(pointLight);
+
+  // Ground
+  const ground = new THREE.Mesh(
+    new THREE.PlaneGeometry(10, 10),
+    new THREE.MeshStandardMaterial({color:0xe8e3dc, roughness:0.8})
+  );
+  ground.rotation.x = -Math.PI/2;
+  ground.position.y = -1.1;
+  ground.receiveShadow = true;
+  scene.add(ground);
+
+  // Build shoe from geometry
+  const shoeGroup = new THREE.Group();
+
+  // Sole
+  const soleGeo = new THREE.BoxGeometry(3.2, 0.25, 1.1);
+  const soleMat = new THREE.MeshStandardMaterial({color:0x1a1a1a, roughness:0.6});
+  const sole = new THREE.Mesh(soleGeo, soleMat);
+  sole.position.y = -0.9;
+  sole.castShadow = true;
+  shoeGroup.add(sole);
+
+  // Midsole
+  const midGeo = new THREE.BoxGeometry(3.0, 0.2, 1.0);
+  const midMat = new THREE.MeshStandardMaterial({color:0xdddddd, roughness:0.4});
+  const mid = new THREE.Mesh(midGeo, midMat);
+  mid.position.y = -0.7;
+  shoeGroup.add(mid);
+
+  // Main upper body
+  const upperGeo = new THREE.CylinderGeometry(0.52, 0.42, 0.9, 32, 1, false, 0, Math.PI);
+  const upperMat = new THREE.MeshStandardMaterial({color:0xFF4D00, roughness:0.3, metalness:0.1});
+  const upper = new THREE.Mesh(upperGeo, upperMat);
+  upper.position.set(0, -0.22, 0);
+  upper.rotation.y = Math.PI;
+  upper.castShadow = true;
+  shoeGroup.add(upper);
+
+  // Toe
+  const toeGeo = new THREE.SphereGeometry(0.5, 32, 16, 0, Math.PI*2, 0, Math.PI/2);
+  const toeMat = new THREE.MeshStandardMaterial({color:0xcc3800, roughness:0.3});
+  const toe = new THREE.Mesh(toeGeo, toeMat);
+  toe.position.set(1.4, -0.3, 0);
+  toe.scale.set(0.9, 0.7, 0.9);
+  toe.castShadow = true;
+  shoeGroup.add(toe);
+
+  // Heel
+  const heelGeo = new THREE.SphereGeometry(0.46, 32, 16, 0, Math.PI*2, 0, Math.PI/2);
+  const heelMat = new THREE.MeshStandardMaterial({color:0xcc3800, roughness:0.3});
+  const heel = new THREE.Mesh(heelGeo, heelMat);
+  heel.position.set(-1.35, -0.32, 0);
+  heel.scale.set(0.85, 0.75, 0.9);
+  heel.castShadow = true;
+  shoeGroup.add(heel);
+
+  // Collar (ankle opening)
+  const collarGeo = new THREE.TorusGeometry(0.42, 0.06, 12, 40, Math.PI);
+  const collarMat = new THREE.MeshStandardMaterial({color:0x222222, roughness:0.5});
+  const collar = new THREE.Mesh(collarGeo, collarMat);
+  collar.position.set(-0.8, 0.12, 0);
+  collar.rotation.y = Math.PI/2;
+  shoeGroup.add(collar);
+
+  // Swoosh stripe
+  const swooshGeo = new THREE.TorusGeometry(0.9, 0.04, 8, 32, Math.PI*0.6);
+  const swooshMat = new THREE.MeshStandardMaterial({color:0xffffff, roughness:0.2, metalness:0.3});
+  const swoosh = new THREE.Mesh(swooshGeo, swooshMat);
+  swoosh.position.set(0.1, -0.15, 0.52);
+  swoosh.rotation.z = -0.4;
+  shoeGroup.add(swoosh);
+
+  // Laces (small cylinders)
+  for(let i=0;i<5;i++){
+    const laceGeo = new THREE.CylinderGeometry(0.025, 0.025, 0.85, 8);
+    const laceMat = new THREE.MeshStandardMaterial({color:0xffffff});
+    const lace = new THREE.Mesh(laceGeo, laceMat);
+    lace.rotation.z = Math.PI/2;
+    lace.position.set(0.3, -0.05 + i*0.14, 0.44);
+    shoeGroup.add(lace);
+  }
+
+  // Air bubble
+  const airGeo = new THREE.SphereGeometry(0.22, 16, 16);
+  const airMat = new THREE.MeshStandardMaterial({color:0xFF4D00, transparent:true, opacity:0.6, roughness:0.1});
+  const air = new THREE.Mesh(airGeo, airMat);
+  air.position.set(-0.9, -0.75, 0);
+  shoeGroup.add(air);
+
+  shoeGroup.rotation.y = -0.4;
+  shoeGroup.position.y = 0.1;
+  scene.add(shoeGroup);
+
+  // Shadow blob
+  const shadowGeo = new THREE.PlaneGeometry(4, 1.5);
+  const shadowMat = new THREE.MeshBasicMaterial({color:0x000000, transparent:true, opacity:0.15});
+  const shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
+  shadowMesh.rotation.x = -Math.PI/2;
+  shadowMesh.position.y = -1.09;
+  scene.add(shadowMesh);
+
+  let t = 0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t += 0.01;
+    shoeGroup.position.y = Math.sin(t) * 0.12 + 0.1;
+    shoeGroup.rotation.y = -0.4 + Math.sin(t*0.5) * 0.15;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', ()=>{
+    const W2 = container.clientWidth, H2 = container.clientHeight;
+    camera.aspect = W2/H2;
+    camera.updateProjectionMatrix();
+    renderer.setSize(W2, H2);
+  });
+})();
+
+/* ── CATEGORIES ── */
+const cats = [
+  {label:'Running', count:'48 styles', shoe:'orange', bg:'linear-gradient(135deg,#1a1a2e,#2d1f3d)'},
+  {label:'Lifestyle', count:'92 styles', shoe:'white',  bg:'linear-gradient(135deg,#2d1f3d,#1a2a1a)'},
+  {label:'Basketball', count:'31 styles', shoe:'black',  bg:'linear-gradient(135deg,#1a0a0a,#2a1a0a)'},
+  {label:'Training', count:'55 styles', shoe:'blue',   bg:'linear-gradient(135deg,#0a1a2a,#0a2a2a)'},
+];
+const catGrid = document.getElementById('catGrid');
+cats.forEach(c => {
+  catGrid.innerHTML += `
+  <div class="cat-card">
+    <div class="cat-bg" style="background:${c.bg}"></div>
+    <div class="cat-shoe">${SHOES[c.shoe]}</div>
+    <div class="cat-overlay"></div>
+    <div class="cat-count">${c.count}</div>
+    <div class="cat-label">${c.label}</div>
+  </div>`;
+});
+
+/* ── PRODUCTS ── */
+const products = [
+  {name:'AirFlow Pro X',    price:5990, orig:7990, tag:'NEW',  rating:'4.9 (312)', shoe:'orange', sizes:['7','8','9','10','11']},
+  {name:'Urban Glide 2',    price:3990, orig:null,  tag:'',    rating:'4.7 (198)', shoe:'white',  sizes:['6','7','8','9','10']},
+  {name:'CloudRun Elite',   price:7490, orig:9490,  tag:'SALE', rating:'5.0 (87)',  shoe:'blue',   sizes:['8','9','10','11']},
+  {name:'Street Force Low', price:4290, orig:null,  tag:'',    rating:'4.8 (445)', shoe:'black',  sizes:['7','8','9','10','11','12']},
+  {name:'TrailBlazer GTX',  price:6290, orig:null,  tag:'NEW', rating:'4.6 (134)', shoe:'green',  sizes:['8','9','10','11']},
+  {name:'Classic Retro 90', price:3490, orig:4990,  tag:'SALE', rating:'4.9 (560)', shoe:'purple', sizes:['6','7','8','9','10','11']},
+];
+let cartTotal = 0;
+const grid = document.getElementById('prodGrid');
+products.forEach((p,idx) => {
+  const tagClass = p.tag==='SALE' ? 'prod-tag sale' : 'prod-tag';
+  const origHTML = p.orig ? `<span style="text-decoration:line-through;color:var(--muted);font-size:.8rem;font-weight:400;margin-left:4px">₱${p.orig.toLocaleString()}</span>` : '';
+  grid.innerHTML += `
+  <div class="prod-card">
+    <div class="prod-img" style="background:${p.shoe==='white'?'#f5f5f5':p.shoe==='black'?'#1a1a1a':p.shoe==='blue'?'#0a1a2a':p.shoe==='purple'?'#1a1030':p.shoe==='green'?'#0a1a0a':'#1a0a00'}">
+      ${SHOES[p.shoe]}
+      ${p.tag ? `<div class="${tagClass}">${p.tag}</div>` : ''}
+      <button class="wishlist" onclick="this.textContent=this.textContent==='🤍'?'❤️':'🤍'">🤍</button>
+    </div>
+    <div class="prod-info">
+      <div class="prod-brand">SOLECRAFT</div>
+      <div class="prod-name">${p.name}</div>
+      <div class="prod-bottom">
+        <div class="prod-price">₱${p.price.toLocaleString()}${origHTML}</div>
+        <div class="prod-rating">⭐ ${p.rating}</div>
+      </div>
+      <div class="sizes">${p.sizes.map(s=>`<span class="size" onclick="selectSize(this)">${s}</span>`).join('')}</div>
+      <button class="add-btn" id="btn${idx}" onclick="addCart(${idx})">Add to Cart</button>
+    </div>
+  </div>`;
+});
+
+function selectSize(el){
+  el.closest('.sizes').querySelectorAll('.size').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+}
+function addCart(idx){
+  const btn = document.getElementById('btn'+idx);
+  btn.textContent='✓ Added!'; btn.classList.add('added');
+  cartTotal++;
+  document.getElementById('cartCount').textContent = cartTotal;
+  setTimeout(()=>{btn.textContent='Add to Cart';btn.classList.remove('added');},1500);
+}
+</script>
+</body>
+</html>
