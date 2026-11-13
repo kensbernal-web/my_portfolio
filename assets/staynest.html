@@ -3,393 +3,416 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>StayNest — Find Your Perfect Stay</title>
+<title>StayNest — Book unique homes</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--red:#FF385C;--dark:#222;--muted:#717171;--border:#EBEBEB;--bg:#F7F7F7}
-body{font-family:'Inter',sans-serif;color:var(--dark);background:#fff}
-img{max-width:100%;display:block}
+:root{
+  --red:#FF385C;
+  --dark:#222222;
+  --muted:#717171;
+  --border:#DDDDDD;
+  --bg:#F7F7F7;
+  --white:#FFFFFF;
+}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white)}
+img{max-width:100%;display:block;object-fit:cover}
 a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer}
 
-nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:#fff;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.logo{font-size:1.5rem;font-weight:800;color:var(--red)}
-.nav-search{display:flex;align-items:center;gap:.5rem;border:1px solid var(--border);border-radius:40px;padding:.5rem 1rem;box-shadow:0 1px 4px rgba(0,0,0,.08);font-size:.85rem;cursor:pointer;transition:box-shadow .2s}
-.nav-search:hover{box-shadow:0 2px 10px rgba(0,0,0,.14)}
-.nav-search span{color:var(--muted)}
-.search-btn{background:var(--red);color:#fff;border:none;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;flex-shrink:0}
-.nav-right{display:flex;align-items:center;gap:1rem;font-size:.88rem;font-weight:500}
-.btn-host{padding:.5rem 1rem;border-radius:20px;transition:background .2s;cursor:pointer}
-.btn-host:hover{background:var(--bg)}
-.avatar{width:36px;height:36px;border-radius:50%;background:var(--dark);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;border:1px solid var(--border)}
+/* NAV */
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:80px;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;background:var(--white);z-index:100;
+}
+.nav-logo{display:flex;align-items:center;gap:.5rem}
+.nav-logo svg{width:30px;height:30px}
+.nav-logo span{font-size:1.4rem;font-weight:800;color:var(--red)}
+.nav-search{
+  display:flex;align-items:center;
+  border:1px solid var(--border);border-radius:40px;
+  padding:.5rem 1rem;
+  box-shadow:0 1px 2px rgba(0,0,0,.08);
+  gap:.8rem;font-size:.88rem;cursor:pointer;
+  transition:box-shadow .2s;
+}
+.nav-search:hover{box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.ns-divider{width:1px;height:20px;background:var(--border)}
+.ns-btn{
+  background:var(--red);color:#fff;border:none;
+  border-radius:50%;width:32px;height:32px;
+  display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.nav-right{display:flex;align-items:center;gap:.8rem;font-size:.88rem;font-weight:500}
+.nav-right a{padding:.5rem .9rem;border-radius:22px;transition:background .2s}
+.nav-right a:hover{background:var(--bg)}
+.nav-avatar{
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  background:var(--dark);color:#fff;font-size:14px;
+}
 
-/* HERO with 3D canvas */
-.hero{position:relative;height:540px;overflow:hidden;background:#1a3a5c}
-#heroCanvas{position:absolute;inset:0;width:100%;height:100%}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.2) 0%,rgba(0,0,0,.35) 60%,rgba(0,0,0,.55) 100%)}
-.hero-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:1rem}
-.hero-content h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;margin-bottom:.8rem;text-shadow:0 2px 10px rgba(0,0,0,.4)}
-.hero-content p{font-size:1.05rem;margin-bottom:2rem;opacity:.92}
-.search-box{background:#fff;border-radius:16px;padding:1rem 1.5rem;display:flex;gap:1rem;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);flex-wrap:wrap}
-.search-field{display:flex;flex-direction:column;min-width:130px}
-.search-field label{font-size:.7rem;font-weight:700;color:var(--dark);text-transform:uppercase;letter-spacing:.04em}
-.search-field input{border:none;outline:none;font-size:.88rem;color:var(--muted);font-family:inherit;width:100%;background:transparent;padding-top:2px}
-.divider{width:1px;height:40px;background:var(--border);flex-shrink:0}
-.search-submit{background:var(--red);color:#fff;border:none;border-radius:12px;padding:.75rem 1.5rem;font-weight:700;font-size:.88rem;cursor:pointer;transition:opacity .2s;white-space:nowrap}
-.search-submit:hover{opacity:.88}
+/* HERO */
+.hero{padding:3rem 2.5rem 2rem}
+.hero h1{font-size:2.2rem;font-weight:700;line-height:1.2;margin-bottom:2rem;max-width:420px}
+.hero h1 span{color:var(--red)}
+.search-bar{
+  display:flex;align-items:stretch;
+  border:1px solid var(--border);border-radius:16px;
+  box-shadow:0 1px 2px rgba(0,0,0,.08);
+  overflow:hidden;max-width:860px;
+}
+.sb-field{
+  flex:1;padding:1rem 1.4rem;
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;gap:4px;
+}
+.sb-field:last-of-type{border-right:none}
+.sb-label{font-size:.72rem;font-weight:700;color:var(--dark);letter-spacing:.02em}
+.sb-input{font-size:.9rem;color:var(--muted);border:none;outline:none;font-family:inherit;background:transparent;width:100%;cursor:text}
+.sb-input::placeholder{color:var(--muted)}
+.sb-btn{
+  background:var(--red);color:#fff;border:none;
+  padding:1rem 1.6rem;font-size:.9rem;font-weight:700;
+  display:flex;align-items:center;gap:.4rem;cursor:pointer;
+  transition:opacity .2s;white-space:nowrap;
+}
+.sb-btn:hover{opacity:.88}
 
-.section{padding:2.5rem 2rem;max-width:1200px;margin:0 auto}
-.section h2{font-size:1.5rem;font-weight:700;margin-bottom:1.4rem}
-.cats{display:flex;gap:1.8rem;overflow-x:auto;padding-bottom:1rem;scrollbar-width:none;border-bottom:1px solid var(--border)}
-.cats::-webkit-scrollbar{display:none}
-.cat{display:flex;flex-direction:column;align-items:center;gap:.4rem;cursor:pointer;opacity:.55;transition:opacity .2s;min-width:56px;padding-bottom:.6rem;border-bottom:2px solid transparent}
-.cat:hover{opacity:1}
-.cat.active{opacity:1;border-bottom-color:var(--dark)}
-.cat-icon{font-size:1.5rem}
-.cat-label{font-size:.72rem;font-weight:500;white-space:nowrap;color:var(--dark)}
+/* TABS */
+.tabs{
+  display:flex;gap:0;
+  border-bottom:1px solid var(--border);
+  padding:0 2.5rem;margin-top:2rem;
+}
+.tab{
+  padding:.8rem 1.2rem;font-size:.9rem;font-weight:500;
+  color:var(--muted);cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:color .2s,border-color .2s;
+}
+.tab:hover{color:var(--dark)}
+.tab.active{color:var(--dark);border-bottom-color:var(--dark);font-weight:600}
 
-/* LISTING CARDS with SVG illustrations */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:1.6rem}
-.card{cursor:pointer}
-.card-img{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:20/19;background:var(--bg)}
-.card-img svg{width:100%;height:100%;transition:transform .4s}
-.card:hover .card-img svg{transform:scale(1.04)}
-.heart{position:absolute;top:12px;right:12px;background:none;border:none;font-size:1.3rem;cursor:pointer;filter:drop-shadow(0 1px 4px rgba(0,0,0,.35));transition:transform .2s;z-index:2}
-.heart:hover{transform:scale(1.15)}
-.badge{position:absolute;top:12px;left:12px;background:#fff;border-radius:6px;padding:3px 9px;font-size:.72rem;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.12);z-index:2}
-.card-info{padding:.7rem .2rem 0}
-.card-top{display:flex;justify-content:space-between;align-items:start;gap:.5rem}
-.card-title{font-weight:600;font-size:.92rem;flex:1}
-.rating{font-size:.82rem;display:flex;align-items:center;gap:3px;flex-shrink:0}
-.card-sub{font-size:.82rem;color:var(--muted);margin:.2rem 0 .1rem}
-.price{font-size:.9rem;margin-top:.4rem}
-.price strong{font-weight:700}
+/* SECTION */
+.section{padding:2.5rem 2.5rem;max-width:1340px;margin:0 auto}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.4rem}
+.section-head h2{font-size:1.4rem;font-weight:700}
+.see-all{font-size:.88rem;font-weight:600;color:var(--dark);text-decoration:underline}
 
-footer{background:var(--bg);border-top:1px solid var(--border);padding:2.5rem 2rem;margin-top:3rem}
-.footer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1.5rem;max-width:1200px;margin:0 auto}
-.footer-col h4{font-size:.82rem;font-weight:700;margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.04em}
-.footer-col a{display:block;font-size:.82rem;color:var(--muted);margin-bottom:.5rem;transition:color .2s}
+/* EXPERIENCES SCROLL */
+.exp-scroll{
+  display:flex;gap:1.2rem;overflow-x:auto;
+  scrollbar-width:none;padding-bottom:.5rem;
+}
+.exp-scroll::-webkit-scrollbar{display:none}
+.exp-card{min-width:220px;cursor:pointer}
+.exp-img{
+  border-radius:12px;overflow:hidden;
+  width:220px;height:160px;position:relative;
+  background:#eee;
+}
+.exp-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.exp-card:hover .exp-img img{transform:scale(1.04)}
+.exp-price{font-size:.9rem;margin-top:.6rem}
+.exp-price strong{font-weight:600}
+.exp-desc{font-size:.82rem;color:var(--muted);margin:.2rem 0;line-height:1.4;max-width:200px}
+.exp-stars{display:flex;align-items:center;gap:4px;font-size:.78rem;color:var(--muted)}
+.exp-stars span{color:#FFB400}
+
+/* HOMES GRID */
+.homes-scroll{
+  display:flex;gap:1.4rem;overflow-x:auto;
+  scrollbar-width:none;padding-bottom:.5rem;
+}
+.homes-scroll::-webkit-scrollbar{display:none}
+.home-card{min-width:300px;cursor:pointer}
+.home-img{
+  border-radius:14px;overflow:hidden;
+  width:300px;height:200px;position:relative;
+  background:#eee;
+}
+.home-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.home-card:hover .home-img img{transform:scale(1.04)}
+.heart-btn{
+  position:absolute;top:10px;right:10px;
+  background:none;border:none;font-size:1.3rem;cursor:pointer;
+  filter:drop-shadow(0 1px 3px rgba(0,0,0,.3));z-index:2;
+}
+.home-info{padding:.6rem .2rem 0}
+.home-top{display:flex;justify-content:space-between;align-items:start}
+.home-title{font-weight:600;font-size:.9rem;flex:1;margin-right:.5rem}
+.home-rating{font-size:.82rem;display:flex;align-items:center;gap:3px}
+.home-sub{font-size:.82rem;color:var(--muted);margin:.15rem 0}
+.home-price{font-size:.88rem;margin-top:.3rem}
+.home-price strong{font-weight:700}
+.superhost{
+  display:inline-block;
+  font-size:.7rem;font-weight:600;
+  border:1px solid var(--dark);border-radius:4px;
+  padding:1px 5px;margin-top:.3rem;
+}
+
+/* DESTINATIONS */
+.dest-grid{
+  display:flex;gap:1rem;overflow-x:auto;
+  scrollbar-width:none;
+}
+.dest-grid::-webkit-scrollbar{display:none}
+.dest-card{
+  min-width:140px;cursor:pointer;
+  border-radius:12px;overflow:hidden;
+  position:relative;transition:transform .3s;
+}
+.dest-card:hover{transform:scale(1.03)}
+.dest-card img{width:140px;height:200px;object-fit:cover}
+.dest-name{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(0,0,0,.55),transparent);
+  color:#fff;font-weight:700;font-size:.9rem;
+  padding:.6rem .8rem;
+}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);
+  padding:2rem 2.5rem;
+  display:flex;justify-content:space-between;
+  align-items:start;flex-wrap:wrap;gap:2rem;
+}
+.footer-col h4{font-size:.82rem;font-weight:700;margin-bottom:.8rem}
+.footer-col a{display:block;font-size:.82rem;color:var(--muted);margin-bottom:.45rem;transition:color .2s}
 .footer-col a:hover{color:var(--dark)}
-.footer-bottom{max-width:1200px;margin:1.5rem auto 0;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);flex-wrap:wrap;gap:.5rem}
+.footer-bottom{
+  border-top:1px solid var(--border);padding:1.5rem 2.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.82rem;color:var(--muted);flex-wrap:wrap;gap:.5rem;
+}
+.footer-links{display:flex;gap:1.2rem}
+.footer-links a{color:var(--muted);transition:color .2s}
+.footer-links a:hover{color:var(--dark)}
+
+@media(max-width:768px){
+  .nav{padding:0 1.2rem}
+  .nav-search{display:none}
+  .hero{padding:2rem 1.2rem 1.5rem}
+  .search-bar{flex-direction:column}
+  .sb-field{border-right:none;border-bottom:1px solid var(--border)}
+  .section{padding:2rem 1.2rem}
+  .tabs{padding:0 1.2rem}
+  footer{padding:2rem 1.2rem}
+}
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="logo">🏠 StayNest</div>
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <svg viewBox="0 0 32 32" fill="none"><path d="M16 1C10.5 1 2 10.5 2 18c0 5 3.5 9 8 10.5 1.5.5 3 .8 4.5 1 .5 0 1 0 1.5-.1 1.5-.2 3-.5 4.5-1 4.5-1.5 8-5.5 8-10.5C28 10.5 21.5 1 16 1z" fill="#FF385C"/></svg>
+    <span>staynest</span>
+  </div>
   <div class="nav-search">
-    <span>Anywhere</span><span style="color:var(--border)">|</span>
-    <span>Any week</span><span style="color:var(--border)">|</span>
-    <span>Add guests</span>
-    <div class="search-btn">🔍</div>
+    <span style="font-weight:500">Anywhere</span>
+    <div class="ns-divider"></div>
+    <span style="font-weight:500">Any week</span>
+    <div class="ns-divider"></div>
+    <span style="color:var(--muted)">Add guests</span>
+    <div class="ns-btn">🔍</div>
   </div>
   <div class="nav-right">
-    <a href="#" class="btn-host">Become a Host</a>
-    <div class="avatar">K</div>
+    <a href="#">Become a Host</a>
+    <a href="#">Help</a>
+    <a href="#">Sign Up</a>
+    <a href="#" style="font-weight:600">Log In</a>
+    <div class="nav-avatar">K</div>
   </div>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
-  <canvas id="heroCanvas"></canvas>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <h1>Find your perfect stay</h1>
-    <p>Discover unique homes and places around the world</p>
-    <div class="search-box">
-      <div class="search-field"><label>Where</label><input type="text" placeholder="Search destinations"/></div>
-      <div class="divider"></div>
-      <div class="search-field"><label>Check in</label><input type="text" placeholder="Add dates"/></div>
-      <div class="divider"></div>
-      <div class="search-field"><label>Check out</label><input type="text" placeholder="Add dates"/></div>
-      <div class="divider"></div>
-      <div class="search-field"><label>Who</label><input type="text" placeholder="Add guests"/></div>
-      <button class="search-submit">🔍 Search</button>
+  <h1>Book unique homes and<br/>experience a city like a <span>local.</span></h1>
+  <div class="search-bar">
+    <div class="sb-field">
+      <div class="sb-label">Where</div>
+      <input class="sb-input" type="text" placeholder="Anywhere"/>
+    </div>
+    <div class="sb-field">
+      <div class="sb-label">When</div>
+      <input class="sb-input" type="text" placeholder="Anytime"/>
+    </div>
+    <div class="sb-field">
+      <div class="sb-label">Guests</div>
+      <input class="sb-input" type="text" placeholder="1 guest"/>
+    </div>
+    <button class="sb-btn">🔍 Search</button>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active">For You</div>
+  <div class="tab">Homes</div>
+  <div class="tab">Experiences</div>
+  <div class="tab">Places</div>
+</div>
+
+<!-- EXPERIENCES -->
+<div class="section">
+  <div class="section-head">
+    <h2>Experiences</h2>
+    <a href="#" class="see-all">See all →</a>
+  </div>
+  <div class="exp-scroll" id="expScroll"></div>
+</div>
+
+<!-- HOMES -->
+<div class="section">
+  <div class="section-head">
+    <h2>Homes</h2>
+    <a href="#" class="see-all">See all →</a>
+  </div>
+  <div class="homes-scroll" id="homesScroll"></div>
+</div>
+
+<!-- DESTINATIONS -->
+<div class="section">
+  <div class="section-head">
+    <h2>Featured destinations</h2>
+    <a href="#" class="see-all">See all →</a>
+  </div>
+  <div class="dest-grid" id="destGrid"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div style="display:flex;gap:3rem;flex-wrap:wrap">
+    <div class="footer-col">
+      <h4>StayNest</h4>
+      <a href="#">About us</a><a href="#">Careers</a><a href="#">Press</a>
+      <a href="#">Policies</a><a href="#">Help</a><a href="#">Diversity &amp; Belonging</a>
+    </div>
+    <div class="footer-col">
+      <h4>Discover</h4>
+      <a href="#">Trust &amp; Safety</a><a href="#">Travel Credit</a><a href="#">Gift Cards</a>
+      <a href="#">StayNest Citizen</a><a href="#">Business Travel</a><a href="#">Guidebooks</a>
+    </div>
+    <div class="footer-col">
+      <h4>Hosting</h4>
+      <a href="#">Why Host</a><a href="#">Hospitality</a>
+      <a href="#">Responsible Hosting</a><a href="#">Community Center</a>
     </div>
   </div>
-</div>
-
-<div class="section">
-  <div class="cats">
-    <div class="cat active"><div class="cat-icon">🏖️</div><div class="cat-label">Beachfront</div></div>
-    <div class="cat"><div class="cat-icon">🌊</div><div class="cat-label">Surfing</div></div>
-    <div class="cat"><div class="cat-icon">🏔️</div><div class="cat-label">Mountains</div></div>
-    <div class="cat"><div class="cat-icon">🏡</div><div class="cat-label">Countryside</div></div>
-    <div class="cat"><div class="cat-icon">🏙️</div><div class="cat-label">City</div></div>
-    <div class="cat"><div class="cat-icon">🌴</div><div class="cat-label">Tropical</div></div>
-    <div class="cat"><div class="cat-icon">🏕️</div><div class="cat-label">Camping</div></div>
-    <div class="cat"><div class="cat-icon">🛖</div><div class="cat-label">Cabins</div></div>
-    <div class="cat"><div class="cat-icon">🏊</div><div class="cat-label">Pools</div></div>
-    <div class="cat"><div class="cat-icon">✨</div><div class="cat-label">Luxe</div></div>
-  </div>
-</div>
-
-<div class="section" style="padding-top:0">
-  <h2>Stays in the Philippines</h2>
-  <div class="grid" id="grid"></div>
-</div>
-
-<footer>
-  <div class="footer-grid">
-    <div class="footer-col"><h4>Support</h4><a href="#">Help Center</a><a href="#">Safety info</a><a href="#">Cancellation</a></div>
-    <div class="footer-col"><h4>Community</h4><a href="#">StayNest.org</a><a href="#">Support refugees</a><a href="#">Anti-discrimination</a></div>
-    <div class="footer-col"><h4>Hosting</h4><a href="#">Try hosting</a><a href="#">AirCover</a><a href="#">Resources</a></div>
-    <div class="footer-col"><h4>StayNest</h4><a href="#">Newsroom</a><a href="#">New features</a><a href="#">Careers</a></div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2025 StayNest, Inc. · Privacy · Terms</span>
-    <span>🌐 English (PH) · ₱ PHP</span>
+  <div style="display:flex;align-items:center;gap:.8rem">
+    <select style="border:1px solid var(--border);border-radius:8px;padding:.4rem .8rem;font-family:inherit;font-size:.85rem;cursor:pointer">
+      <option>English</option><option>Filipino</option>
+    </select>
+    <select style="border:1px solid var(--border);border-radius:8px;padding:.4rem .8rem;font-family:inherit;font-size:.85rem;cursor:pointer">
+      <option>USD</option><option>PHP</option>
+    </select>
   </div>
 </footer>
+<div class="footer-bottom">
+  <span>© 2025 StayNest, Inc.</span>
+  <div class="footer-links">
+    <a href="#">Terms</a><a href="#">Privacy</a><a href="#">Site Map</a>
+    <a href="#">🐦</a><a href="#">📘</a><a href="#">📷</a>
+  </div>
+</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-/* ── SVG HOUSE ILLUSTRATIONS ── */
-function makeSVG(config){
-  const {sky1,sky2,house,roof,accent,trees,water,time} = config;
-  const stars = time==='night' ? Array.from({length:12},(_,i)=>`<circle cx="${30+i*22}" cy="${15+Math.sin(i)*10}" r="1.2" fill="#fff" opacity="${.5+Math.random()*.5}"/>`).join('') : '';
-  const sun = time==='day' ? `<circle cx="320" cy="55" r="28" fill="#FFD700" opacity=".9"/>` : time==='sunset' ? `<circle cx="320" cy="90" r="35" fill="#FF6B35" opacity=".85"/>` : `<circle cx="80" cy="40" r="20" fill="#E8F4FD" opacity=".7"/>`;
-  const clouds = time!=='night' ? `<ellipse cx="100" cy="60" rx="45" ry="18" fill="#fff" opacity=".7"/><ellipse cx="140" cy="55" rx="30" ry="14" fill="#fff" opacity=".8"/><ellipse cx="260" cy="45" rx="38" ry="15" fill="#fff" opacity=".6"/>` : '';
-  return `<svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-  <defs>
-    <linearGradient id="sky${config.id}" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:${sky1}"/><stop offset="100%" style="stop-color:${sky2}"/></linearGradient>
-    <linearGradient id="water${config.id}" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:${water}"/><stop offset="100%" style="stop-color:${water}" stop-opacity=".6"/></linearGradient>
-  </defs>
-  <!-- Sky -->
-  <rect width="400" height="280" fill="url(#sky${config.id})"/>
-  ${stars}${sun}${clouds}
-  <!-- Ground -->
-  <rect x="0" y="210" width="400" height="70" fill="#4a7c3f" opacity=".8"/>
-  <rect x="0" y="225" width="400" height="55" fill="#3d6b34"/>
-  ${water ? `<rect x="0" y="230" width="400" height="50" fill="url(#water${config.id})" opacity=".75"/>` : ''}
-  <!-- Trees left -->
-  ${trees ? `<polygon points="30,210 50,145 70,210" fill="#2d5a1b"/><polygon points="40,195 55,145 70,195" fill="#3a7024"/><rect x="47" y="205" width="8" height="12" fill="#5c3d2e"/>` : ''}
-  <!-- House shadow -->
-  <ellipse cx="200" cy="215" rx="90" ry="8" fill="#000" opacity=".12"/>
-  <!-- House walls -->
-  <rect x="${130}" y="${130}" width="${140}" height="${80}" fill="${house}" rx="4"/>
-  <!-- Windows -->
-  <rect x="148" y="148" width="30" height="24" fill="#AED6F1" rx="3"/><rect x="152" y="152" width="22" height="16" fill="#85C1E9" rx="2"/><line x1="163" y1="152" x2="163" y2="168" stroke="#5D9EC7" stroke-width="1.5"/><line x1="152" y1="160" x2="174" y2="160" stroke="#5D9EC7" stroke-width="1.5"/>
-  <rect x="222" y="148" width="30" height="24" fill="#AED6F1" rx="3"/><rect x="226" y="152" width="22" height="16" fill="#85C1E9" rx="2"/><line x1="237" y1="152" x2="237" y2="168" stroke="#5D9EC7" stroke-width="1.5"/><line x1="226" y1="160" x2="248" y2="160" stroke="#5D9EC7" stroke-width="1.5"/>
-  <!-- Door -->
-  <rect x="183" y="168" width="34" height="42" fill="${accent}" rx="3 3 0 0"/>
-  <circle cx="213" cy="192" r="3" fill="#FFD700"/>
-  <rect x="188" y="173" width="22" height="16" fill="${accent}" opacity=".6" rx="2"/>
-  <!-- Roof -->
-  <polygon points="120,132 200,68 280,132" fill="${roof}"/>
-  <polygon points="120,132 200,68 280,132" fill="#000" opacity=".08"/>
-  <!-- Chimney -->
-  <rect x="230" y="82" width="18" height="35" fill="${roof}" opacity=".8"/>
-  <rect x="226" y="78" width="26" height="8" fill="#555"/>
-  <!-- Smoke -->
-  <circle cx="239" cy="68" r="6" fill="#ddd" opacity=".5"/>
-  <circle cx="244" cy="58" r="8" fill="#ccc" opacity=".4"/>
-  <!-- Roof ridge -->
-  <line x1="120" y1="132" x2="280" y2="132" stroke="#000" stroke-width="2" opacity=".15"/>
-  <!-- Path -->
-  <path d="M183 210 Q185 230 180 260" stroke="${accent}" stroke-width="8" fill="none" opacity=".4" stroke-linecap="round"/>
-  <path d="M217 210 Q215 230 220 260" stroke="${accent}" stroke-width="8" fill="none" opacity=".4" stroke-linecap="round"/>
-  <!-- Trees right -->
-  ${trees ? `<polygon points="310,210 330,145 350,210" fill="#2d5a1b"/><polygon points="320,195 335,145 350,195" fill="#3a7024"/><rect x="327" y="205" width="8" height="12" fill="#5c3d2e"/>` : ''}
-  <!-- Pool/water feature -->
-  ${config.pool ? `<ellipse cx="200" cy="248" rx="50" ry="12" fill="#4fc3f7" opacity=".6"/>` : ''}
-  <!-- Flowers -->
-  <circle cx="135" cy="210" r="5" fill="#FF6B9D" opacity=".8"/><circle cx="145" cy="207" r="4" fill="#FF8C00" opacity=".8"/><circle cx="265" cy="210" r="5" fill="#FF6B9D" opacity=".8"/><circle cx="255" cy="207" r="4" fill="#FF8C00" opacity=".8"/>
-</svg>`;
-}
-
-const listings = [
-  {title:"Boracay Beachfront Villa",    loc:"Boracay, Aklan",       price:4500, rating:4.98, reviews:142, badge:"Guest favorite",
-   svg: makeSVG({id:1, sky1:'#1a6fa0', sky2:'#87CEEB', house:'#FFF8E7', roof:'#8B4513', accent:'#FF6B35', trees:true, water:'#4fc3f7', time:'day', pool:false})},
-  {title:"Palawan Jungle Treehouse",    loc:"El Nido, Palawan",     price:3200, rating:4.95, reviews:89,  badge:"",
-   svg: makeSVG({id:2, sky1:'#0d2b1a', sky2:'#1a4a2e', house:'#8B6914', roof:'#5a3e1b', accent:'#8B6914', trees:true, water:false, time:'night', pool:false})},
-  {title:"Siargao Surf Cabin",          loc:"General Luna, Siargao",price:2800, rating:4.91, reviews:203, badge:"",
-   svg: makeSVG({id:3, sky1:'#FF6B35', sky2:'#FF9A5C', house:'#f5deb3', roof:'#8B4513', accent:'#FF6B35', trees:false,water:'#1a6fa0', time:'sunset', pool:false})},
-  {title:"Tagaytay Highland Retreat",   loc:"Tagaytay City",        price:5500, rating:4.97, reviews:67,  badge:"Guest favorite",
-   svg: makeSVG({id:4, sky1:'#2c3e50', sky2:'#4a6fa5', house:'#ecf0f1', roof:'#2c3e50', accent:'#3498db', trees:true, water:false, time:'night', pool:true})},
-  {title:"Batanes Stone House",         loc:"Basco, Batanes",       price:3800, rating:4.99, reviews:34,  badge:"Rare find",
-   svg: makeSVG({id:5, sky1:'#4a6fa5', sky2:'#87CEEB', house:'#808080', roof:'#555',    accent:'#777',    trees:false,water:'#1a6fa0', time:'day', pool:false})},
-  {title:"Cebu City Loft",              loc:"IT Park, Cebu City",   price:2200, rating:4.88, reviews:178, badge:"",
-   svg: makeSVG({id:6, sky1:'#1a1a2e', sky2:'#2d2d4e', house:'#2c2c4a', roof:'#1a1a3e', accent:'#4fc3f7', trees:false,water:false, time:'night', pool:false})},
-  {title:"Puerto Galera Cottage",       loc:"Oriental Mindoro",     price:1900, rating:4.85, reviews:92,  badge:"",
-   svg: makeSVG({id:7, sky1:'#1a6fa0', sky2:'#4fc3f7', house:'#fffde7', roof:'#8B4513', accent:'#FF8C00', trees:true, water:'#1a6fa0', time:'day', pool:false})},
-  {title:"Bohol Chocolate Hills View",  loc:"Carmen, Bohol",        price:3100, rating:4.93, reviews:55,  badge:"Guest favorite",
-   svg: makeSVG({id:8, sky1:'#2980b9', sky2:'#87CEEB', house:'#f9f9f9', roof:'#c0392b', accent:'#e74c3c', trees:true, water:false, time:'day', pool:true})},
+// Unsplash direct image URLs (no download needed)
+const experiences = [
+  {price:"₱1,100",desc:"Great live jazz in a beautiful old Manila setting.",stars:"4.5",reviews:66,
+   img:"https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=440&q=80"},
+  {price:"₱4,000",desc:"Cook the whole menu guided by a professional chef.",stars:"4.9",reviews:51,
+   img:"https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=440&q=80"},
+  {price:"₱5,100",desc:"Exclusive dinner with private chef in a historic setting.",stars:"5.0",reviews:3,
+   img:"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=440&q=80"},
+  {price:"₱3,750",desc:"Taste your way through Intramuros with a local guide.",stars:"4.8",reviews:25,
+   img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=440&q=80"},
+  {price:"₱2,200",desc:"Sunrise hike to Taal Volcano with breakfast by the lake.",stars:"4.7",reviews:38,
+   img:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=440&q=80"},
 ];
 
-const grid = document.getElementById('grid');
-listings.forEach(l => {
-  grid.innerHTML += `
-  <div class="card">
-    <div class="card-img">
-      ${l.svg}
-      <button class="heart" onclick="this.textContent=this.textContent==='🤍'?'❤️':'🤍'">🤍</button>
-      ${l.badge ? `<div class="badge">${l.badge}</div>` : ''}
+const homes = [
+  {title:"Superb location, Boracay beach villa, 1 bed",type:"Entire apartment · 1 bed",price:"₱2,100",rating:"4.9",reviews:44,superhost:true,
+   img:"https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=600&q=80"},
+  {title:"House in El Nido countryside, 20 min from sea",type:"Private room · 3 beds",price:"₱2,500",rating:"4.8",reviews:207,superhost:true,
+   img:"https://images.unsplash.com/photo-1540541338287-41700207dee6?w=600&q=80"},
+  {title:"Private Family Love Villa, close to Boracay",type:"Entire villa · 3 beds",price:"₱8,200",rating:"4.7",reviews:40,superhost:false,
+   img:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80"},
+  {title:"Siargao surf cabin, steps from the break",type:"Entire cabin · 2 beds",price:"₱3,400",rating:"5.0",reviews:19,superhost:true,
+   img:"https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80"},
+  {title:"Tagaytay Highland Loft with Taal view",type:"Entire apartment · 1 bed",price:"₱4,600",rating:"4.9",reviews:62,superhost:false,
+   img:"https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80"},
+];
+
+const destinations = [
+  {name:"Paris",   img:"https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=300&q=80"},
+  {name:"London",  img:"https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=300&q=80"},
+  {name:"Seoul",   img:"https://images.unsplash.com/photo-1549339601-6a4f5a5a5a5a?w=300&q=80"},
+  {name:"Manila",  img:"https://images.unsplash.com/photo-1575378940847-b5d2a6f28e7d?w=300&q=80"},
+  {name:"Bali",    img:"https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=300&q=80"},
+  {name:"Tokyo",   img:"https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=300&q=80"},
+];
+
+// Render experiences
+const expEl = document.getElementById('expScroll');
+experiences.forEach(e => {
+  expEl.innerHTML += `
+  <div class="exp-card">
+    <div class="exp-img">
+      <img src="${e.img}" alt="${e.desc}" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#f093fb,#f5576c)'"/>
     </div>
-    <div class="card-info">
-      <div class="card-top">
-        <div class="card-title">${l.title}</div>
-        <div class="rating">⭐ ${l.rating}</div>
+    <div class="exp-price"><strong>${e.price}</strong></div>
+    <div class="exp-desc">${e.desc}</div>
+    <div class="exp-stars"><span>★</span> ${e.stars} · ${e.reviews} reviews</div>
+  </div>`;
+});
+
+// Render homes
+const homesEl = document.getElementById('homesScroll');
+homes.forEach(h => {
+  homesEl.innerHTML += `
+  <div class="home-card">
+    <div class="home-img">
+      <img src="${h.img}" alt="${h.title}" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#4facfe,#00f2fe)'"/>
+      <button class="heart-btn" onclick="this.textContent=this.textContent==='🤍'?'❤️':'🤍'">🤍</button>
+    </div>
+    <div class="home-info">
+      <div class="home-top">
+        <div class="home-title">${h.title}</div>
+        <div class="home-rating">★ ${h.rating}</div>
       </div>
-      <div class="card-sub">${l.loc}</div>
-      <div class="card-sub">${l.reviews} reviews</div>
-      <div class="price"><strong>₱${l.price.toLocaleString()}</strong> / night</div>
+      <div class="home-sub">${h.type}</div>
+      <div class="home-sub">${h.reviews} reviews</div>
+      <div class="home-price"><strong>${h.price}</strong> / night</div>
+      ${h.superhost ? '<div class="superhost">Superhost</div>' : ''}
     </div>
   </div>`;
 });
 
-document.querySelectorAll('.cat').forEach(c => {
-  c.addEventListener('click', () => {
-    document.querySelectorAll('.cat').forEach(x => x.classList.remove('active'));
-    c.classList.add('active');
-  });
+// Render destinations
+const destEl = document.getElementById('destGrid');
+destinations.forEach(d => {
+  destEl.innerHTML += `
+  <div class="dest-card">
+    <img src="${d.img}" alt="${d.name}" loading="lazy" onerror="this.style.background='linear-gradient(135deg,#667eea,#764ba2)'"/>
+    <div class="dest-name">${d.name}</div>
+  </div>`;
 });
 
-/* ── THREE.JS HERO SCENE ── */
-(function(){
-  const canvas = document.getElementById('heroCanvas');
-  const W = canvas.parentElement.clientWidth;
-  const H = canvas.parentElement.clientHeight;
-  const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x0a2a4a);
-  scene.fog = new THREE.Fog(0x0a2a4a, 20, 60);
-
-  const camera = new THREE.PerspectiveCamera(55, W/H, 0.1, 100);
-  camera.position.set(0, 3, 14);
-  camera.lookAt(0, 0, 0);
-
-  const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
-  renderer.setSize(W, H);
-  renderer.shadowMap.enabled = true;
-
-  // Lights
-  scene.add(new THREE.AmbientLight(0x334466, 0.8));
-  const moon = new THREE.DirectionalLight(0x8899cc, 1.2);
-  moon.position.set(-5, 10, 5);
-  moon.castShadow = true;
-  scene.add(moon);
-  const warm = new THREE.PointLight(0xffaa44, 2, 15);
-  warm.position.set(0, 2, 2);
-  scene.add(warm);
-
-  // Ocean
-  const oceanGeo = new THREE.PlaneGeometry(80, 80, 40, 40);
-  const oceanMat = new THREE.MeshStandardMaterial({color:0x1a4a6a, roughness:0.1, metalness:0.6, transparent:true, opacity:0.85});
-  const ocean = new THREE.Mesh(oceanGeo, oceanMat);
-  ocean.rotation.x = -Math.PI/2;
-  ocean.position.y = -1.5;
-  scene.add(ocean);
-
-  // Beach sand
-  const sandGeo = new THREE.PlaneGeometry(80, 20);
-  const sandMat = new THREE.MeshStandardMaterial({color:0xd4a96a, roughness:0.9});
-  const sand = new THREE.Mesh(sandGeo, sandMat);
-  sand.rotation.x = -Math.PI/2;
-  sand.position.set(0, -1.49, 10);
-  scene.add(sand);
-
-  // Helper to build a house
-  function buildHouse(x, z, color, roofColor, scale=1){
-    const g = new THREE.Group();
-    // Walls
-    const walls = new THREE.Mesh(new THREE.BoxGeometry(3*scale,2*scale,2.5*scale), new THREE.MeshStandardMaterial({color}));
-    walls.position.y = scale;
-    walls.castShadow = true;
-    g.add(walls);
-    // Roof
-    const roofGeo = new THREE.ConeGeometry(2.3*scale, 1.5*scale, 4);
-    const roof = new THREE.Mesh(roofGeo, new THREE.MeshStandardMaterial({color:roofColor}));
-    roof.position.y = 2.75*scale;
-    roof.rotation.y = Math.PI/4;
-    roof.castShadow = true;
-    g.add(roof);
-    // Window glow
-    const winGeo = new THREE.BoxGeometry(0.6*scale, 0.5*scale, 0.05);
-    const winMat = new THREE.MeshStandardMaterial({color:0xffdd88, emissive:0xffaa00, emissiveIntensity:1.2});
-    [-0.7,0.7].forEach(wx => {
-      const win = new THREE.Mesh(winGeo, winMat);
-      win.position.set(wx*scale, scale*0.9, 1.26*scale);
-      g.add(win);
-    });
-    // Door
-    const door = new THREE.Mesh(new THREE.BoxGeometry(0.5*scale,0.9*scale,0.05), new THREE.MeshStandardMaterial({color:0x8B4513}));
-    door.position.set(0, 0.45*scale, 1.26*scale);
-    g.add(door);
-    g.position.set(x, -1.5, z);
-    return g;
-  }
-
-  // Add several houses
-  const houses = [
-    buildHouse(-6, -2, 0xf5f5dc, 0x8B4513, 1),
-    buildHouse(0, -4, 0xfff8e7, 0xc0392b, 1.2),
-    buildHouse(6, -2, 0xe8d5b0, 0x2c3e50, 0.9),
-    buildHouse(-10, -5, 0xddd, 0x556b2f, 0.75),
-    buildHouse(10, -5, 0xf0e0c0, 0x8B2500, 0.75),
-  ];
-  houses.forEach(h => scene.add(h));
-
-  // Palm trees
-  function makePalm(x, z){
-    const g = new THREE.Group();
-    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.15, 3, 8), new THREE.MeshStandardMaterial({color:0x8B6914}));
-    trunk.position.y = 0;
-    trunk.rotation.z = 0.15;
-    g.add(trunk);
-    for(let i=0;i<6;i++){
-      const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.05, 1.8, 6), new THREE.MeshStandardMaterial({color:0x2d7a1f}));
-      leaf.position.set(Math.cos(i*Math.PI/3)*0.6, 1.8, Math.sin(i*Math.PI/3)*0.6);
-      leaf.rotation.z = 0.7 + Math.random()*0.3;
-      leaf.rotation.y = i*Math.PI/3;
-      g.add(leaf);
-    }
-    g.position.set(x, -1.5, z);
-    return g;
-  }
-  [-8,-4,4,8,-12,12].forEach((x,i) => scene.add(makePalm(x, -1+i*0.5)));
-
-  // Stars
-  const starGeo = new THREE.BufferGeometry();
-  const starVerts = [];
-  for(let i=0;i<800;i++){
-    starVerts.push((Math.random()-0.5)*100, Math.random()*40+5, (Math.random()-0.5)*100);
-  }
-  starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starVerts, 3));
-  const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({color:0xffffff, size:0.08}));
-  scene.add(stars);
-
-  // Moon
-  const moonMesh = new THREE.Mesh(new THREE.SphereGeometry(1.2, 16, 16), new THREE.MeshStandardMaterial({color:0xE8F4FD, emissive:0xccddee, emissiveIntensity:0.4}));
-  moonMesh.position.set(-12, 12, -20);
-  scene.add(moonMesh);
-
-  // Water waves animation
-  let t = 0;
-  const posAttr = oceanGeo.attributes.position;
-  const origY = Array.from({length:posAttr.count}, (_,i) => posAttr.getY(i));
-
-  function animate(){
-    requestAnimationFrame(animate);
-    t += 0.015;
-    for(let i=0;i<posAttr.count;i++){
-      const x = posAttr.getX(i), z = posAttr.getZ(i);
-      posAttr.setY(i, origY[i] + Math.sin(x*0.5+t)*0.15 + Math.cos(z*0.3+t*0.8)*0.1);
-    }
-    posAttr.needsUpdate = true;
-    oceanGeo.computeVertexNormals();
-    stars.rotation.y = t * 0.005;
-    warm.intensity = 1.8 + Math.sin(t*2)*0.4;
-    renderer.render(scene, camera);
-  }
-  animate();
-
-  window.addEventListener('resize', ()=>{
-    const W2 = canvas.parentElement.clientWidth;
-    const H2 = canvas.parentElement.clientHeight;
-    camera.aspect = W2/H2;
-    camera.updateProjectionMatrix();
-    renderer.setSize(W2, H2);
+// Tab switching
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
   });
-})();
+});
 </script>
 </body>
 </html>
