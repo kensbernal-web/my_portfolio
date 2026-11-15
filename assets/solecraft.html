@@ -1,601 +1,490 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SOLECRAFT — Premium Footwear</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--blue:#0097D5;--blue-dark:#0077AA;--black:#1A1A2E;--dark:#222;--muted:#777;--border:#E8E8E8;--bg:#F8F9FA;--white:#FFF}
-body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
-img{max-width:100%;display:block}
-a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:pointer}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0097D5" />
+  <title>SOLECRAFT — Move With Air</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Original SOLECRAFT palette */
+      --ink: #1A1A2E;
+      --muted: #777;
+      --paper: #F8F9FA;
+      --paper-deep: #E8E8E8;
+      --white: #FFF;
+      --line: rgba(26, 26, 46, .12);
+      --blue: #0097D5;
+      --blue-dark: #0077AA;
+      --shadow: 0 18px 50px rgba(26,26,46,.12);
+      --display: 'Barlow Condensed', Impact, sans-serif;
+      --body: 'DM Sans', Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--white); font-family: var(--body); overflow-x: hidden; }
+    button, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; }
+    img { display: block; max-width: 100%; }
 
-/* NAV */
-.nav{background:var(--blue);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:64px;position:sticky;top:0;z-index:200}
-.nav-logo{color:#fff;font-size:1.4rem;font-weight:900;letter-spacing:-.03em;display:flex;align-items:center;gap:.5rem}
-.nav-logo img{height:30px;width:auto;object-fit:contain;filter:brightness(0) invert(1)}
-.nav-links{display:flex;gap:2rem}
-.nav-links a{color:rgba(255,255,255,.85);font-size:.88rem;font-weight:500;transition:color .2s}
-.nav-links a:hover{color:#fff}
-.nav-right{display:flex;gap:.8rem;align-items:center}
-.nav-icon{background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;opacity:.85;transition:opacity .2s;position:relative}
-.nav-icon:hover{opacity:1}
-.cart-badge{position:absolute;top:-5px;right:-5px;background:#FF385C;color:#fff;border-radius:50%;width:17px;height:17px;font-size:.62rem;font-weight:700;display:flex;align-items:center;justify-content:center}
-.nav-btn-auth{background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.4);border-radius:8px;padding:.4rem 1rem;font-size:.82rem;font-weight:600;transition:background .2s}
-.nav-btn-auth:hover{background:rgba(255,255,255,.25)}
-.nav-btn-auth.signup{background:#fff;color:var(--blue)}
-.nav-btn-auth.signup:hover{opacity:.9}
-.nav-user{display:flex;align-items:center;gap:.6rem;color:#fff;font-size:.88rem;font-weight:600;cursor:pointer;position:relative}
-.nav-avatar-sc{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:.82rem;border:2px solid rgba(255,255,255,.5)}
+    .site-wrap { width: min(1510px, calc(100% - 56px)); margin: 0 auto; }
+    .topbar {
+      height: 82px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      gap: 28px; position: relative; z-index: 30; background: var(--blue); color: var(--white);
+    }
+    .brand { display: inline-flex; align-items: center; gap: 11px; width: max-content; font-size: 15px; font-weight: 800; letter-spacing: .19em; }
+    .brand-mark { width: 31px; height: 31px; border: 2px solid var(--white); border-radius: 50%; display: grid; place-items: center; font-family: var(--display); font-size: 19px; font-weight: 800; line-height: 1; letter-spacing: 0; }
+    .brand span:last-child { font-weight: 500; }
+    .nav-links { display: flex; align-items: center; gap: clamp(20px, 3vw, 48px); }
+    .nav-links a { color: rgba(255,255,255,.9); font-size: 12px; font-weight: 700; letter-spacing: .075em; text-transform: uppercase; transition: opacity .2s; }
+    .nav-links a:hover { opacity: .55; }
+    .nav-actions { justify-self: end; display: flex; align-items: center; gap: 19px; }
+    .icon-btn { width: 36px; height: 36px; display: grid; place-items: center; border: 0; padding: 0; color: var(--white); background: transparent; position: relative; }
+    .icon-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .cart-count { position: absolute; top: -2px; right: -3px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 20px; display: grid; place-items: center; color: white; background: var(--ink); font-size: 9px; font-weight: 800; }
+    .menu-toggle { display: none; }
 
-/* MODALS */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center}
-.modal-overlay.show{display:flex}
-.modal{background:#fff;border-radius:20px;width:min(440px,92vw);padding:2rem;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:popIn .25s ease}
-@keyframes popIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
-.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.3rem;cursor:pointer;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.modal-close:hover{background:#f5f5f5}
-.modal h2{font-size:1.3rem;font-weight:800;margin-bottom:.3rem}
-.modal-sub{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}
-.form-field{margin-bottom:1rem}
-.form-field label{display:block;font-size:.8rem;font-weight:600;margin-bottom:.4rem}
-.form-field input{width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.9rem;outline:none;transition:border-color .2s}
-.form-field input:focus{border-color:var(--blue)}
-.modal-submit{width:100%;padding:.85rem;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:opacity .2s;margin-top:.5rem}
-.modal-submit:hover{opacity:.88}
-.modal-footer{text-align:center;font-size:.82rem;color:var(--muted);margin-top:1rem}
-.modal-footer a{color:var(--blue);font-weight:600;cursor:pointer;text-decoration:underline}
-.social-login{display:flex;flex-direction:column;gap:.6rem}
-.social-btn-modal{display:flex;align-items:center;gap:.8rem;padding:.75rem 1rem;border:1px solid var(--border);border-radius:10px;background:#fff;cursor:pointer;font-size:.9rem;font-weight:500;transition:background .2s;width:100%}
-.social-btn-modal:hover{background:#f8f9fa}
-.modal-divider{text-align:center;position:relative;margin:1rem 0}
-.modal-divider::before{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:var(--border)}
-.modal-divider span{background:#fff;padding:0 .8rem;position:relative;font-size:.82rem;color:var(--muted)}
+    .hero {
+      min-height: 640px; height: min(760px, calc(100svh - 105px)); max-height: 820px; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #E3F5FC 0%, #F8F9FA 48%, #D8EEF7 100%);
+      display: grid; grid-template-columns: minmax(320px, .78fr) minmax(500px, 1.5fr); align-items: center;
+      isolation: isolate;
+    }
+    .hero::before { content: ''; position: absolute; inset: 0; z-index: -1; opacity: .32; background: radial-gradient(ellipse at 73% 51%, rgba(255,255,255,.95), transparent 54%), linear-gradient(120deg, transparent 45%, rgba(255,255,255,.24)); }
+    .hero-copy { z-index: 5; padding: 35px 0 125px clamp(34px, 6vw, 92px); align-self: center; }
+    .eyebrow { display: flex; align-items: center; gap: 11px; margin-bottom: 17px; color: var(--blue-dark); font-size: 10px; font-weight: 800; letter-spacing: .24em; text-transform: uppercase; }
+    .eyebrow::before { content: ''; width: 30px; height: 2px; background: var(--ink); }
+    h1 { margin: 0; max-width: 500px; font-family: var(--display); font-size: clamp(66px, 8.4vw, 130px); font-weight: 900; line-height: .78; letter-spacing: -.035em; text-transform: uppercase; }
+    h1 span { display: block; }
+    h1 .outline { color: transparent; -webkit-text-stroke: 1.6px var(--blue); }
+    .hero-sub { max-width: 330px; margin: 25px 0 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .hero-price-row { display: flex; align-items: baseline; gap: 13px; margin-top: 18px; }
+    .hero-price { font-size: 18px; font-weight: 800; letter-spacing: -.02em; }
+    .hero-code { color: var(--blue-dark); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .hero-cta-row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
+    .btn-dark { min-height: 47px; display: inline-flex; align-items: center; justify-content: center; gap: 18px; padding: 0 20px; border: 1px solid var(--blue); border-radius: 4px; color: white; background: var(--blue); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; transition: transform .2s, background .2s; }
+    .btn-dark:hover { transform: translateY(-2px); background: var(--blue-dark); border-color: var(--blue-dark); }
+    .btn-dark svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .text-link { border: 0; background: transparent; color: var(--blue-dark); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 12px 5px; }
+    .hero-visual { position: absolute; z-index: 1; inset: 0 0 110px 31%; display: grid; place-items: center; pointer-events: none; }
+    .hero-watermark { position: absolute; left: 13%; top: 48%; transform: translateY(-50%); white-space: nowrap; font-family: var(--display); font-size: clamp(150px, 26vw, 390px); font-weight: 900; letter-spacing: -.055em; line-height: .8; color: rgba(0,151,213,.12); user-select: none; }
+    .hero-product { width: min(78%, 790px); height: min(86%, 560px); object-fit: contain; position: relative; z-index: 2; transform: rotate(-11deg) translate(4%, 0); filter: drop-shadow(0 28px 23px rgba(0,0,0,.20)); mix-blend-mode: multiply; transition: opacity .25s, transform .4s; }
+    .hero-product:hover { transform: rotate(-8deg) translate(4%, -5px); }
+    .side-social { position: absolute; z-index: 7; right: 25px; top: 43%; display: flex; flex-direction: column; gap: 12px; }
+    .side-social a { width: 28px; height: 28px; border: 1px solid rgba(0,119,170,.36); border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 800; transition: background .2s, color .2s; }
+    .side-social a:hover { background: var(--blue); color: white; }
+    .hero-bottom-line { position: absolute; z-index: 6; bottom: 0; left: 0; right: 0; height: 110px; padding: 12px clamp(22px, 4vw, 64px); display: flex; align-items: center; gap: 18px; background: rgba(248,249,250,.78); border-top: 1px solid rgba(0,151,213,.22); backdrop-filter: blur(8px); }
+    .strip-label { min-width: 84px; align-self: center; color: var(--blue-dark); font-size: 9px; font-weight: 800; letter-spacing: .16em; line-height: 1.7; text-transform: uppercase; }
+    .strip-items { display: flex; flex: 1; align-items: stretch; gap: 12px; min-width: 0; overflow-x: auto; scrollbar-width: none; scroll-behavior: smooth; }
+    .strip-items::-webkit-scrollbar { display: none; }
+    .mini-product { flex: 0 0 min(230px, 30%); min-width: 175px; height: 82px; display: grid; grid-template-columns: 86px 1fr; align-items: center; gap: 10px; padding: 8px 11px; border: 1px solid transparent; border-radius: 8px; background: rgba(255,255,255,.82); text-align: left; transition: border .2s, background .2s, transform .2s; }
+    .mini-product:hover { transform: translateY(-2px); background: var(--white); }
+    .mini-product.active { border-color: rgba(0,151,213,.70); background: var(--white); }
+    .mini-product img { width: 86px; height: 65px; object-fit: contain; mix-blend-mode: multiply; }
+    .mini-name { display: block; margin-bottom: 5px; font-size: 10px; font-weight: 700; line-height: 1.3; }
+    .mini-price { display: block; color: var(--blue-dark); font-size: 10px; font-weight: 700; }
+    .strip-arrow { flex: 0 0 36px; width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid rgba(0,119,170,.28); border-radius: 50%; background: var(--white); color: var(--blue-dark); }
+    .strip-arrow svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; }
 
-/* CART DRAWER */
-.cart-drawer{position:fixed;top:0;right:-420px;width:min(420px,100vw);height:100vh;background:#fff;z-index:998;box-shadow:-4px 0 30px rgba(0,0,0,.15);transition:right .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
-.cart-drawer.open{right:0}
-.cart-header{padding:1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.cart-header h3{font-size:1.1rem;font-weight:700}
-.cart-close{background:none;border:none;font-size:1.3rem;cursor:pointer}
-.cart-items{flex:1;overflow-y:auto;padding:1rem 1.5rem}
-.cart-item{display:flex;gap:1rem;padding:.8rem 0;border-bottom:1px solid var(--border);align-items:center}
-.cart-item-img{width:64px;height:64px;border-radius:8px;background:var(--bg);flex-shrink:0;overflow:hidden}
-.cart-item-img img{width:100%;height:100%;object-fit:contain;padding:4px}
-.cart-item-info{flex:1}
-.cart-item-name{font-size:.88rem;font-weight:600;margin-bottom:.2rem}
-.cart-item-price{font-size:.82rem;color:var(--muted)}
-.cart-item-remove{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.8rem;transition:color .2s}
-.cart-item-remove:hover{color:#e74c3c}
-.cart-footer{padding:1.5rem;border-top:1px solid var(--border)}
-.cart-total{display:flex;justify-content:space-between;font-weight:700;margin-bottom:1rem}
-.checkout-btn{width:100%;padding:.85rem;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:opacity .2s}
-.checkout-btn:hover{opacity:.88}
-.cart-empty{text-align:center;padding:3rem 1rem;color:var(--muted)}
-.cart-empty div{font-size:3rem;margin-bottom:1rem}
+    .section { padding: 90px 0 96px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
+    .section-kicker { margin-bottom: 9px; color: var(--blue-dark); font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+    .section-title { margin: 0; font-family: var(--display); font-size: clamp(40px, 5vw, 64px); line-height: .9; letter-spacing: -.02em; text-transform: uppercase; }
+    .section-note { max-width: 260px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .product-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 17px; }
+    .product-card { min-width: 0; background: var(--paper); border-radius: 8px; overflow: hidden; transition: transform .25s, box-shadow .25s; }
+    .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .product-photo { aspect-ratio: 1 / .88; display: grid; place-items: center; padding: 16px; background: linear-gradient(145deg, var(--paper-deep), var(--paper)); position: relative; }
+    .product-photo img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; transition: transform .3s; }
+    .product-card:hover .product-photo img { transform: scale(1.06) rotate(-3deg); }
+    .product-tag { position: absolute; top: 13px; left: 13px; padding: 6px 8px; border-radius: 3px; color: #fff; background: var(--blue); font-size: 8px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .product-info { padding: 15px 16px 17px; background: var(--white); }
+    .product-info h3 { margin: 0 0 6px; font-size: 12px; font-weight: 800; }
+    .product-info p { margin: 0; color: var(--muted); font-size: 10px; }
+    .product-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 13px; }
+    .product-price { font-size: 12px; font-weight: 800; }
+    .add-btn { display: inline-flex; align-items: center; gap: 6px; border: 0; padding: 8px 10px; color: white; background: var(--blue); border-radius: 3px; font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 
-/* TOAST */
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--black);color:#fff;padding:.8rem 1.6rem;border-radius:40px;font-size:.9rem;font-weight:500;z-index:9999;transition:transform .35s cubic-bezier(.34,1.56,.64,1);pointer-events:none;white-space:nowrap}
-.toast.show{transform:translateX(-50%) translateY(0)}
+    .story-band { padding: 54px clamp(25px, 5vw, 70px); display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; background: var(--ink); color: white; }
+    .story-band p { margin: 0 0 8px; color: #8CCFEB; font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+    .story-band h2 { margin: 0; max-width: 690px; font-family: var(--display); font-size: clamp(34px, 4.8vw, 60px); line-height: .9; text-transform: uppercase; }
+    .story-band .btn-light { min-height: 44px; display: inline-flex; align-items: center; gap: 14px; padding: 0 18px; border: 1px solid rgba(255,255,255,.5); border-radius: 3px; color: #fff; background: transparent; font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 
-/* HERO */
-.hero{background:var(--blue);display:grid;grid-template-columns:1fr 1fr;min-height:420px;overflow:hidden;position:relative}
-.hero-left{padding:3.5rem 2.5rem;color:#fff;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
-.hero-brand{position:absolute;left:1.5rem;bottom:-1rem;font-size:11rem;font-weight:900;color:rgba(255,255,255,.07);line-height:1;pointer-events:none;letter-spacing:-.05em}
-.hero-name{font-size:1.6rem;font-weight:800;margin-bottom:.3rem}
-.hero-price{font-size:1.1rem;font-weight:600;margin-bottom:1rem;opacity:.9}
-.hero-desc{font-size:.9rem;line-height:1.65;opacity:.8;max-width:34ch;margin-bottom:1.5rem}
-.hero-sizes{display:flex;gap:.5rem;margin-bottom:1.2rem;flex-wrap:wrap}
-.sz-btn{background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3);border-radius:6px;padding:.35rem .8rem;font-size:.82rem;font-weight:600;transition:all .2s;cursor:pointer}
-.sz-btn:hover,.sz-btn.active{background:#fff;color:var(--blue);border-color:#fff}
-.hero-colors{display:flex;gap:.6rem;margin-bottom:2rem;align-items:center}
-.color-dot{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color .2s;position:relative}
-.color-dot:hover,.color-dot.active{border-color:#fff}
-.buy-btn{background:#fff;color:var(--blue);border:none;padding:.85rem 2.2rem;border-radius:8px;font-size:.95rem;font-weight:800;transition:opacity .2s;align-self:flex-start}
-.buy-btn:hover{opacity:.88}
+    footer { padding: 32px 0 26px; color: rgba(255,255,255,.72); background: var(--ink); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-brand { color: var(--white); font-size: 12px; font-weight: 900; letter-spacing: .16em; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; font-size: 10px; font-weight: 600; }
+    .copyright { font-size: 9px; }
 
-.hero-right{display:flex;align-items:center;justify-content:center;padding:2rem;position:relative;overflow:hidden}
-.hero-right::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 60%,rgba(255,255,255,.1),transparent 70%)}
-.hero-shoe-img{width:88%;max-height:340px;object-fit:contain;position:relative;z-index:1;filter:drop-shadow(0 20px 40px rgba(0,0,0,.3));transition:transform .4s}
-.hero-right:hover .hero-shoe-img{transform:translateY(-8px) rotate(-3deg)}
-.hero-shoe-bg{position:absolute;inset:0;background:center/cover no-repeat;opacity:.2;filter:blur(2px)}
-.hero-thumbs{position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);display:flex;gap:.6rem;z-index:2}
-.thumb{width:56px;height:42px;border-radius:7px;overflow:hidden;border:2px solid rgba(255,255,255,.3);cursor:pointer;transition:border-color .2s;background:#fff}
-.thumb img{width:100%;height:100%;object-fit:contain;padding:3px}
-.thumb.active,.thumb:hover{border-color:#fff}
+    /* Cart, sign-in and search overlays */
+    .overlay { position: fixed; inset: 0; z-index: 100; display: none; background: rgba(26,26,46,.42); }
+    .overlay.show { display: block; }
+    .cart-drawer { position: fixed; z-index: 110; top: 0; right: 0; bottom: 0; width: min(420px, 100%); padding: 24px; display: flex; flex-direction: column; background: var(--white); transform: translateX(105%); transition: transform .32s ease; box-shadow: -15px 0 45px rgba(26,26,46,.12); }
+    .cart-drawer.open { transform: translateX(0); }
+    .drawer-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .drawer-head h2 { margin: 0; font-family: var(--display); font-size: 30px; text-transform: uppercase; }
+    .close-btn { width: 34px; height: 34px; border: 0; border-radius: 50%; background: var(--paper); color: var(--ink); font-size: 18px; }
+    .cart-items { flex: 1; overflow-y: auto; padding: 12px 0; }
+    .cart-empty { padding: 45px 12px; color: var(--muted); text-align: center; font-size: 12px; line-height: 1.7; }
+    .cart-row { display: grid; grid-template-columns: 76px 1fr auto; gap: 12px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .cart-row img { width: 76px; height: 65px; object-fit: contain; background: var(--paper); mix-blend-mode: multiply; }
+    .cart-row strong { display: block; font-size: 11px; line-height: 1.4; }
+    .cart-row small { display: block; margin-top: 5px; color: var(--muted); font-size: 10px; }
+    .remove-item { border: 0; background: transparent; color: var(--muted); font-size: 10px; }
+    .drawer-foot { padding-top: 18px; border-top: 1px solid var(--line); }
+    .subtotal { display: flex; justify-content: space-between; margin-bottom: 14px; font-size: 12px; font-weight: 800; }
+    .checkout { width: 100%; min-height: 48px; border: 0; border-radius: 3px; color: white; background: var(--blue); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .modal-wrap { position: fixed; inset: 0; z-index: 120; display: none; place-items: center; padding: 20px; background: rgba(26,26,46,.48); }
+    .modal-wrap.show { display: grid; }
+    .modal { width: min(420px, 100%); position: relative; padding: 32px; border-radius: 8px; background: var(--white); box-shadow: var(--shadow); }
+    .modal h2 { margin: 0 0 7px; font-family: var(--display); font-size: 36px; text-transform: uppercase; }
+    .modal p { margin: 0 0 22px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .modal .close-btn { position: absolute; top: 15px; right: 15px; }
+    .field { display: block; margin-bottom: 13px; }
+    .field span { display: block; margin-bottom: 6px; color: var(--ink); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .field input { width: 100%; height: 43px; padding: 0 12px; border: 1px solid var(--paper-deep); border-radius: 3px; outline: 0; font-size: 12px; }
+    .field input:focus { border-color: var(--blue); }
+    .modal-submit { width: 100%; min-height: 45px; margin-top: 6px; border: 0; border-radius: 3px; color: white; background: var(--blue); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .switch-auth { margin-top: 17px; color: var(--muted); font-size: 10px; text-align: center; }
+    .switch-auth button { border: 0; padding: 0; color: var(--blue-dark); background: transparent; font-size: inherit; font-weight: 800; text-decoration: underline; }
+    .toast { position: fixed; z-index: 150; left: 50%; bottom: 24px; max-width: calc(100% - 30px); padding: 13px 18px; border-radius: 30px; color: white; background: var(--ink); box-shadow: var(--shadow); font-size: 11px; font-weight: 700; opacity: 0; transform: translate(-50%, 20px); pointer-events: none; transition: opacity .25s, transform .25s; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .search-panel { position: fixed; z-index: 125; top: 0; left: 0; right: 0; display: none; padding: 25px max(28px, calc((100vw - 1200px)/2)); background: var(--white); box-shadow: 0 10px 30px rgba(26,26,46,.10); }
+    .search-panel.show { display: flex; align-items: center; gap: 15px; }
+    .search-panel input { flex: 1; border: 0; outline: 0; font-size: 17px; }
+    .search-panel button { border: 0; background: transparent; font-size: 21px; }
 
-/* FEATURED */
-.featured{padding:3rem 2.5rem;background:var(--bg)}
-.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
-.feat-card{border-radius:16px;overflow:hidden;position:relative;cursor:pointer;transition:transform .3s;min-height:220px}
-.feat-card:hover{transform:translateY(-4px)}
-.feat-inner{padding:1.5rem;height:100%;display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:1}
-.feat-logo{font-weight:900;font-size:.85rem;color:rgba(255,255,255,.8);margin-bottom:.4rem}
-.feat-price{font-size:1rem;font-weight:700;color:rgba(255,255,255,.9)}
-.feat-name{font-size:1.1rem;font-weight:800;color:#fff;margin:.2rem 0}
-.feat-desc{font-size:.78rem;color:rgba(255,255,255,.7);line-height:1.5;max-width:22ch}
-.feat-shoe{position:absolute;bottom:1rem;right:-8px;width:55%;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,.35));transition:transform .3s;z-index:2;max-height:130px}
-.feat-card:hover .feat-shoe{transform:translateX(-8px) rotate(-5deg) scale(1.05)}
-.feat-buy{background:rgba(255,255,255,.18);color:#fff;border:1.5px solid rgba(255,255,255,.4);border-radius:7px;padding:.45rem 1.2rem;font-size:.82rem;font-weight:700;transition:background .2s;align-self:flex-start;margin-top:.8rem}
-.feat-buy:hover{background:rgba(255,255,255,.32)}
-
-/* FILTERS */
-.filters{padding:1.8rem 2.5rem 1rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;border-bottom:1px solid var(--border)}
-.filter-group{display:flex;align-items:center;gap:.8rem}
-.filter-label{font-size:.82rem;color:var(--muted);white-space:nowrap}
-.filter-range{-webkit-appearance:none;appearance:none;width:120px;height:4px;border-radius:2px;background:var(--blue);outline:none;cursor:pointer}
-.filter-range::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--blue);cursor:pointer}
-.filter-val{background:var(--blue);color:#fff;font-size:.72rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;min-width:36px;text-align:center}
-.cf-dot{width:18px;height:18px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color .2s}
-.cf-dot:hover,.cf-dot.active{border-color:var(--dark)}
-
-/* PRODUCT GRID */
-.prod-section{padding:1.5rem 2.5rem 3rem;max-width:1340px;margin:0 auto}
-.prod-section h2{font-size:1.4rem;font-weight:700;margin-bottom:1.4rem}
-.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.6rem}
-.prod-card{cursor:pointer;text-align:center}
-.prod-img-wrap{background:var(--bg);border-radius:12px;overflow:hidden;aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:.8rem;transition:background .2s}
-.prod-card:hover .prod-img-wrap{background:#e8e8e8}
-.prod-img-wrap img{width:85%;height:85%;object-fit:contain;transition:transform .35s;filter:drop-shadow(0 8px 16px rgba(0,0,0,.12))}
-.prod-card:hover .prod-img-wrap img{transform:scale(1.08) rotate(-4deg)}
-.prod-hover{position:absolute;inset:0;background:rgba(0,151,213,.06);opacity:0;transition:opacity .2s;display:flex;align-items:center;justify-content:center;gap:.5rem}
-.prod-card:hover .prod-hover{opacity:1}
-.ph-add{background:var(--blue);color:#fff;border:none;border-radius:7px;padding:.42rem .95rem;font-size:.75rem;font-weight:700;transition:opacity .2s}
-.ph-add:hover{opacity:.85}
-.ph-wish{background:#fff;border:1px solid var(--border);border-radius:7px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:.82rem}
-.prod-name{font-size:.9rem;font-weight:600;margin-bottom:.2rem}
-.prod-price{font-size:.88rem;color:var(--muted)}
-
-/* PAGINATION */
-.pagination{display:flex;justify-content:center;align-items:center;gap:.4rem;padding:1.5rem 0 3rem}
-.pg-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:#fff;font-size:.85rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-weight:500}
-.pg-btn:hover,.pg-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
-.pg-arrow{background:none;border:1px solid var(--border);border-radius:7px;padding:.4rem .7rem;font-size:.82rem;cursor:pointer;transition:all .2s}
-.pg-arrow:hover{background:var(--bg)}
-
-/* FOOTER */
-footer{background:var(--black);color:#fff;padding:3rem 2.5rem}
-.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;max-width:1200px;margin:0 auto 2rem}
-.footer-socials{display:flex;gap:.8rem;margin-top:1rem}
-.soc-btn{width:36px;height:36px;border-radius:7px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:.9rem;cursor:pointer;transition:background .2s}
-.soc-btn:hover{background:rgba(255,255,255,.2)}
-footer h4{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem;color:rgba(255,255,255,.5)}
-footer a{display:block;font-size:.82rem;color:rgba(255,255,255,.65);margin-bottom:.5rem;transition:color .2s}
-footer a:hover{color:#fff}
-.footer-bottom{max-width:1200px;margin:1.5rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;font-size:.78rem;color:rgba(255,255,255,.4);flex-wrap:wrap;gap:.5rem}
-
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr}
-  .hero-right{height:280px}
-  .feat-grid{grid-template-columns:1fr}
-  .footer-top{grid-template-columns:1fr 1fr}
-  .nav-links{display:none}
-}
-</style>
+    @media (max-width: 1050px) {
+      .site-wrap { width: min(100% - 36px, 1100px); }
+      .hero { min-height: 610px; grid-template-columns: .8fr 1.2fr; }
+      .hero-copy { padding-left: 42px; }
+      .hero-visual { left: 27%; }
+      .hero-product { width: 88%; }
+      .side-social { right: 12px; }
+      .mini-product { flex-basis: 215px; }
+      .product-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 720px) {
+      .site-wrap { width: calc(100% - 28px); }
+      .topbar { height: 68px; grid-template-columns: 1fr auto; }
+      .brand { font-size: 12px; }
+      .nav-links { display: none; position: absolute; top: 61px; left: 0; right: 0; padding: 18px; flex-direction: column; align-items: flex-start; gap: 18px; background: var(--blue-dark); box-shadow: 0 12px 20px rgba(26,26,46,.08); }
+      .nav-links.open { display: flex; }
+      .nav-actions { gap: 8px; }
+      .icon-btn { width: 31px; height: 31px; }
+      .menu-toggle { display: grid; }
+      .hero { height: auto; min-height: 830px; max-height: none; display: block; }
+      .hero-copy { position: relative; padding: 46px 25px 0; }
+      .eyebrow { font-size: 9px; }
+      h1 { font-size: clamp(65px, 19vw, 105px); }
+      .hero-sub { max-width: 280px; margin-top: 18px; font-size: 12px; }
+      .hero-price-row { margin-top: 12px; }
+      .hero-cta-row { margin-top: 17px; }
+      .hero-visual { inset: 300px -10px 130px 0; place-items: center; }
+      .hero-watermark { left: 4%; top: 43%; font-size: 42vw; }
+      .hero-product { width: 95%; height: 100%; max-height: 390px; transform: rotate(-10deg); }
+      .side-social { top: auto; right: 12px; bottom: 133px; flex-direction: row; }
+      .hero-bottom-line { height: 118px; padding: 12px 12px; gap: 8px; }
+      .strip-label { display: none; }
+      .mini-product { min-width: 190px; flex-basis: 190px; height: 88px; grid-template-columns: 78px 1fr; padding: 7px; }
+      .mini-product img { width: 78px; }
+      .strip-arrow { flex-basis: 32px; width: 32px; height: 32px; }
+      .section { padding: 60px 0 65px; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .section-note { max-width: 310px; }
+      .product-grid { gap: 10px; }
+      .product-photo { padding: 8px; }
+      .product-info { padding: 11px; }
+      .product-info h3 { font-size: 10px; }
+      .product-price { font-size: 10px; }
+      .add-btn { font-size: 8px; padding: 7px; }
+      .story-band { grid-template-columns: 1fr; padding: 38px 24px; }
+      .story-band .btn-light { width: max-content; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav class="nav">
-  <div class="nav-logo">
-    <!-- REPLACE with your logo: <img src="../assets/solecraft-logo.png"/> -->
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
-    SOLE<span style="color:rgba(255,255,255,.65)">CRAFT</span>
-  </div>
-  <div class="nav-links">
-    <a href="#">Men</a><a href="#">Women</a><a href="#">Kids</a>
-    <a href="#">Sale</a><a href="#">New Arrivals</a>
-  </div>
-  <div class="nav-right" id="scNavRight">
-    <button class="nav-icon" onclick="showToast('🔍 Search coming soon!')">🔍</button>
-    <button class="nav-icon" style="position:relative" onclick="toggleCart()">🛒<span class="cart-badge" id="cartBadge">0</span></button>
-    <button class="nav-btn-auth" onclick="openModal('login')">Log In</button>
-    <button class="nav-btn-auth signup" onclick="openModal('signup')">Sign Up</button>
-  </div>
-</nav>
-
-<!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div id="modalContent"></div>
-  </div>
-</div>
-
-<!-- CART DRAWER -->
-<div class="cart-drawer" id="cartDrawer">
-  <div class="cart-header">
-    <h3>🛒 Your Cart (<span id="cartCount">0</span>)</h3>
-    <button class="cart-close" onclick="toggleCart()">✕</button>
-  </div>
-  <div class="cart-items" id="cartItems">
-    <div class="cart-empty"><div>👟</div>Your cart is empty</div>
-  </div>
-  <div class="cart-footer" id="cartFooter" style="display:none">
-    <div class="cart-total"><span>Total</span><span id="cartTotal">₱0</span></div>
-    <button class="checkout-btn" onclick="doCheckout()">Checkout →</button>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="scToast"></div>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-brand">NIKE</div>
-  <div class="hero-left">
-    <div class="hero-name" id="heroName">Air Max Speed Turf Blue</div>
-    <div class="hero-price" id="heroPrice">₱17,999</div>
-    <div class="hero-desc" id="heroDesc">Premium running shoe with responsive cushioning and breathable upper. Built for speed, designed for style.</div>
-    <div class="hero-sizes">
-      <button class="sz-btn" onclick="selectSize(this)">40</button>
-      <button class="sz-btn active" onclick="selectSize(this)">41</button>
-      <button class="sz-btn" onclick="selectSize(this)">42</button>
-      <button class="sz-btn" onclick="selectSize(this)">43</button>
-    </div>
-    <div class="hero-colors" id="heroColors"></div>
-    <button class="buy-btn" onclick="addHeroToCart()">Buy Now</button>
-  </div>
-  <div class="hero-right">
-    <div class="hero-shoe-bg" id="heroShoBg"></div>
-    <img class="hero-shoe-img" id="heroShoeImg"
-      src="https://source.unsplash.com/700x500/?nike,sneaker,running,shoe,red"
-      alt="Featured Shoe"
-      onerror="this.style.opacity='.4'"/>
-    <div class="hero-thumbs" id="heroThumbs"></div>
-  </div>
-</div>
-
-<!-- FEATURED -->
-<div class="featured">
-  <div class="feat-grid" id="featGrid"></div>
-</div>
-
-<!-- FILTERS -->
-<div class="filters">
-  <div class="filter-group">
-    <span class="filter-label">Size</span>
-    <input type="range" class="filter-range" min="38" max="46" value="41"
-      oninput="document.getElementById('szV').textContent=this.value"/>
-    <span class="filter-val" id="szV">41</span>
-  </div>
-  <div class="filter-group">
-    <span class="filter-label">Price</span>
-    <input type="range" class="filter-range" min="1000" max="30000" value="10000"
-      oninput="document.getElementById('prMin').textContent='₱'+Math.round(this.value/1000)+'K'"/>
-    <span class="filter-val" id="prMin">₱10K</span>
-    <input type="range" class="filter-range" min="1000" max="30000" value="25000"
-      oninput="document.getElementById('prMax').textContent='₱'+Math.round(this.value/1000)+'K'"/>
-    <span class="filter-val" id="prMax">₱25K</span>
-  </div>
-  <div class="filter-group">
-    <span class="filter-label">Color</span>
-    <div style="display:flex;gap:.4rem" id="filterColors"></div>
-  </div>
-</div>
-
-<!-- PRODUCTS -->
-<div class="prod-section">
-  <h2>All Products</h2>
-  <div class="prod-grid" id="prodGrid"></div>
-  <div class="pagination">
-    <button class="pg-arrow">◀</button>
-    <button class="pg-btn active">1</button>
-    <button class="pg-btn" onclick="this.closest('.pagination').querySelectorAll('.pg-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">2</button>
-    <button class="pg-btn" onclick="this.closest('.pagination').querySelectorAll('.pg-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">3</button>
-    <button class="pg-btn" onclick="this.closest('.pagination').querySelectorAll('.pg-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">4</button>
-    <button class="pg-arrow">▶</button>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-top">
-    <div>
-      <div style="font-size:1.3rem;font-weight:900">SOLE<span style="color:var(--blue)">CRAFT</span></div>
-      <p style="font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.6;max-width:26ch;margin-top:.5rem">Premium footwear for every step of your journey.</p>
-      <div class="footer-socials">
-        <div class="soc-btn" onclick="showToast('🐦 Twitter/X')">𝕏</div>
-        <div class="soc-btn" onclick="showToast('📘 Facebook')">f</div>
-        <div class="soc-btn" onclick="showToast('▶ YouTube')">▶</div>
-        <div class="soc-btn" onclick="showToast('📷 Instagram')">📷</div>
+  <div class="site-wrap">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Solecraft home"><span class="brand-mark">S</span><span>SOLECRAFT</span></a>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#products">Men</a><a href="#products">Women</a><a href="#products">Kids</a><a href="#collections">Collections</a><a href="#products">Sale</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="searchOpen" aria-label="Search">
+          <svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+        </button>
+        <button class="icon-btn" id="loginOpen" aria-label="Account">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"></circle><path d="M4.8 20c.8-3.6 3.2-5.4 7.2-5.4s6.4 1.8 7.2 5.4"></path></svg>
+        </button>
+        <button class="icon-btn" id="cartOpen" aria-label="Open shopping bag">
+          <svg viewBox="0 0 24 24"><path d="M5 8h14l1 13H4L5 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg><span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        </button>
       </div>
-    </div>
-    <div>
-      <h4>Shop</h4>
-      <a href="#">Men's</a><a href="#">Women's</a><a href="#">Kids'</a><a href="#">Sale</a>
-    </div>
-    <div>
-      <h4>Help</h4>
-      <a href="#">Size Guide</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a>
-    </div>
-    <div>
-      <h4>Company</h4>
-      <a href="#">About Us</a><a href="#">Careers</a><a href="#">Press</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2025 SOLECRAFT. All rights reserved.</span>
-    <div style="display:flex;gap:1.2rem"><a href="#">Privacy</a><a href="#">Terms</a></div>
-  </div>
-</footer>
+    </header>
 
-<script>
-/* ── DATA ── */
-const HERO_SHOES = [
-  {name:"Air Max Speed Turf Blue", price:"₱17,999",desc:"Premium running shoe with responsive cushioning and breathable upper. Built for speed, designed for style.",
-   img:"https://source.unsplash.com/700x500/?nike,sneaker,running,shoe,red",
-   bg:"https://source.unsplash.com/700x500/?red,texture,abstract"},
-  {name:"Urban Glide 2",           price:"₱12,500",desc:"Classic street-ready silhouette with premium leather upper and comfort foam midsole.",
-   img:"https://source.unsplash.com/700x500/?white,sneaker,shoe,clean",
-   bg:"https://source.unsplash.com/700x500/?white,minimal,background"},
-  {name:"CloudRun Elite",          price:"₱19,990",desc:"Engineered mesh upper with carbon-fiber plate for maximum energy return in every stride.",
-   img:"https://source.unsplash.com/700x500/?blue,sneaker,sport,shoe",
-   bg:"https://source.unsplash.com/700x500/?blue,abstract,background"},
-  {name:"Street Force Low",        price:"₱14,200",desc:"Low-cut urban design with durable rubber outsole for all-day city wear.",
-   img:"https://source.unsplash.com/700x500/?black,sneaker,urban,shoe",
-   bg:"https://source.unsplash.com/700x500/?dark,texture"},
-];
+    <main id="top">
+      <section class="hero" aria-label="Featured shoe">
+        <div class="hero-copy">
+          <div class="eyebrow">The new season / 2026</div>
+          <h1><span id="heroTitleTop">AIR MAX</span><span class="outline" id="heroTitleBottom">SPEED TURF</span></h1>
+          <p class="hero-sub" id="heroDescription">Feel the future. Move with Air. A bold classic built for all-day comfort, responsive cushioning, and unmistakable street style.</p>
+          <div class="hero-price-row"><span class="hero-price" id="heroPrice">₱17,999</span><span class="hero-code" id="heroCode">Game Royal / Blue</span></div>
+          <div class="hero-cta-row">
+            <button class="btn-dark" id="heroAdd">Shop now <svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button>
+            <button class="text-link" id="discoverBtn">Discover the shoe</button>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-watermark" id="heroWatermark">AIR MAX</div>
+          <img class="hero-product" id="heroImage" src="https://cdna.lystit.com/photos/2013/10/10/nike-game-royalwolf-greygrey-air-max-speed-turf-raider-training-sneakers-product-1-13969529-723608356.jpeg" alt="Nike Air Max Speed Turf in royal blue" />
+        </div>
+        <div class="side-social" aria-label="Social links">
+          <a href="#" aria-label="Instagram" title="Instagram">◎</a><a href="#" aria-label="Facebook" title="Facebook">f</a><a href="#" aria-label="Pinterest" title="Pinterest">p</a>
+        </div>
+        <div class="hero-bottom-line">
+          <div class="strip-label">Featured<br/>selection</div>
+          <div class="strip-items" id="stripItems" aria-label="Select a featured shoe"></div>
+          <button class="strip-arrow" id="stripNext" aria-label="Scroll products">
+            <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"></path></svg>
+          </button>
+        </div>
+      </section>
 
-const FEATURED = [
-  {name:"Air Zoo Structure 18",price:"₱10,000",desc:"Built for training. Breathable mesh upper with orange sole.",
-   bg:"linear-gradient(135deg,#1a1a2e,#16213e)",
-   img:"https://source.unsplash.com/400x300/?orange,sneaker,training,shoe"},
-  {name:"AirJordan Retro 7",   price:"₱15,000",desc:"The newest pair of Air Jordan. Classic silhouette, modern cushioning.",
-   bg:"linear-gradient(135deg,#2d1b69,#1a0a3e)",
-   img:"https://source.unsplash.com/400x300/?jordan,sneaker,basketball,black"},
-  {name:"Air Max 270 Dusty",   price:"₱20,000",desc:"Air Max 270 Dusty Cactus. Vibrant color palette meets daily comfort.",
-   bg:"linear-gradient(135deg,#0a6666,#004444)",
-   img:"https://source.unsplash.com/400x300/?teal,sneaker,airmax,shoe"},
-];
+      <section class="section" id="products">
+        <div class="section-head">
+          <div><div class="section-kicker">Solecraft essentials</div><h2 class="section-title">Find your next pair.</h2></div>
+          <p class="section-note">Iconic Air-inspired silhouettes, selected for everyday movement and standout style.</p>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+      </section>
 
-const PRODUCTS = [
-  {n:"Air Jordan 6 Retro BG",  p:"₱9,500",  img:"https://source.unsplash.com/400x400/?jordan,sneaker,red,shoe"},
-  {n:"Air Pippen 1 Vast Grey", p:"₱11,000", img:"https://source.unsplash.com/400x400/?grey,sneaker,shoe,sport"},
-  {n:"Air Jordan 13 Retro",    p:"₱15,989", img:"https://source.unsplash.com/400x400/?white,sneaker,shoe,classic"},
-  {n:"Air More Uptempo",       p:"₱13,500", img:"https://source.unsplash.com/400x400/?blue,sneaker,shoe,bold"},
-  {n:"Air Max 720 Sunrise",    p:"₱14,200", img:"https://source.unsplash.com/400x400/?yellow,orange,sneaker,shoe"},
-  {n:"Air Max 95 Green Red",   p:"₱12,800", img:"https://source.unsplash.com/400x400/?green,sneaker,shoe,bright"},
-  {n:"Air Jordan 12 Retro",    p:"₱16,500", img:"https://source.unsplash.com/400x400/?black,white,sneaker,high"},
-  {n:"Air Presto Safari",      p:"₱9,999",  img:"https://source.unsplash.com/400x400/?running,shoe,sneaker,minimal"},
-  {n:"Air Max 270 Blue",       p:"₱13,200", img:"https://source.unsplash.com/400x400/?blue,airmax,shoe,modern"},
-  {n:"Air Zoom Vomero 14",     p:"₱11,500", img:"https://source.unsplash.com/400x400/?pink,sneaker,shoe,womens"},
-  {n:"Air Force 1 Low",        p:"₱8,990",  img:"https://source.unsplash.com/400x400/?white,leather,sneaker,clean"},
-  {n:"Air Monarch IV",         p:"₱7,500",  img:"https://source.unsplash.com/400x400/?retro,sneaker,shoe,classic"},
-];
+      <section class="story-band" id="collections">
+        <div><p>Made to move</p><h2>Every step has a story. Make yours count.</h2></div>
+        <a class="btn-light" href="#products">Explore the collection <span>↗</span></a>
+      </section>
+    </main>
 
-/* ── HERO THUMBNAILS ── */
-const heroColors = [{c:'#e74c3c'},{c:'#2d2d2d'},{c:'#3498db'},{c:'#f1f1f1'}];
-const hcEl = document.getElementById('heroColors');
-heroColors.forEach((h,i)=>{
-  const d=document.createElement('div');
-  d.className='color-dot'+(i===0?' active':'');
-  d.style.background=h.c;
-  d.onclick=()=>{
-    document.querySelectorAll('.hero-colors .color-dot').forEach(x=>x.classList.remove('active'));
-    d.classList.add('active');
-    const s=HERO_SHOES[i]||HERO_SHOES[0];
-    document.getElementById('heroShoeImg').src=s.img;
-    document.getElementById('heroName').textContent=s.name;
-    document.getElementById('heroPrice').textContent=s.price;
-    document.getElementById('heroDesc').textContent=s.desc;
-  };
-  hcEl.appendChild(d);
-});
-
-const thumbsEl = document.getElementById('heroThumbs');
-HERO_SHOES.forEach((s,i)=>{
-  const t=document.createElement('div');
-  t.className='thumb'+(i===0?' active':'');
-  t.innerHTML=`<img src="${s.img}" alt="${s.name}" onerror="this.style.display='none'"/>`;
-  t.onclick=()=>{
-    document.querySelectorAll('.hero-thumbs .thumb').forEach(x=>x.classList.remove('active'));
-    t.classList.add('active');
-    document.getElementById('heroShoeImg').src=s.img;
-    document.getElementById('heroName').textContent=s.name;
-    document.getElementById('heroPrice').textContent=s.price;
-    document.getElementById('heroDesc').textContent=s.desc;
-  };
-  thumbsEl.appendChild(t);
-});
-
-/* ── FEATURED CARDS ── */
-const fg=document.getElementById('featGrid');
-FEATURED.forEach(f=>{
-  fg.innerHTML+=`
-  <div class="feat-card" style="background:${f.bg};min-height:220px">
-    <div class="feat-inner">
-      <div>
-        <div class="feat-logo">⬤ SOLECRAFT</div>
-        <div class="feat-price">${f.price}</div>
-        <div class="feat-name">${f.name}</div>
-        <div class="feat-desc">${f.desc}</div>
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-brand">SOLECRAFT</div>
+        <div class="footer-links"><a href="#products">Shop</a><a href="#collections">Collections</a><a href="#">Shipping & Returns</a><a href="#">Contact</a></div>
+        <div class="copyright">© 2026 SOLECRAFT. All rights reserved.</div>
       </div>
-      <button class="feat-buy" onclick="addToCartNamed('${f.name}','${f.price}','${f.img}')">Buy Now</button>
-    </div>
-    <img class="feat-shoe" src="${f.img}" alt="${f.name}" loading="lazy" onerror="this.style.display='none'"/>
-  </div>`;
-});
+    </footer>
+  </div>
 
-/* ── FILTER COLORS ── */
-const fcols=['#3498db','#f1c40f','#e74c3c','#9b59b6','#2ecc71'];
-const fcEl=document.getElementById('filterColors');
-fcols.forEach(c=>{
-  const d=document.createElement('div');
-  d.className='cf-dot';
-  d.style.background=c;
-  d.onclick=()=>d.classList.toggle('active');
-  fcEl.appendChild(d);
-});
+  <div class="overlay" id="overlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart" aria-hidden="true">
+    <div class="drawer-head"><h2>Your bag (<span id="drawerCount">0</span>)</h2><button class="close-btn" id="cartClose" aria-label="Close cart">×</button></div>
+    <div class="cart-items" id="cartItems"><div class="cart-empty">Your bag is waiting for something good.<br/>Add a pair to get started.</div></div>
+    <div class="drawer-foot" id="drawerFoot" hidden><div class="subtotal"><span>Subtotal</span><span id="cartTotal">₱0</span></div><button class="checkout" id="checkoutBtn">Continue to checkout</button></div>
+  </aside>
 
-/* ── PRODUCT GRID ── */
-const pg=document.getElementById('prodGrid');
-PRODUCTS.forEach((p,i)=>{
-  const card=document.createElement('div');
-  card.className='prod-card';
-  card.innerHTML=`
-  <div class="prod-img-wrap">
-    <img src="${p.img}" alt="${p.n}" loading="lazy" onerror="this.parentElement.style.background='#eee';this.style.display='none'"/>
-    <div class="prod-hover">
-      <button class="ph-add" onclick="event.stopPropagation();addToCartNamed('${p.n}','${p.p}','${p.img}')">Add to Cart</button>
-      <div class="ph-wish" onclick="event.stopPropagation();this.textContent=this.textContent==='🤍'?'❤️':'🤍'">🤍</div>
+  <div class="modal-wrap" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal">
+      <button class="close-btn" id="authClose" aria-label="Close">×</button>
+      <h2 id="authTitle">Welcome back</h2><p id="authSub">Log in to your SOLECRAFT account.</p>
+      <form id="authForm">
+        <label class="field" id="nameField" hidden><span>Full name</span><input id="authName" type="text" autocomplete="name" placeholder="Your name" /></label>
+        <label class="field"><span>Email address</span><input id="authEmail" type="email" required autocomplete="email" placeholder="you@example.com" /></label>
+        <label class="field"><span>Password</span><input id="authPassword" type="password" required minlength="4" autocomplete="current-password" placeholder="Enter your password" /></label>
+        <button class="modal-submit" id="authSubmit" type="submit">Log in</button>
+      </form>
+      <div class="switch-auth"><span id="switchText">New to SOLECRAFT?</span> <button id="switchAuth" type="button">Create account</button></div>
     </div>
   </div>
-  <div class="prod-name">${p.n}</div>
-  <div class="prod-price">${p.p}</div>`;
-  card.onclick=()=>showToast(`👟 Viewing ${p.n}`);
-  pg.appendChild(card);
-});
 
-/* ── CART ── */
-let cartItems=[];
-function toggleCart(){
-  document.getElementById('cartDrawer').classList.toggle('open');
-}
-function renderCart(){
-  const el=document.getElementById('cartItems');
-  const footer=document.getElementById('cartFooter');
-  const count=document.getElementById('cartCount');
-  const badge=document.getElementById('cartBadge');
-  count.textContent=cartItems.length;
-  badge.textContent=cartItems.length;
-  if(cartItems.length===0){
-    el.innerHTML='<div class="cart-empty"><div>👟</div>Your cart is empty</div>';
-    footer.style.display='none';
-    return;
-  }
-  footer.style.display='block';
-  el.innerHTML=cartItems.map((item,i)=>`
-  <div class="cart-item">
-    <div class="cart-item-img">
-      <img src="${item.img}" alt="${item.name}" onerror="this.style.display='none'"/>
-    </div>
-    <div class="cart-item-info">
-      <div class="cart-item-name">${item.name}</div>
-      <div class="cart-item-price">${item.price}</div>
-    </div>
-    <button class="cart-item-remove" onclick="removeFromCart(${i})">✕ Remove</button>
-  </div>`).join('');
-  const total=cartItems.reduce((sum,i)=>sum+parseInt(i.price.replace(/[₱,]/g,'')),0);
-  document.getElementById('cartTotal').textContent='₱'+total.toLocaleString();
-}
-function addToCartNamed(name,price,img){
-  cartItems.push({name,price,img});
-  renderCart();
-  showToast(`🛒 ${name} added to cart!`);
-  document.getElementById('cartDrawer').classList.add('open');
-}
-function addHeroToCart(){
-  const name=document.getElementById('heroName').textContent;
-  const price=document.getElementById('heroPrice').textContent;
-  const img=document.getElementById('heroShoeImg').src;
-  addToCartNamed(name,price,img);
-}
-function removeFromCart(i){
-  const name=cartItems[i].name;
-  cartItems.splice(i,1);
-  renderCart();
-  showToast(`🗑️ ${name} removed`);
-}
-function doCheckout(){
-  if(!currentScUser){openModal('login');return}
-  cartItems=[];
-  renderCart();
-  document.getElementById('cartDrawer').classList.remove('open');
-  showToast('🎉 Order placed! Thank you, '+currentScUser.split(' ')[0]+'!');
-}
+  <div class="search-panel" id="searchPanel"><input id="searchInput" type="search" placeholder="Search shoes and collections..." aria-label="Search products" /><button id="searchClose" aria-label="Close search">×</button></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-/* ── SIZE SELECT ── */
-function selectSize(el){
-  document.querySelectorAll('.sz-btn').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-  showToast('Size '+el.textContent+' selected');
-}
+  <script>
+    const shoes = [
+      {
+        id: 'speed-turf', name: 'Nike Air Max Speed Turf Blue', shortName: 'Air Max Speed Turf',
+        titleTop: 'AIR MAX', titleBottom: 'SPEED TURF', price: 17999, priceLabel: '₱17,999',
+        code: 'Game Royal / Blue', description: 'Feel the future. Move with Air. A bold classic built for all-day comfort, responsive cushioning, and unmistakable street style.',
+        image: 'https://cdna.lystit.com/photos/2013/10/10/nike-game-royalwolf-greygrey-air-max-speed-turf-raider-training-sneakers-product-1-13969529-723608356.jpeg',
+        alt: 'Nike Air Max Speed Turf in royal blue', tag: 'Featured',
+        details: 'Royal blue upper, adjustable midfoot strap, visible Air cushioning, and durable turf-ready traction.'
+      },
+      {
+        id: 'air-max-270', name: 'Nike Air Max 270 Red', shortName: 'Air Max 270',
+        titleTop: 'AIR MAX', titleBottom: '270 RED', price: 12995, priceLabel: '₱12,995',
+        code: 'Gym Red / White', description: 'A bold everyday look with a breathable upper and the signature oversized Air unit made for comfort from morning to night.',
+        image: 'https://cdn.shopify.com/s/files/1/0603/3031/1875/files/main-square_67429d12-6b8d-4e1f-b207-8a7fc0a09795.jpg?v=1708101693',
+        alt: 'Nike Air Max 270 in red', tag: 'Popular', details: 'Red mesh upper, responsive Air cushioning, and a lightweight everyday profile.'
+      },
+      {
+        id: 'air-max-alpha', name: 'Nike Air Max Alpha Black', shortName: 'Air Max Alpha',
+        titleTop: 'AIR MAX', titleBottom: 'ALPHA', price: 8995, priceLabel: '₱8,995',
+        code: 'Triple Black', description: 'A clean training silhouette with a supportive fit and an all-black finish that works from the gym to the street.',
+        image: 'https://a.allegroimg.com/original/11513a/ffc9f6524a1884763fcc88dd4314/Buty-Meskie-Sportowe-Nike-Air-Max-Alpha-Trainer-5-Czarne-DM0829-010-R-45-5-Marka-Nike',
+        alt: 'Nike Air Max Alpha Trainer in black', tag: 'Training', details: 'Black mesh upper, supportive construction, and a stable training outsole.'
+      },
+      {
+        id: 'air-max-excee', name: 'Nike Air Max Excee White', shortName: 'Air Max Excee',
+        titleTop: 'AIR MAX', titleBottom: 'EXCEE', price: 9995, priceLabel: '₱9,995',
+        code: 'White / Black', description: 'A fresh, versatile classic with layered lines, a crisp white finish, and visible Air cushioning for everyday comfort.',
+        image: 'https://www.nike.com.kw/dw/image/v2/BDVB_PRD/on/demandware.static/-/Sites-akeneo-master-catalog/default/dw0f0f3f01/nk/b80/8/b/3/a/a/b808b3aa_5b71_46b9_bf2f_24f8634e256f.png',
+        alt: 'Nike Air Max Excee in white and black', tag: 'Everyday', details: 'White and platinum upper with a black Swoosh and visible Air-Sole cushioning.'
+      }
+    ];
 
-/* ── AUTH ── */
-let currentScUser=null;
-const modalTemplates={
-  login:`<h2>Welcome back</h2>
-    <p class="modal-sub">Log in to your SOLECRAFT account</p>
-    <div class="social-login">
-      <button class="social-btn-modal" onclick="scSocialLogin('Google')"><span>G</span> Continue with Google</button>
-      <button class="social-btn-modal" onclick="scSocialLogin('Facebook')"><span>📘</span> Continue with Facebook</button>
-    </div>
-    <div class="modal-divider"><span>or</span></div>
-    <div class="form-field"><label>Email</label><input type="email" id="scEmail" placeholder="you@email.com"/></div>
-    <div class="form-field"><label>Password</label><input type="password" id="scPass" placeholder="••••••••"/></div>
-    <button class="modal-submit" onclick="scLogin()">Log In</button>
-    <div class="modal-footer">New here? <a onclick="openModal('signup')">Create account</a></div>`,
+    let activeShoe = shoes[0];
+    let selectedSize = '41';
+    let cart = [];
+    let authMode = 'login';
+    let currentUser = '';
+    let toastTimer;
 
-  signup:`<h2>Create account</h2>
-    <p class="modal-sub">Join SOLECRAFT today</p>
-    <div class="social-login">
-      <button class="social-btn-modal" onclick="scSocialLogin('Google')"><span>G</span> Continue with Google</button>
-      <button class="social-btn-modal" onclick="scSocialLogin('Facebook')"><span>📘</span> Continue with Facebook</button>
-    </div>
-    <div class="modal-divider"><span>or</span></div>
-    <div class="form-field"><label>Full Name</label><input type="text" id="scName" placeholder="Kenneth Bernal"/></div>
-    <div class="form-field"><label>Email</label><input type="email" id="scEmail2" placeholder="you@email.com"/></div>
-    <div class="form-field"><label>Password</label><input type="password" id="scPass2" placeholder="••••••••"/></div>
-    <button class="modal-submit" onclick="scSignup()">Create Account</button>
-    <div class="modal-footer">Already have an account? <a onclick="openModal('login')">Log in</a></div>`,
-};
+    const byId = (id) => document.getElementById(id);
+    const peso = (value) => '₱' + Number(value).toLocaleString('en-PH');
 
-function openModal(type){
-  document.getElementById('modalContent').innerHTML=modalTemplates[type];
-  document.getElementById('modalOverlay').classList.add('show');
-}
-function closeModal(){document.getElementById('modalOverlay').classList.remove('show')}
-function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal()}
+    function showToast(message) {
+      const toast = byId('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+    }
 
-function scLogin(){
-  const e=document.getElementById('scEmail')?.value||'';
-  const p=document.getElementById('scPass')?.value||'';
-  if(!e||!p){showToast('⚠️ Fill in all fields');return}
-  const name=e.split('@')[0].replace(/[._]/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
-  scSetUser(name);
-}
-function scSignup(){
-  const n=document.getElementById('scName')?.value||'';
-  const e=document.getElementById('scEmail2')?.value||'';
-  const p=document.getElementById('scPass2')?.value||'';
-  if(!n||!e||!p){showToast('⚠️ Fill in all fields');return}
-  scSetUser(n);
-}
-function scSocialLogin(provider){scSetUser(provider==='Google'?'Google User':'Facebook User')}
-function scSetUser(name){
-  currentScUser=name;
-  closeModal();
-  updateScNav();
-  showToast(`👟 Welcome, ${name.split(' ')[0]}!`);
-}
-function updateScNav(){
-  const nr=document.getElementById('scNavRight');
-  if(currentScUser){
-    nr.innerHTML=`<button class="nav-icon" onclick="showToast('🔍 Search')">🔍</button>
-    <button class="nav-icon" style="position:relative" onclick="toggleCart()">🛒<span class="cart-badge" id="cartBadge">${cartItems.length}</span></button>
-    <span style="color:rgba(255,255,255,.85);font-size:.88rem;font-weight:600">Hi, ${currentScUser.split(' ')[0]}!</span>
-    <div class="nav-avatar-sc" onclick="scLogout()" title="Click to log out">${currentScUser[0]}</div>`;
-  } else {
-    nr.innerHTML=`<button class="nav-icon" onclick="showToast('🔍 Search')">🔍</button>
-    <button class="nav-icon" style="position:relative" onclick="toggleCart()">🛒<span class="cart-badge" id="cartBadge">0</span></button>
-    <button class="nav-btn-auth" onclick="openModal('login')">Log In</button>
-    <button class="nav-btn-auth signup" onclick="openModal('signup')">Sign Up</button>`;
-  }
-}
-function scLogout(){currentScUser=null;updateScNav();showToast('👋 Logged out!')}
+    function setActiveShoe(shoe) {
+      activeShoe = shoe;
+      byId('heroTitleTop').textContent = shoe.titleTop;
+      byId('heroTitleBottom').textContent = shoe.titleBottom;
+      byId('heroDescription').textContent = shoe.description;
+      byId('heroPrice').textContent = shoe.priceLabel;
+      byId('heroCode').textContent = shoe.code;
+      byId('heroWatermark').textContent = shoe.titleBottom;
+      const image = byId('heroImage');
+      image.style.opacity = '0';
+      setTimeout(() => { image.src = shoe.image; image.alt = shoe.alt; image.style.opacity = '1'; }, 120);
+      document.querySelectorAll('.mini-product').forEach((button) => {
+        const selected = button.dataset.id === shoe.id;
+        button.classList.toggle('active', selected);
+        button.setAttribute('aria-pressed', String(selected));
+      });
+    }
 
-/* ── TOAST ── */
-let toastTimer;
-function showToast(msg){
-  const t=document.getElementById('scToast');
-  t.textContent=msg;t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.classList.remove('show'),2800);
-}
-</script>
+    function renderStrip() {
+      byId('stripItems').innerHTML = shoes.slice(1).concat(shoes[0]).map((shoe) => `
+        <button class="mini-product ${shoe.id === activeShoe.id ? 'active' : ''}" data-id="${shoe.id}" aria-pressed="${shoe.id === activeShoe.id}">
+          <img src="${shoe.image}" alt="${shoe.alt}" loading="lazy" />
+          <span><span class="mini-name">${shoe.shortName}</span><span class="mini-price">${shoe.priceLabel}</span></span>
+        </button>`).join('');
+      byId('stripItems').querySelectorAll('.mini-product').forEach((button) => {
+        button.addEventListener('click', () => setActiveShoe(shoes.find((shoe) => shoe.id === button.dataset.id)));
+      });
+    }
+
+    function renderProducts() {
+      byId('productGrid').innerHTML = shoes.map((shoe) => `
+        <article class="product-card">
+          <div class="product-photo"><span class="product-tag">${shoe.tag}</span><img src="${shoe.image}" alt="${shoe.alt}" loading="lazy" /></div>
+          <div class="product-info">
+            <h3>${shoe.name}</h3><p>${shoe.code}</p>
+            <div class="product-bottom"><span class="product-price">${shoe.priceLabel}</span><button class="add-btn" data-add="${shoe.id}">Add to bag +</button></div>
+          </div>
+        </article>`).join('');
+      byId('productGrid').querySelectorAll('[data-add]').forEach((button) => {
+        button.addEventListener('click', () => addToCart(shoes.find((shoe) => shoe.id === button.dataset.add)));
+      });
+    }
+
+    function addToCart(shoe) {
+      const existing = cart.find((item) => item.id === shoe.id && item.size === selectedSize);
+      if (existing) existing.quantity += 1;
+      else cart.push({ ...shoe, size: selectedSize, quantity: 1 });
+      renderCart();
+      showToast(`${shoe.shortName} added to your bag · Size ${selectedSize}`);
+      openCart();
+    }
+
+    function renderCart() {
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      byId('cartCount').textContent = count;
+      byId('drawerCount').textContent = count;
+      if (!cart.length) {
+        byId('cartItems').innerHTML = '<div class="cart-empty">Your bag is waiting for something good.<br/>Add a pair to get started.</div>';
+        byId('drawerFoot').hidden = true;
+        return;
+      }
+      byId('drawerFoot').hidden = false;
+      byId('cartItems').innerHTML = cart.map((item, index) => `
+        <div class="cart-row"><img src="${item.image}" alt="${item.alt}"/><div><strong>${item.shortName}</strong><small>Size ${item.size} · Qty ${item.quantity}</small><small>${item.priceLabel}</small></div><button class="remove-item" data-remove="${index}">Remove</button></div>`).join('');
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      byId('cartTotal').textContent = peso(total);
+      byId('cartItems').querySelectorAll('[data-remove]').forEach((button) => button.addEventListener('click', () => {
+        cart.splice(Number(button.dataset.remove), 1); renderCart();
+      }));
+    }
+
+    function openCart() { byId('overlay').classList.add('show'); byId('cartDrawer').classList.add('open'); byId('cartDrawer').setAttribute('aria-hidden', 'false'); }
+    function closeCart() { byId('overlay').classList.remove('show'); byId('cartDrawer').classList.remove('open'); byId('cartDrawer').setAttribute('aria-hidden', 'true'); }
+
+    function openAuth(mode = 'login') {
+      authMode = mode;
+      const signup = mode === 'signup';
+      byId('authTitle').textContent = signup ? 'Create account' : (currentUser ? 'Your account' : 'Welcome back');
+      byId('authSub').textContent = signup ? 'Join SOLECRAFT and find your next favorite pair.' : 'Log in to your SOLECRAFT account.';
+      byId('nameField').hidden = !signup;
+      byId('authName').required = signup;
+      byId('authSubmit').textContent = signup ? 'Create account' : 'Log in';
+      byId('switchText').textContent = signup ? 'Already have an account?' : 'New to SOLECRAFT?';
+      byId('switchAuth').textContent = signup ? 'Log in' : 'Create account';
+      byId('authModal').classList.add('show');
+    }
+    function closeAuth() { byId('authModal').classList.remove('show'); }
+
+    byId('heroAdd').addEventListener('click', () => addToCart(activeShoe));
+    byId('discoverBtn').addEventListener('click', () => byId('products').scrollIntoView({ behavior: 'smooth' }));
+    byId('stripNext').addEventListener('click', () => byId('stripItems').scrollBy({ left: 250, behavior: 'smooth' }));
+    byId('cartOpen').addEventListener('click', openCart);
+    byId('cartClose').addEventListener('click', closeCart);
+    byId('overlay').addEventListener('click', closeCart);
+    byId('loginOpen').addEventListener('click', () => openAuth('login'));
+    byId('authClose').addEventListener('click', closeAuth);
+    byId('authModal').addEventListener('click', (event) => { if (event.target === byId('authModal')) closeAuth(); });
+    byId('switchAuth').addEventListener('click', () => openAuth(authMode === 'login' ? 'signup' : 'login'));
+    byId('authForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const signup = authMode === 'signup';
+      currentUser = signup ? byId('authName').value.trim() : byId('authEmail').value.trim().split('@')[0];
+      closeAuth();
+      showToast(`Welcome to SOLECRAFT, ${currentUser}!`);
+    });
+    byId('checkoutBtn').addEventListener('click', () => {
+      if (!currentUser) { closeCart(); openAuth('login'); showToast('Log in to continue to checkout.'); return; }
+      showToast('Demo checkout only — connect a payment service to accept orders.');
+    });
+    byId('searchOpen').addEventListener('click', () => { byId('searchPanel').classList.add('show'); byId('searchInput').focus(); });
+    byId('searchClose').addEventListener('click', () => byId('searchPanel').classList.remove('show'));
+    byId('searchInput').addEventListener('input', (event) => {
+      const q = event.target.value.toLowerCase().trim();
+      document.querySelectorAll('.product-card').forEach((card) => { card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none'; });
+      byId('products').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    byId('menuToggle').addEventListener('click', () => byId('navLinks').classList.toggle('open'));
+    byId('navLinks').querySelectorAll('a').forEach((link) => link.addEventListener('click', () => byId('navLinks').classList.remove('open')));
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { closeCart(); closeAuth(); byId('searchPanel').classList.remove('show'); } });
+
+    renderStrip();
+    renderProducts();
+    renderCart();
+    setActiveShoe(shoes[0]);
+  </script>
 </body>
 </html>
