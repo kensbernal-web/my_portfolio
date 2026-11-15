@@ -8,11 +8,10 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--red:#FF385C;--dark:#222;--muted:#717171;--border:#DDDDDD;--bg:#F7F7F7;--white:#FFF}
-body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white)}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:#f4f6f8}
 img{max-width:100%;display:block}
 a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer}
-
 /* NAV */
 .nav{display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:80px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--white);z-index:200}
 .nav-logo{display:flex;align-items:center;gap:.5rem}
@@ -29,7 +28,6 @@ button{font-family:inherit;cursor:pointer}
 .nav-btn.primary:hover{opacity:.9}
 .nav-avatar{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:var(--dark);color:#fff;font-size:14px;cursor:pointer;overflow:hidden}
 .nav-avatar img{width:100%;height:100%;object-fit:cover}
-
 /* MODAL OVERLAY */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center}
 .modal-overlay.show{display:flex}
@@ -48,51 +46,52 @@ button{font-family:inherit;cursor:pointer}
 .form-field input:focus{border-color:var(--dark)}
 .modal-submit{width:100%;padding:.85rem;background:linear-gradient(to right,var(--red),#e31c5f);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:opacity .2s;margin-top:.5rem}
 .modal-submit:hover{opacity:.9}
+.modal-alt-button{width:100%;padding:.85rem;background:#fff;color:var(--dark);border:1px solid var(--border);border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:background .2s,border-color .2s;margin-top:.6rem}
+.modal-alt-button:hover{background:var(--bg);border-color:#b8b8b8}
+.modal-link-button{display:block;width:100%;padding:.7rem 1rem;margin-top:.25rem;background:transparent;border:0;color:var(--dark);font-family:inherit;font-size:.9rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.modal-link-button:hover{color:var(--red)}
 .modal-footer{text-align:center;font-size:.82rem;color:var(--muted);margin-top:1rem}
 .modal-footer a{color:var(--dark);font-weight:600;cursor:pointer;text-decoration:underline}
 .social-login{display:flex;flex-direction:column;gap:.6rem}
 .social-btn-modal{display:flex;align-items:center;gap:.8rem;padding:.75rem 1rem;border:1px solid var(--border);border-radius:10px;background:#fff;cursor:pointer;font-size:.9rem;font-weight:500;transition:background .2s;width:100%}
 .social-btn-modal:hover{background:var(--bg)}
-
 /* TOAST */
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--dark);color:#fff;padding:.8rem 1.6rem;border-radius:40px;font-size:.9rem;font-weight:500;z-index:9999;transition:transform .35s cubic-bezier(.34,1.56,.64,1);pointer-events:none;white-space:nowrap}
 .toast.show{transform:translateX(-50%) translateY(0)}
-
 /* USER NAV STATE */
 .user-menu{display:none;position:absolute;top:100%;right:2.5rem;background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 4px 20px rgba(0,0,0,.12);padding:.5rem 0;min-width:180px;z-index:300}
 .user-menu.show{display:block}
 .user-menu a{display:block;padding:.6rem 1.2rem;font-size:.88rem;cursor:pointer;transition:background .2s}
 .user-menu a:hover{background:var(--bg)}
 .user-menu .divider{height:1px;background:var(--border);margin:.4rem 0}
-
 /* HERO */
-.hero{padding:3rem 2.5rem 2rem}
-.hero h1{font-size:2.2rem;font-weight:700;line-height:1.2;margin-bottom:2rem;max-width:420px}
-.hero h1 span{color:var(--red)}
-.search-bar{display:flex;align-items:stretch;border:1px solid var(--border);border-radius:16px;box-shadow:0 1px 2px rgba(0,0,0,.08);overflow:hidden;max-width:860px}
+.hero{position:relative;isolation:isolate;min-height:420px;padding:4.2rem 2.5rem 3.5rem;display:flex;flex-direction:column;justify-content:center;color:#fff;background-color:#365d75;background-image:linear-gradient(90deg,rgba(0,0,0,.58),rgba(0,0,0,.14)),url('https://images.trvl-media.com/lodging/125000000/124450000/124445000/124444902/e4c47761_z.jpg');background-size:cover;background-position:center 48%;overflow:hidden}
+.hero h1{font-size:2.55rem;font-weight:800;line-height:1.16;margin-bottom:2rem;max-width:540px;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.24)}
+.hero h1 span{color:#ffd1dc}
+.search-bar{display:flex;align-items:stretch;border:1px solid rgba(255,255,255,.75);border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.16);overflow:hidden;max-width:900px;background:#fff}
 .sb-field{flex:1;padding:1rem 1.4rem;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:4px}
 .sb-field:last-of-type{border-right:none}
 .sb-label{font-size:.72rem;font-weight:700;color:var(--dark);letter-spacing:.02em}
 .sb-input{font-size:.9rem;color:var(--muted);border:none;outline:none;font-family:inherit;background:transparent;width:100%}
 .sb-btn{background:var(--red);color:#fff;border:none;padding:1rem 1.6rem;font-size:.9rem;font-weight:700;display:flex;align-items:center;gap:.4rem;cursor:pointer;transition:opacity .2s;white-space:nowrap}
 .sb-btn:hover{opacity:.88}
-
 /* TABS */
-.tabs{display:flex;border-bottom:1px solid var(--border);padding:0 2.5rem;margin-top:2rem}
-.tab{padding:.8rem 1.2rem;font-size:.9rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.tabs{display:flex;border-bottom:1px solid var(--border);padding:0 2.5rem;margin-top:0;background:#fff;position:relative;z-index:2}
+.tab{padding:.95rem 1.2rem;font-size:.9rem;font-weight:500;color:var(--muted);cursor:pointer;border:0;border-bottom:2px solid transparent;background:transparent;font-family:inherit;transition:color .2s,border-color .2s}
 .tab:hover{color:var(--dark)}
 .tab.active{color:var(--dark);border-bottom-color:var(--dark);font-weight:600}
-
 /* SECTION */
-.section{padding:2.5rem 2.5rem;max-width:1340px;margin:0 auto}
+.section{padding:2.2rem 2.5rem;max-width:1340px;margin:1.3rem auto;background:rgba(255,255,255,.97);border:1px solid rgba(220,225,230,.85);border-radius:18px;box-shadow:0 8px 28px rgba(30,50,70,.06);scroll-margin-top:100px}
 .section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.4rem}
 .section-head h2{font-size:1.4rem;font-weight:700}
 .see-all{font-size:.88rem;font-weight:600;color:var(--dark);text-decoration:underline;cursor:pointer}
-
 /* EXPERIENCE CARDS */
 .exp-scroll{display:flex;gap:1.2rem;overflow-x:auto;scrollbar-width:none;padding-bottom:.5rem}
 .exp-scroll::-webkit-scrollbar{display:none}
 .exp-card{min-width:220px;cursor:pointer}
+.background-select-card .exp-img{outline:2px solid transparent;transition:outline-color .2s,box-shadow .2s}
+.background-select-card:hover .exp-img,.background-select-card:focus-visible .exp-img{outline-color:var(--red);box-shadow:0 0 0 4px rgba(255,56,92,.14)}
+.background-select-card:focus-visible{outline:none}
 .exp-img{border-radius:12px;overflow:hidden;width:220px;height:160px;background:#eee;position:relative}
 .exp-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
 .exp-card:hover .exp-img img{transform:scale(1.04)}
@@ -101,7 +100,6 @@ button{font-family:inherit;cursor:pointer}
 .exp-desc{font-size:.82rem;color:var(--muted);margin:.2rem 0;line-height:1.4;max-width:200px}
 .exp-stars{display:flex;align-items:center;gap:4px;font-size:.78rem;color:var(--muted)}
 .exp-stars span{color:#FFB400}
-
 /* HOME CARDS */
 .homes-scroll{display:flex;gap:1.4rem;overflow-x:auto;scrollbar-width:none;padding-bottom:.5rem}
 .homes-scroll::-webkit-scrollbar{display:none}
@@ -118,7 +116,6 @@ button{font-family:inherit;cursor:pointer}
 .home-price{font-size:.88rem;margin-top:.3rem}
 .home-price strong{font-weight:700}
 .superhost{display:inline-block;font-size:.7rem;font-weight:600;border:1px solid var(--dark);border-radius:4px;padding:1px 5px;margin-top:.3rem}
-
 /* DESTINATIONS */
 .dest-grid{display:flex;gap:1rem;overflow-x:auto;scrollbar-width:none}
 .dest-grid::-webkit-scrollbar{display:none}
@@ -126,30 +123,32 @@ button{font-family:inherit;cursor:pointer}
 .dest-card:hover{transform:scale(1.03)}
 .dest-card img{width:140px;height:200px;object-fit:cover;display:block}
 .dest-name{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent);color:#fff;font-weight:700;font-size:.9rem;padding:.6rem .8rem}
-
 /* FOOTER */
 footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:2rem}
 .footer-col h4{font-size:.82rem;font-weight:700;margin-bottom:.8rem}
 .footer-col a{display:block;font-size:.82rem;color:var(--muted);margin-bottom:.45rem}
 .footer-col a:hover{color:var(--dark)}
 .footer-bottom{border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;color:var(--muted);flex-wrap:wrap;gap:.5rem}
-
 @media(max-width:768px){
   .nav{padding:0 1rem}
   .nav-search{display:none}
-  .hero{padding:2rem 1rem}
+  .hero{min-height:390px;padding:2.5rem 1rem;background-position:center}
+  .hero h1{font-size:2rem}
+  .tabs{padding:0 1rem}
+  .tab{padding:.9rem .85rem;white-space:nowrap}
   .search-bar{flex-direction:column}
   .sb-field{border-right:none;border-bottom:1px solid var(--border)}
   .section{padding:1.5rem 1rem}
   .tabs{padding:0 1rem;overflow-x:auto}
   footer{padding:2rem 1rem}
+  .section{margin:1rem .75rem;padding:1.5rem 1rem}
+  .modal{padding:1.5rem;max-height:90vh;overflow:auto}
 }
 </style>
 </head>
 <body>
-
 <!-- NAV -->
-<nav class="nav">
+<nav class="nav" id="top">
   <div class="nav-logo">
     <!-- REPLACE src with your Canva logo export: <img class="logo-img" src="../assets/staynest-logo.png"/> -->
     <svg width="32" height="32" viewBox="0 0 32 32"><path d="M16 2C9.4 2 4 7.4 4 14c0 6 4.5 11 10.5 12.5.5.1 1 .2 1.5.2s1-.1 1.5-.2C23.5 25 28 20 28 14 28 7.4 22.6 2 16 2z" fill="#FF385C"/></svg>
@@ -175,7 +174,6 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;justi
     <a onclick="logout()">Log out</a>
   </div>
 </nav>
-
 <!-- SIGN IN / SIGN UP MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
   <div class="modal" id="modal">
@@ -183,10 +181,8 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;justi
     <div id="modalContent"></div>
   </div>
 </div>
-
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
-
 <!-- HERO -->
 <div class="hero">
   <h1>Book unique homes and<br/>experience a city like a <span>local.</span></h1>
@@ -206,42 +202,37 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;justi
     <button class="sb-btn" onclick="doSearch()">🔍 Search</button>
   </div>
 </div>
-
 <!-- TABS -->
-<div class="tabs">
-  <div class="tab active" onclick="switchTab(this)">For You</div>
-  <div class="tab" onclick="switchTab(this)">Homes</div>
-  <div class="tab" onclick="switchTab(this)">Experiences</div>
-  <div class="tab" onclick="switchTab(this)">Places</div>
+<div class="tabs" aria-label="Explore StayNest sections">
+  <button type="button" class="tab active" onclick="switchTab(this, 'top')">For You</button>
+  <button type="button" class="tab" onclick="switchTab(this, 'homesSection')">Homes</button>
+  <button type="button" class="tab" onclick="switchTab(this, 'experiencesSection')">Experiences</button>
+  <button type="button" class="tab" onclick="switchTab(this, 'placesSection')">Places</button>
 </div>
-
 <!-- EXPERIENCES -->
-<div class="section">
+<div class="section" id="experiencesSection">
   <div class="section-head">
     <h2>Experiences</h2>
     <span class="see-all" onclick="showToast('Showing all experiences...')">See all →</span>
   </div>
   <div class="exp-scroll" id="expScroll"></div>
 </div>
-
 <!-- HOMES -->
-<div class="section">
+<div class="section" id="homesSection">
   <div class="section-head">
     <h2>Homes</h2>
     <span class="see-all" onclick="showToast('Showing all homes...')">See all →</span>
   </div>
   <div class="homes-scroll" id="homesScroll"></div>
 </div>
-
 <!-- DESTINATIONS -->
-<div class="section">
+<div class="section" id="placesSection">
   <div class="section-head">
     <h2>Featured destinations</h2>
     <span class="see-all" onclick="showToast('Showing all destinations...')">See all →</span>
   </div>
   <div class="dest-grid" id="destGrid"></div>
 </div>
-
 <footer>
   <div style="display:flex;gap:3rem;flex-wrap:wrap">
     <div class="footer-col">
@@ -267,9 +258,10 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;justi
     <a href="#">Terms</a><a href="#">Privacy</a><a href="#">Site Map</a>
   </div>
 </div>
-
 <script>
 /* ── IMAGE DATA ── */
+const DEFAULT_HERO_BG = "https://images.trvl-media.com/lodging/125000000/124450000/124445000/124444902/e4c47761_z.jpg";
+const TAAL_HERO_BG = "https://gttp.images.tshiftcdn.com/416379/x/0/a-scenic-view-of-taal-lake-and-taal-volcano-that-is-best-seen-during-a-tagaytay-city-highlands-tour.jpg?ar=1.91%3A1&fit=crop&w=1200";
 // Using direct Unsplash source URLs — these work when online (Vercel)
 // Fallback gradient colours show when offline (local file://)
 const EXP = [
@@ -286,10 +278,9 @@ const EXP = [
    img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM-XAxPg6A06nfgmfffWeT7zPf5LVgL3vrm2CiTHjBdw&s=10",
    fb:"linear-gradient(135deg,#16a085,#f39c12)"},
   {price:"₱2,200",desc:"Sunrise hike to Taal Volcano with breakfast by the lake.",stars:"4.7",rev:38,
-   img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQahJPoa8x_6rRygfxAA5KRyA311IVWU_-P7wV0jDIAnQ&s=10",
+   img:TAAL_HERO_BG,
    fb:"linear-gradient(135deg,#e74c3c,#f39c12)"},
 ];
-
 const HOMES = [
   {title:"Boracay Beachfront Villa",   type:"Entire apartment · 1 bed", price:"₱2,100",rating:"4.9",rev:44, sh:true,
    img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8vZzHGg265nJgkaskB44q6eSpX12CYRBtNX1K-wuNQg&s=10",
@@ -307,7 +298,6 @@ const HOMES = [
    img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTx27LodX_eZxRcyW6KXt4B2RNTMFfDLbDaz1wXgDtxw&s=10",
    fb:"linear-gradient(135deg,#2c3e50,#3498db)"},
 ];
-
 const DEST = [
  {name:"Paris",   img:"https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=300&q=80"},
   {name:"London",  img:"https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=300&q=80"},
@@ -316,7 +306,6 @@ const DEST = [
   {name:"Bali",    img:"https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=300&q=80"},
   {name:"Tokyo",   img:"https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=300&q=80"},
 ];
-
 function makeImg(src,fallback,w,h,alt){
   const d=document.createElement('div');
   d.style.cssText=`width:${w}px;height:${h}px;background:${fallback};border-radius:inherit`;
@@ -327,7 +316,6 @@ function makeImg(src,fallback,w,h,alt){
   d.appendChild(i);
   return d;
 }
-
 // Render experiences
 const expEl=document.getElementById('expScroll');
 EXP.forEach(e=>{
@@ -345,9 +333,21 @@ EXP.forEach(e=>{
   card.innerHTML+=`<div class="exp-price"><strong>${e.price}</strong></div>
   <div class="exp-desc">${e.desc}</div>
   <div class="exp-stars"><span>★</span> ${e.stars} · ${e.rev} reviews</div>`;
+  if (e.desc === "Sunrise hike to Taal Volcano with breakfast by the lake.") {
+    card.classList.add('background-select-card');
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', 'Set the Taal Volcano sunrise image as the page background');
+    card.addEventListener('click', () => setHeroBackground(TAAL_HERO_BG, e.desc));
+    card.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        setHeroBackground(TAAL_HERO_BG, e.desc);
+      }
+    });
+  }
   expEl.appendChild(card);
 });
-
 // Render homes
 const homesEl=document.getElementById('homesScroll');
 HOMES.forEach(h=>{
@@ -372,7 +372,6 @@ HOMES.forEach(h=>{
   </div>`;
   homesEl.appendChild(card);
 });
-
 // Render destinations
 const destEl=document.getElementById('destGrid');
 DEST.forEach(d=>{
@@ -387,10 +386,8 @@ DEST.forEach(d=>{
   card.onclick=()=>showToast(`✈️ Exploring ${d.name}...`);
   destEl.appendChild(card);
 });
-
 /* ── AUTH STATE ── */
 let currentUser = null;
-
 function updateNav(){
   const nr=document.getElementById('navRight');
   if(currentUser){
@@ -403,7 +400,6 @@ function updateNav(){
     <button class="nav-btn primary" onclick="openModal('signup')">Sign Up</button>`;
   }
 }
-
 function toggleUserMenu(){
   document.getElementById('userMenu').classList.toggle('show');
 }
@@ -411,14 +407,12 @@ document.addEventListener('click',e=>{
   if(!e.target.closest('#navAvatarBtn') && !e.target.closest('#userMenu'))
     document.getElementById('userMenu').classList.remove('show');
 });
-
 function logout(){
   currentUser=null;
   updateNav();
   showToast('👋 Logged out. See you soon!');
   document.getElementById('userMenu').classList.remove('show');
 }
-
 /* ── MODAL ── */
 const modalTemplates = {
   login:`
@@ -442,8 +436,8 @@ const modalTemplates = {
       <input type="password" id="loginPass" placeholder="••••••••"/>
     </div>
     <button class="modal-submit" onclick="doLogin()">Log In</button>
-    <div class="modal-footer">Don't have an account? <a onclick="openModal('signup')">Sign up</a></div>`,
-
+    <button class="modal-alt-button" type="button" onclick="openModal('signup')">Sign Up</button>
+    <button class="modal-link-button" type="button" onclick="openModal('forgot')">Forgot password?</button>`,
   signup:`
     <h2>Create your account</h2>
     <p class="modal-sub">Join StayNest and start exploring</p>
@@ -469,7 +463,16 @@ const modalTemplates = {
       <input type="password" id="signupPass" placeholder="••••••••"/>
     </div>
     <button class="modal-submit" onclick="doSignup()">Create Account</button>
-    <div class="modal-footer">Already have an account? <a onclick="openModal('login')">Log in</a></div>`,
+    <button class="modal-alt-button" type="button" onclick="openModal('login')">Log In</button>`,
+  forgot:`
+    <h2>Forgot your password?</h2>
+    <p class="modal-sub">Enter the email address connected to your StayNest account.</p>
+    <div class="form-field">
+      <label>Email</label>
+      <input type="email" id="resetEmail" placeholder="you@email.com"/>
+    </div>
+    <button class="modal-submit" onclick="sendPasswordReset()">Send reset link</button>
+    <button class="modal-link-button" type="button" onclick="openModal('login')">Back to Log In</button>`,
 
   search:(w,wh,g)=>`
     <h2>🔍 Search Results</h2>
@@ -489,7 +492,6 @@ const modalTemplates = {
     </div>
     <button class="modal-submit" onclick="closeModal()">Close</button>`
 };
-
 function openModal(type){
   const overlay=document.getElementById('modalOverlay');
   const content=document.getElementById('modalContent');
@@ -498,14 +500,12 @@ function openModal(type){
     : modalTemplates[type];
   overlay.classList.add('show');
 }
-
 function closeModal(){
   document.getElementById('modalOverlay').classList.remove('show');
 }
 function closeModalOutside(e){
   if(e.target===document.getElementById('modalOverlay')) closeModal();
 }
-
 function doLogin(){
   const email=document.getElementById('loginEmail')?.value||'';
   const pass=document.getElementById('loginPass')?.value||'';
@@ -516,7 +516,6 @@ function doLogin(){
   closeModal();
   showToast(`🎉 Welcome back, ${name.split(' ')[0]}!`);
 }
-
 function doSignup(){
   const name=document.getElementById('signupName')?.value||'';
   const email=document.getElementById('signupEmail')?.value||'';
@@ -527,7 +526,6 @@ function doSignup(){
   closeModal();
   showToast(`🏠 Welcome to StayNest, ${name.split(' ')[0]}!`);
 }
-
 function socialLogin(provider){
   const name = provider==='Google' ? 'Google User' : 'Facebook User';
   currentUser=name;
@@ -535,7 +533,6 @@ function socialLogin(provider){
   closeModal();
   showToast(`✅ Signed in with ${provider}!`);
 }
-
 function doSearch(){
   const w=document.getElementById('whereInput').value;
   const wh=document.getElementById('whenInput').value;
@@ -544,12 +541,10 @@ function doSearch(){
   content.innerHTML=modalTemplates.search(w,wh,g);
   document.getElementById('modalOverlay').classList.add('show');
 }
-
 function showSearch(){
   document.querySelector('.sb-input')?.focus();
   document.querySelector('.search-bar')?.scrollIntoView({behavior:'smooth',block:'center'});
 }
-
 /* ── TOAST ── */
 let toastTimer;
 function showToast(msg){
@@ -559,11 +554,32 @@ function showToast(msg){
   clearTimeout(toastTimer);
   toastTimer=setTimeout(()=>t.classList.remove('show'),2800);
 }
+function setHeroBackground(imageUrl, description){
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  hero.style.backgroundImage = `linear-gradient(90deg, rgba(0,0,0,.58), rgba(0,0,0,.14)), url("${imageUrl}")`;
+  hero.style.backgroundPosition = 'center center';
+  showToast('Background changed to the Taal Volcano experience.');
+  hero.scrollIntoView({behavior:'smooth', block:'start'});
+}
 
-function switchTab(el){
+function sendPasswordReset(){
+  const email = document.getElementById('resetEmail')?.value.trim() || '';
+  if (!email){showToast('⚠️ Please enter your email address');return;}
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showToast('⚠️ Please enter a valid email address');return;}
+  closeModal();
+  showToast('Demo only: password reset is not connected to an email service yet.');
+}
+
+function switchTab(el, targetId){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
-  showToast(`Showing: ${el.textContent}`);
+  if (targetId === 'top') {
+    window.scrollTo({top:0, behavior:'smooth'});
+    return;
+  }
+  const target = document.getElementById(targetId);
+  if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
 }
 </script>
 </body>
