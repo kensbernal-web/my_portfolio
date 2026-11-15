@@ -7,255 +7,172 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --blue:#0097D5;
-  --blue-dark:#0077AA;
-  --black:#1A1A2E;
-  --dark:#222;
-  --muted:#777;
-  --border:#E8E8E8;
-  --bg:#F8F9FA;
-  --white:#FFFFFF;
-}
+:root{--blue:#0097D5;--blue-dark:#0077AA;--black:#1A1A2E;--dark:#222;--muted:#777;--border:#E8E8E8;--bg:#F8F9FA;--white:#FFF}
 body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
 img{max-width:100%;display:block}
 a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer}
 
 /* NAV */
-.nav{
-  background:var(--blue);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 2.5rem;height:64px;position:sticky;top:0;z-index:100;
-}
-.nav-logo{color:#fff;font-size:1.6rem;font-weight:900;letter-spacing:-.03em;display:flex;align-items:center;gap:.4rem}
-.nav-logo svg{width:28px;height:28px;fill:#fff}
+.nav{background:var(--blue);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:64px;position:sticky;top:0;z-index:200}
+.nav-logo{color:#fff;font-size:1.4rem;font-weight:900;letter-spacing:-.03em;display:flex;align-items:center;gap:.5rem}
+.nav-logo img{height:30px;width:auto;object-fit:contain;filter:brightness(0) invert(1)}
 .nav-links{display:flex;gap:2rem}
 .nav-links a{color:rgba(255,255,255,.85);font-size:.88rem;font-weight:500;transition:color .2s}
 .nav-links a:hover{color:#fff}
-.nav-right{display:flex;gap:1.2rem;align-items:center}
-.nav-icon{background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;opacity:.85;transition:opacity .2s}
+.nav-right{display:flex;gap:.8rem;align-items:center}
+.nav-icon{background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;opacity:.85;transition:opacity .2s;position:relative}
 .nav-icon:hover{opacity:1}
-.cart-wrap{position:relative}
-.cart-badge{
-  position:absolute;top:-5px;right:-5px;
-  background:#FF385C;color:#fff;
-  border-radius:50%;width:17px;height:17px;
-  font-size:.62rem;font-weight:700;
-  display:flex;align-items:center;justify-content:center;
-}
+.cart-badge{position:absolute;top:-5px;right:-5px;background:#FF385C;color:#fff;border-radius:50%;width:17px;height:17px;font-size:.62rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.nav-btn-auth{background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.4);border-radius:8px;padding:.4rem 1rem;font-size:.82rem;font-weight:600;transition:background .2s}
+.nav-btn-auth:hover{background:rgba(255,255,255,.25)}
+.nav-btn-auth.signup{background:#fff;color:var(--blue)}
+.nav-btn-auth.signup:hover{opacity:.9}
+.nav-user{display:flex;align-items:center;gap:.6rem;color:#fff;font-size:.88rem;font-weight:600;cursor:pointer;position:relative}
+.nav-avatar-sc{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:.82rem;border:2px solid rgba(255,255,255,.5)}
+
+/* MODALS */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center}
+.modal-overlay.show{display:flex}
+.modal{background:#fff;border-radius:20px;width:min(440px,92vw);padding:2rem;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:popIn .25s ease}
+@keyframes popIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.3rem;cursor:pointer;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.modal-close:hover{background:#f5f5f5}
+.modal h2{font-size:1.3rem;font-weight:800;margin-bottom:.3rem}
+.modal-sub{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}
+.form-field{margin-bottom:1rem}
+.form-field label{display:block;font-size:.8rem;font-weight:600;margin-bottom:.4rem}
+.form-field input{width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:.9rem;outline:none;transition:border-color .2s}
+.form-field input:focus{border-color:var(--blue)}
+.modal-submit{width:100%;padding:.85rem;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:opacity .2s;margin-top:.5rem}
+.modal-submit:hover{opacity:.88}
+.modal-footer{text-align:center;font-size:.82rem;color:var(--muted);margin-top:1rem}
+.modal-footer a{color:var(--blue);font-weight:600;cursor:pointer;text-decoration:underline}
+.social-login{display:flex;flex-direction:column;gap:.6rem}
+.social-btn-modal{display:flex;align-items:center;gap:.8rem;padding:.75rem 1rem;border:1px solid var(--border);border-radius:10px;background:#fff;cursor:pointer;font-size:.9rem;font-weight:500;transition:background .2s;width:100%}
+.social-btn-modal:hover{background:#f8f9fa}
+.modal-divider{text-align:center;position:relative;margin:1rem 0}
+.modal-divider::before{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:var(--border)}
+.modal-divider span{background:#fff;padding:0 .8rem;position:relative;font-size:.82rem;color:var(--muted)}
+
+/* CART DRAWER */
+.cart-drawer{position:fixed;top:0;right:-420px;width:min(420px,100vw);height:100vh;background:#fff;z-index:998;box-shadow:-4px 0 30px rgba(0,0,0,.15);transition:right .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.cart-drawer.open{right:0}
+.cart-header{padding:1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cart-header h3{font-size:1.1rem;font-weight:700}
+.cart-close{background:none;border:none;font-size:1.3rem;cursor:pointer}
+.cart-items{flex:1;overflow-y:auto;padding:1rem 1.5rem}
+.cart-item{display:flex;gap:1rem;padding:.8rem 0;border-bottom:1px solid var(--border);align-items:center}
+.cart-item-img{width:64px;height:64px;border-radius:8px;background:var(--bg);flex-shrink:0;overflow:hidden}
+.cart-item-img img{width:100%;height:100%;object-fit:contain;padding:4px}
+.cart-item-info{flex:1}
+.cart-item-name{font-size:.88rem;font-weight:600;margin-bottom:.2rem}
+.cart-item-price{font-size:.82rem;color:var(--muted)}
+.cart-item-remove{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.8rem;transition:color .2s}
+.cart-item-remove:hover{color:#e74c3c}
+.cart-footer{padding:1.5rem;border-top:1px solid var(--border)}
+.cart-total{display:flex;justify-content:space-between;font-weight:700;margin-bottom:1rem}
+.checkout-btn{width:100%;padding:.85rem;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:opacity .2s}
+.checkout-btn:hover{opacity:.88}
+.cart-empty{text-align:center;padding:3rem 1rem;color:var(--muted)}
+.cart-empty div{font-size:3rem;margin-bottom:1rem}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--black);color:#fff;padding:.8rem 1.6rem;border-radius:40px;font-size:.9rem;font-weight:500;z-index:9999;transition:transform .35s cubic-bezier(.34,1.56,.64,1);pointer-events:none;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
 
 /* HERO */
-.hero{
-  background:var(--blue);
-  display:grid;grid-template-columns:1fr 1fr;
-  min-height:420px;overflow:hidden;position:relative;
-}
-.hero-left{
-  padding:3.5rem 2.5rem;color:#fff;
-  display:flex;flex-direction:column;justify-content:center;
-}
-.hero-brand{
-  position:absolute;left:2rem;bottom:-1rem;
-  font-size:12rem;font-weight:900;color:rgba(255,255,255,.08);
-  line-height:1;pointer-events:none;letter-spacing:-.05em;
-}
-.hero-model-name{font-size:1.6rem;font-weight:800;margin-bottom:.3rem;line-height:1.1}
+.hero{background:var(--blue);display:grid;grid-template-columns:1fr 1fr;min-height:420px;overflow:hidden;position:relative}
+.hero-left{padding:3.5rem 2.5rem;color:#fff;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
+.hero-brand{position:absolute;left:1.5rem;bottom:-1rem;font-size:11rem;font-weight:900;color:rgba(255,255,255,.07);line-height:1;pointer-events:none;letter-spacing:-.05em}
+.hero-name{font-size:1.6rem;font-weight:800;margin-bottom:.3rem}
 .hero-price{font-size:1.1rem;font-weight:600;margin-bottom:1rem;opacity:.9}
 .hero-desc{font-size:.9rem;line-height:1.65;opacity:.8;max-width:34ch;margin-bottom:1.5rem}
 .hero-sizes{display:flex;gap:.5rem;margin-bottom:1.2rem;flex-wrap:wrap}
-.sz-btn{
-  background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3);
-  border-radius:6px;padding:.35rem .8rem;font-size:.82rem;font-weight:600;
-  transition:all .2s;cursor:pointer;
-}
+.sz-btn{background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3);border-radius:6px;padding:.35rem .8rem;font-size:.82rem;font-weight:600;transition:all .2s;cursor:pointer}
 .sz-btn:hover,.sz-btn.active{background:#fff;color:var(--blue);border-color:#fff}
-.hero-colors{display:flex;gap:.6rem;margin-bottom:2rem}
-.color-dot{
-  width:22px;height:22px;border-radius:50%;cursor:pointer;
-  border:2px solid transparent;transition:border-color .2s;
-}
+.hero-colors{display:flex;gap:.6rem;margin-bottom:2rem;align-items:center}
+.color-dot{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color .2s;position:relative}
 .color-dot:hover,.color-dot.active{border-color:#fff}
-.buy-btn{
-  background:#fff;color:var(--blue);border:none;
-  padding:.85rem 2.2rem;border-radius:8px;font-size:.95rem;font-weight:800;
-  transition:opacity .2s;align-self:flex-start;
-}
+.buy-btn{background:#fff;color:var(--blue);border:none;padding:.85rem 2.2rem;border-radius:8px;font-size:.95rem;font-weight:800;transition:opacity .2s;align-self:flex-start}
 .buy-btn:hover{opacity:.88}
-.hero-right{
-  display:flex;align-items:center;justify-content:center;
-  padding:2rem;position:relative;overflow:hidden;
-}
-.hero-right::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 50% 60%,rgba(255,255,255,.12),transparent 70%);
-}
-.hero-right img{
-  width:85%;max-height:320px;object-fit:contain;
-  position:relative;z-index:1;
-  filter:drop-shadow(0 20px 40px rgba(0,0,0,.3));
-  transition:transform .4s;
-}
-.hero-right:hover img{transform:translateY(-8px) rotate(-3deg)}
-.hero-thumbs{
-  position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);
-  display:flex;gap:.6rem;z-index:2;
-}
-.thumb{
-  width:52px;height:38px;border-radius:6px;overflow:hidden;
-  border:2px solid rgba(255,255,255,.3);cursor:pointer;
-  transition:border-color .2s;background:#fff;
-}
+
+.hero-right{display:flex;align-items:center;justify-content:center;padding:2rem;position:relative;overflow:hidden}
+.hero-right::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 60%,rgba(255,255,255,.1),transparent 70%)}
+.hero-shoe-img{width:88%;max-height:340px;object-fit:contain;position:relative;z-index:1;filter:drop-shadow(0 20px 40px rgba(0,0,0,.3));transition:transform .4s}
+.hero-right:hover .hero-shoe-img{transform:translateY(-8px) rotate(-3deg)}
+.hero-shoe-bg{position:absolute;inset:0;background:center/cover no-repeat;opacity:.2;filter:blur(2px)}
+.hero-thumbs{position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);display:flex;gap:.6rem;z-index:2}
+.thumb{width:56px;height:42px;border-radius:7px;overflow:hidden;border:2px solid rgba(255,255,255,.3);cursor:pointer;transition:border-color .2s;background:#fff}
 .thumb img{width:100%;height:100%;object-fit:contain;padding:3px}
 .thumb.active,.thumb:hover{border-color:#fff}
 
-/* FEATURED CARDS */
+/* FEATURED */
 .featured{padding:3rem 2.5rem;background:var(--bg)}
 .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
-.feat-card{
-  border-radius:16px;overflow:hidden;position:relative;
-  cursor:pointer;transition:transform .3s;
-}
+.feat-card{border-radius:16px;overflow:hidden;position:relative;cursor:pointer;transition:transform .3s;min-height:220px}
 .feat-card:hover{transform:translateY(-4px)}
-.feat-card-bg{
-  padding:1.5rem;min-height:220px;
-  display:flex;flex-direction:column;justify-content:space-between;
-}
-.feat-logo{
-  display:flex;align-items:center;gap:.5rem;
-  font-weight:900;font-size:.9rem;color:#fff;margin-bottom:.5rem;
-}
+.feat-inner{padding:1.5rem;height:100%;display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:1}
+.feat-logo{font-weight:900;font-size:.85rem;color:rgba(255,255,255,.8);margin-bottom:.4rem}
 .feat-price{font-size:1rem;font-weight:700;color:rgba(255,255,255,.9)}
 .feat-name{font-size:1.1rem;font-weight:800;color:#fff;margin:.2rem 0}
-.feat-desc{font-size:.78rem;color:rgba(255,255,255,.75);line-height:1.5;max-width:22ch}
-.feat-shoe{
-  position:absolute;bottom:1rem;right:-10px;
-  width:60%;max-height:120px;object-fit:contain;
-  filter:drop-shadow(0 8px 16px rgba(0,0,0,.35));
-  transition:transform .3s;
-}
-.feat-card:hover .feat-shoe{transform:translateX(-8px) rotate(-5deg)}
-.feat-buy{
-  background:rgba(255,255,255,.2);color:#fff;border:1.5px solid rgba(255,255,255,.4);
-  border-radius:6px;padding:.45rem 1.2rem;font-size:.82rem;font-weight:700;
-  transition:background .2s;align-self:flex-start;margin-top:.8rem;
-}
-.feat-buy:hover{background:rgba(255,255,255,.35)}
+.feat-desc{font-size:.78rem;color:rgba(255,255,255,.7);line-height:1.5;max-width:22ch}
+.feat-shoe{position:absolute;bottom:1rem;right:-8px;width:55%;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,.35));transition:transform .3s;z-index:2;max-height:130px}
+.feat-card:hover .feat-shoe{transform:translateX(-8px) rotate(-5deg) scale(1.05)}
+.feat-buy{background:rgba(255,255,255,.18);color:#fff;border:1.5px solid rgba(255,255,255,.4);border-radius:7px;padding:.45rem 1.2rem;font-size:.82rem;font-weight:700;transition:background .2s;align-self:flex-start;margin-top:.8rem}
+.feat-buy:hover{background:rgba(255,255,255,.32)}
 
 /* FILTERS */
-.filters{
-  padding:1.8rem 2.5rem 1rem;
-  display:flex;align-items:center;gap:2rem;flex-wrap:wrap;
-  border-bottom:1px solid var(--border);
-}
+.filters{padding:1.8rem 2.5rem 1rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;border-bottom:1px solid var(--border)}
 .filter-group{display:flex;align-items:center;gap:.8rem}
 .filter-label{font-size:.82rem;color:var(--muted);white-space:nowrap}
-.filter-range{
-  -webkit-appearance:none;appearance:none;
-  width:120px;height:4px;border-radius:2px;
-  background:var(--blue);outline:none;cursor:pointer;
-}
-.filter-range::-webkit-slider-thumb{
-  -webkit-appearance:none;appearance:none;
-  width:16px;height:16px;border-radius:50%;
-  background:#fff;border:2px solid var(--blue);cursor:pointer;
-}
-.filter-val{
-  background:var(--blue);color:#fff;
-  font-size:.72rem;font-weight:700;
-  padding:.2rem .5rem;border-radius:4px;min-width:36px;text-align:center;
-}
-.color-filters{display:flex;gap:.4rem}
-.cf-dot{
-  width:18px;height:18px;border-radius:50%;cursor:pointer;
-  border:2px solid transparent;transition:border-color .2s;
-}
+.filter-range{-webkit-appearance:none;appearance:none;width:120px;height:4px;border-radius:2px;background:var(--blue);outline:none;cursor:pointer}
+.filter-range::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--blue);cursor:pointer}
+.filter-val{background:var(--blue);color:#fff;font-size:.72rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;min-width:36px;text-align:center}
+.cf-dot{width:18px;height:18px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color .2s}
 .cf-dot:hover,.cf-dot.active{border-color:var(--dark)}
 
 /* PRODUCT GRID */
 .prod-section{padding:1.5rem 2.5rem 3rem;max-width:1340px;margin:0 auto}
-.prod-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:1.6rem;
-}
+.prod-section h2{font-size:1.4rem;font-weight:700;margin-bottom:1.4rem}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.6rem}
 .prod-card{cursor:pointer;text-align:center}
-.prod-img{
-  background:var(--bg);border-radius:12px;overflow:hidden;
-  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
-  position:relative;margin-bottom:.8rem;
-  transition:background .2s;
-}
-.prod-card:hover .prod-img{background:#eee}
-.prod-img img{
-  width:85%;height:85%;object-fit:contain;
-  transition:transform .3s;
-  filter:drop-shadow(0 8px 16px rgba(0,0,0,.12));
-}
-.prod-card:hover .prod-img img{transform:scale(1.08) rotate(-4deg)}
-.prod-hover{
-  position:absolute;inset:0;
-  background:rgba(0,151,213,.06);
-  opacity:0;transition:opacity .2s;
-  display:flex;align-items:center;justify-content:center;gap:.5rem;
-}
+.prod-img-wrap{background:var(--bg);border-radius:12px;overflow:hidden;aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:.8rem;transition:background .2s}
+.prod-card:hover .prod-img-wrap{background:#e8e8e8}
+.prod-img-wrap img{width:85%;height:85%;object-fit:contain;transition:transform .35s;filter:drop-shadow(0 8px 16px rgba(0,0,0,.12))}
+.prod-card:hover .prod-img-wrap img{transform:scale(1.08) rotate(-4deg)}
+.prod-hover{position:absolute;inset:0;background:rgba(0,151,213,.06);opacity:0;transition:opacity .2s;display:flex;align-items:center;justify-content:center;gap:.5rem}
 .prod-card:hover .prod-hover{opacity:1}
-.ph-btn{
-  background:var(--blue);color:#fff;border:none;
-  border-radius:6px;padding:.4rem .9rem;font-size:.75rem;font-weight:700;
-}
-.ph-icon{
-  background:#fff;border:1px solid var(--border);border-radius:6px;
-  width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:.8rem;
-}
+.ph-add{background:var(--blue);color:#fff;border:none;border-radius:7px;padding:.42rem .95rem;font-size:.75rem;font-weight:700;transition:opacity .2s}
+.ph-add:hover{opacity:.85}
+.ph-wish{background:#fff;border:1px solid var(--border);border-radius:7px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:.82rem}
 .prod-name{font-size:.9rem;font-weight:600;margin-bottom:.2rem}
-.prod-price{font-size:.9rem;color:var(--muted)}
+.prod-price{font-size:.88rem;color:var(--muted)}
 
 /* PAGINATION */
-.pagination{
-  display:flex;justify-content:center;align-items:center;gap:.4rem;
-  padding:1.5rem 0 3rem;
-}
-.pg-btn{
-  width:36px;height:36px;border-radius:50%;border:1px solid var(--border);
-  background:#fff;font-size:.85rem;display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:all .2s;font-weight:500;
-}
+.pagination{display:flex;justify-content:center;align-items:center;gap:.4rem;padding:1.5rem 0 3rem}
+.pg-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:#fff;font-size:.85rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-weight:500}
 .pg-btn:hover,.pg-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
-.pg-arrow{background:none;border:1px solid var(--border);border-radius:6px;padding:.4rem .7rem;font-size:.82rem;cursor:pointer;transition:all .2s}
+.pg-arrow{background:none;border:1px solid var(--border);border-radius:7px;padding:.4rem .7rem;font-size:.82rem;cursor:pointer;transition:all .2s}
 .pg-arrow:hover{background:var(--bg)}
 
 /* FOOTER */
 footer{background:var(--black);color:#fff;padding:3rem 2.5rem}
-.footer-top{
-  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;
-  max-width:1200px;margin:0 auto 2rem;
-}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;max-width:1200px;margin:0 auto 2rem}
 .footer-socials{display:flex;gap:.8rem;margin-top:1rem}
-.soc-btn{
-  width:36px;height:36px;border-radius:6px;background:rgba(255,255,255,.1);
-  display:flex;align-items:center;justify-content:center;font-size:.9rem;cursor:pointer;transition:background .2s;
-}
+.soc-btn{width:36px;height:36px;border-radius:7px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:.9rem;cursor:pointer;transition:background .2s}
 .soc-btn:hover{background:rgba(255,255,255,.2)}
 footer h4{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem;color:rgba(255,255,255,.5)}
 footer a{display:block;font-size:.82rem;color:rgba(255,255,255,.65);margin-bottom:.5rem;transition:color .2s}
 footer a:hover{color:#fff}
-.footer-bottom{
-  max-width:1200px;margin:1.5rem auto 0;
-  padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);
-  display:flex;justify-content:space-between;font-size:.78rem;
-  color:rgba(255,255,255,.4);flex-wrap:wrap;gap:.5rem;
-}
-.footer-bottom-links{display:flex;gap:1.2rem}
-.footer-bottom-links a{color:rgba(255,255,255,.4);transition:color .2s}
-.footer-bottom-links a:hover{color:rgba(255,255,255,.8)}
+.footer-bottom{max-width:1200px;margin:1.5rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;font-size:.78rem;color:rgba(255,255,255,.4);flex-wrap:wrap;gap:.5rem}
 
 @media(max-width:900px){
   .hero{grid-template-columns:1fr}
   .hero-right{height:280px}
   .feat-grid{grid-template-columns:1fr}
   .footer-top{grid-template-columns:1fr 1fr}
-  nav .nav-links{display:none}
+  .nav-links{display:none}
 }
 </style>
 </head>
@@ -264,58 +181,75 @@ footer a:hover{color:#fff}
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-logo">
-    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
-    SOLECRAFT
+    <!-- REPLACE with your logo: <img src="../assets/solecraft-logo.png"/> -->
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+    SOLE<span style="color:rgba(255,255,255,.65)">CRAFT</span>
   </div>
   <div class="nav-links">
-    <a href="#">Home</a>
-    <a href="#">About Us</a>
-    <a href="#">Catalog</a>
-    <a href="#">Special Offers</a>
-    <a href="#">Contact Us</a>
+    <a href="#">Men</a><a href="#">Women</a><a href="#">Kids</a>
+    <a href="#">Sale</a><a href="#">New Arrivals</a>
   </div>
-  <div class="nav-right">
-    <button class="nav-icon">🔍</button>
-    <button class="nav-icon cart-wrap">🛒<span class="cart-badge" id="cartBadge">0</span></button>
+  <div class="nav-right" id="scNavRight">
+    <button class="nav-icon" onclick="showToast('🔍 Search coming soon!')">🔍</button>
+    <button class="nav-icon" style="position:relative" onclick="toggleCart()">🛒<span class="cart-badge" id="cartBadge">0</span></button>
+    <button class="nav-btn-auth" onclick="openModal('login')">Log In</button>
+    <button class="nav-btn-auth signup" onclick="openModal('signup')">Sign Up</button>
   </div>
 </nav>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- CART DRAWER -->
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>🛒 Your Cart (<span id="cartCount">0</span>)</h3>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty"><div>👟</div>Your cart is empty</div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total"><span>Total</span><span id="cartTotal">₱0</span></div>
+    <button class="checkout-btn" onclick="doCheckout()">Checkout →</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="scToast"></div>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-brand">NIKE</div>
   <div class="hero-left">
-    <div class="hero-model-name">Air Max Speed Turf Blue</div>
-    <div class="hero-price">₱17,999</div>
-    <div class="hero-desc">Premium running shoe with responsive cushioning and breathable upper. Built for speed, designed for style.</div>
+    <div class="hero-name" id="heroName">Air Max Speed Turf Blue</div>
+    <div class="hero-price" id="heroPrice">₱17,999</div>
+    <div class="hero-desc" id="heroDesc">Premium running shoe with responsive cushioning and breathable upper. Built for speed, designed for style.</div>
     <div class="hero-sizes">
       <button class="sz-btn" onclick="selectSize(this)">40</button>
-      <button class="sz-btn" onclick="selectSize(this)">41</button>
-      <button class="sz-btn active" onclick="selectSize(this)">42</button>
+      <button class="sz-btn active" onclick="selectSize(this)">41</button>
+      <button class="sz-btn" onclick="selectSize(this)">42</button>
       <button class="sz-btn" onclick="selectSize(this)">43</button>
     </div>
-    <div class="hero-colors">
-      <div class="color-dot active" style="background:#e74c3c" onclick="selectColor(this)"></div>
-      <div class="color-dot" style="background:#3498db" onclick="selectColor(this)"></div>
-      <div class="color-dot" style="background:#f1c40f" onclick="selectColor(this)"></div>
-      <div class="color-dot" style="background:#2ecc71" onclick="selectColor(this)"></div>
-    </div>
-    <button class="buy-btn" onclick="addToCart()">Buy Now</button>
+    <div class="hero-colors" id="heroColors"></div>
+    <button class="buy-btn" onclick="addHeroToCart()">Buy Now</button>
   </div>
   <div class="hero-right">
-    <img id="heroShoe"
-      src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&q=85"
+    <div class="hero-shoe-bg" id="heroShoBg"></div>
+    <img class="hero-shoe-img" id="heroShoeImg"
+      src="https://source.unsplash.com/700x500/?nike,sneaker,running,shoe,red"
       alt="Featured Shoe"
-      onerror="this.src='https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=700&q=85'"/>
-    <div class="hero-thumbs">
-      <div class="thumb active"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=120&q=70" onerror="this.style.display='none'"/></div>
-      <div class="thumb"><img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=120&q=70" onerror="this.style.display='none'"/></div>
-      <div class="thumb"><img src="https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?w=120&q=70" onerror="this.style.display='none'"/></div>
-      <div class="thumb"><img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=120&q=70" onerror="this.style.display='none'"/></div>
-    </div>
+      onerror="this.style.opacity='.4'"/>
+    <div class="hero-thumbs" id="heroThumbs"></div>
   </div>
 </div>
 
-<!-- FEATURED CARDS -->
+<!-- FEATURED -->
 <div class="featured">
   <div class="feat-grid" id="featGrid"></div>
 </div>
@@ -324,37 +258,35 @@ footer a:hover{color:#fff}
 <div class="filters">
   <div class="filter-group">
     <span class="filter-label">Size</span>
-    <input type="range" class="filter-range" min="38" max="46" value="41" id="sizeRange" oninput="document.getElementById('sizeVal').textContent=this.value"/>
-    <span class="filter-val" id="sizeVal">41</span>
+    <input type="range" class="filter-range" min="38" max="46" value="41"
+      oninput="document.getElementById('szV').textContent=this.value"/>
+    <span class="filter-val" id="szV">41</span>
   </div>
   <div class="filter-group">
     <span class="filter-label">Price</span>
-    <input type="range" class="filter-range" min="1000" max="30000" value="10000" id="priceMin" oninput="document.getElementById('priceMinVal').textContent='₱'+Math.round(this.value/1000)+'K'"/>
-    <span class="filter-val" id="priceMinVal">₱10K</span>
-    <input type="range" class="filter-range" min="1000" max="30000" value="25000" id="priceMax" oninput="document.getElementById('priceMaxVal').textContent='₱'+Math.round(this.value/1000)+'K'"/>
-    <span class="filter-val" id="priceMaxVal">₱25K</span>
+    <input type="range" class="filter-range" min="1000" max="30000" value="10000"
+      oninput="document.getElementById('prMin').textContent='₱'+Math.round(this.value/1000)+'K'"/>
+    <span class="filter-val" id="prMin">₱10K</span>
+    <input type="range" class="filter-range" min="1000" max="30000" value="25000"
+      oninput="document.getElementById('prMax').textContent='₱'+Math.round(this.value/1000)+'K'"/>
+    <span class="filter-val" id="prMax">₱25K</span>
   </div>
   <div class="filter-group">
     <span class="filter-label">Color</span>
-    <div class="color-filters">
-      <div class="cf-dot active" style="background:#3498db" onclick="filterColor(this)"></div>
-      <div class="cf-dot" style="background:#f1c40f" onclick="filterColor(this)"></div>
-      <div class="cf-dot" style="background:#e74c3c" onclick="filterColor(this)"></div>
-      <div class="cf-dot" style="background:#9b59b6" onclick="filterColor(this)"></div>
-      <div class="cf-dot" style="background:#2ecc71" onclick="filterColor(this)"></div>
-    </div>
+    <div style="display:flex;gap:.4rem" id="filterColors"></div>
   </div>
 </div>
 
-<!-- PRODUCT GRID -->
+<!-- PRODUCTS -->
 <div class="prod-section">
+  <h2>All Products</h2>
   <div class="prod-grid" id="prodGrid"></div>
   <div class="pagination">
     <button class="pg-arrow">◀</button>
     <button class="pg-btn active">1</button>
-    <button class="pg-btn">2</button>
-    <button class="pg-btn">3</button>
-    <button class="pg-btn">4</button>
+    <button class="pg-btn" onclick="this.closest('.pagination').querySelectorAll('.pg-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">2</button>
+    <button class="pg-btn" onclick="this.closest('.pagination').querySelectorAll('.pg-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">3</button>
+    <button class="pg-btn" onclick="this.closest('.pagination').querySelectorAll('.pg-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">4</button>
     <button class="pg-arrow">▶</button>
   </div>
 </div>
@@ -363,141 +295,306 @@ footer a:hover{color:#fff}
 <footer>
   <div class="footer-top">
     <div>
-      <div style="font-size:1.3rem;font-weight:900;margin-bottom:.5rem">SOLE<span style="color:var(--blue)">CRAFT</span></div>
-      <p style="font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.6;max-width:26ch">Premium footwear for every step of your journey.</p>
+      <div style="font-size:1.3rem;font-weight:900">SOLE<span style="color:var(--blue)">CRAFT</span></div>
+      <p style="font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.6;max-width:26ch;margin-top:.5rem">Premium footwear for every step of your journey.</p>
       <div class="footer-socials">
-        <div class="soc-btn">🐦</div>
-        <div class="soc-btn">📘</div>
-        <div class="soc-btn">▶</div>
-        <div class="soc-btn">📷</div>
+        <div class="soc-btn" onclick="showToast('🐦 Twitter/X')">𝕏</div>
+        <div class="soc-btn" onclick="showToast('📘 Facebook')">f</div>
+        <div class="soc-btn" onclick="showToast('▶ YouTube')">▶</div>
+        <div class="soc-btn" onclick="showToast('📷 Instagram')">📷</div>
       </div>
     </div>
     <div>
-      <h4>Nearby Stores</h4>
-      <a href="#">Subscribe to newsletter</a>
-      <a href="#">Register</a>
-      <a href="#">Site feedback</a>
+      <h4>Shop</h4>
+      <a href="#">Men's</a><a href="#">Women's</a><a href="#">Kids'</a><a href="#">Sale</a>
     </div>
     <div>
       <h4>Help</h4>
-      <a href="#">Order status</a>
-      <a href="#">Delivery</a>
-      <a href="#">Returns</a>
-      <a href="#">Payment methods</a>
-      <a href="#">Contact us</a>
+      <a href="#">Size Guide</a><a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a>
     </div>
     <div>
-      <h4>About</h4>
-      <a href="#">News</a>
-      <a href="#">Careers</a>
-      <a href="#">Investors</a>
+      <h4>Company</h4>
+      <a href="#">About Us</a><a href="#">Careers</a><a href="#">Press</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>Philippines © 2025 SOLECRAFT. All rights reserved.</span>
-    <div class="footer-bottom-links">
-      <a href="#">Catalog</a>
-      <a href="#">Terms of service</a>
-      <a href="#">Privacy policy</a>
-    </div>
+    <span>© 2025 SOLECRAFT. All rights reserved.</span>
+    <div style="display:flex;gap:1.2rem"><a href="#">Privacy</a><a href="#">Terms</a></div>
   </div>
 </footer>
 
 <script>
-let cart = 0;
-
-const featured = [
-  {name:"Air Zoo Structure 18",price:"₱10,000",desc:"Built for training. Breathable mesh upper with orange sole.",
-   bg:"linear-gradient(135deg,#1a1a2e,#16213e)",
-   img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnj00P0UxlBswoLI_-iEPB50a6XUltfbEYIsxqyF8Knw&s=10"},
-  {name:"AirJordan Retro 7",price:"₱15,000",desc:"The newest pair of Air Jordan. Classic silhouette, modern cushioning.",
-   bg:"linear-gradient(135deg,#2d1b69,#1a0a3e)",
-   img:"https://i.pinimg.com/736x/e6/bd/80/e6bd80ff8f3e5874bb0459baefe870f9.jpg"},
-  {name:"Air Max 270 Dusty",price:"₱20,000",desc:"Air Max 270 Dusty Cactus. Vibrant color palette meets daily comfort.",
-   bg:"linear-gradient(135deg,#0a6666,#004444)",
-   img:"https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?w=400&q=80"},
+/* ── DATA ── */
+const HERO_SHOES = [
+  {name:"Air Max Speed Turf Blue", price:"₱17,999",desc:"Premium running shoe with responsive cushioning and breathable upper. Built for speed, designed for style.",
+   img:"https://source.unsplash.com/700x500/?nike,sneaker,running,shoe,red",
+   bg:"https://source.unsplash.com/700x500/?red,texture,abstract"},
+  {name:"Urban Glide 2",           price:"₱12,500",desc:"Classic street-ready silhouette with premium leather upper and comfort foam midsole.",
+   img:"https://source.unsplash.com/700x500/?white,sneaker,shoe,clean",
+   bg:"https://source.unsplash.com/700x500/?white,minimal,background"},
+  {name:"CloudRun Elite",          price:"₱19,990",desc:"Engineered mesh upper with carbon-fiber plate for maximum energy return in every stride.",
+   img:"https://source.unsplash.com/700x500/?blue,sneaker,sport,shoe",
+   bg:"https://source.unsplash.com/700x500/?blue,abstract,background"},
+  {name:"Street Force Low",        price:"₱14,200",desc:"Low-cut urban design with durable rubber outsole for all-day city wear.",
+   img:"https://source.unsplash.com/700x500/?black,sneaker,urban,shoe",
+   bg:"https://source.unsplash.com/700x500/?dark,texture"},
 ];
 
-const fg = document.getElementById('featGrid');
-featured.forEach(f => {
-  fg.innerHTML += `
-  <div class="feat-card">
-    <div class="feat-card-bg" style="background:${f.bg}">
+const FEATURED = [
+  {name:"Air Zoo Structure 18",price:"₱10,000",desc:"Built for training. Breathable mesh upper with orange sole.",
+   bg:"linear-gradient(135deg,#1a1a2e,#16213e)",
+   img:"https://source.unsplash.com/400x300/?orange,sneaker,training,shoe"},
+  {name:"AirJordan Retro 7",   price:"₱15,000",desc:"The newest pair of Air Jordan. Classic silhouette, modern cushioning.",
+   bg:"linear-gradient(135deg,#2d1b69,#1a0a3e)",
+   img:"https://source.unsplash.com/400x300/?jordan,sneaker,basketball,black"},
+  {name:"Air Max 270 Dusty",   price:"₱20,000",desc:"Air Max 270 Dusty Cactus. Vibrant color palette meets daily comfort.",
+   bg:"linear-gradient(135deg,#0a6666,#004444)",
+   img:"https://source.unsplash.com/400x300/?teal,sneaker,airmax,shoe"},
+];
+
+const PRODUCTS = [
+  {n:"Air Jordan 6 Retro BG",  p:"₱9,500",  img:"https://source.unsplash.com/400x400/?jordan,sneaker,red,shoe"},
+  {n:"Air Pippen 1 Vast Grey", p:"₱11,000", img:"https://source.unsplash.com/400x400/?grey,sneaker,shoe,sport"},
+  {n:"Air Jordan 13 Retro",    p:"₱15,989", img:"https://source.unsplash.com/400x400/?white,sneaker,shoe,classic"},
+  {n:"Air More Uptempo",       p:"₱13,500", img:"https://source.unsplash.com/400x400/?blue,sneaker,shoe,bold"},
+  {n:"Air Max 720 Sunrise",    p:"₱14,200", img:"https://source.unsplash.com/400x400/?yellow,orange,sneaker,shoe"},
+  {n:"Air Max 95 Green Red",   p:"₱12,800", img:"https://source.unsplash.com/400x400/?green,sneaker,shoe,bright"},
+  {n:"Air Jordan 12 Retro",    p:"₱16,500", img:"https://source.unsplash.com/400x400/?black,white,sneaker,high"},
+  {n:"Air Presto Safari",      p:"₱9,999",  img:"https://source.unsplash.com/400x400/?running,shoe,sneaker,minimal"},
+  {n:"Air Max 270 Blue",       p:"₱13,200", img:"https://source.unsplash.com/400x400/?blue,airmax,shoe,modern"},
+  {n:"Air Zoom Vomero 14",     p:"₱11,500", img:"https://source.unsplash.com/400x400/?pink,sneaker,shoe,womens"},
+  {n:"Air Force 1 Low",        p:"₱8,990",  img:"https://source.unsplash.com/400x400/?white,leather,sneaker,clean"},
+  {n:"Air Monarch IV",         p:"₱7,500",  img:"https://source.unsplash.com/400x400/?retro,sneaker,shoe,classic"},
+];
+
+/* ── HERO THUMBNAILS ── */
+const heroColors = [{c:'#e74c3c'},{c:'#2d2d2d'},{c:'#3498db'},{c:'#f1f1f1'}];
+const hcEl = document.getElementById('heroColors');
+heroColors.forEach((h,i)=>{
+  const d=document.createElement('div');
+  d.className='color-dot'+(i===0?' active':'');
+  d.style.background=h.c;
+  d.onclick=()=>{
+    document.querySelectorAll('.hero-colors .color-dot').forEach(x=>x.classList.remove('active'));
+    d.classList.add('active');
+    const s=HERO_SHOES[i]||HERO_SHOES[0];
+    document.getElementById('heroShoeImg').src=s.img;
+    document.getElementById('heroName').textContent=s.name;
+    document.getElementById('heroPrice').textContent=s.price;
+    document.getElementById('heroDesc').textContent=s.desc;
+  };
+  hcEl.appendChild(d);
+});
+
+const thumbsEl = document.getElementById('heroThumbs');
+HERO_SHOES.forEach((s,i)=>{
+  const t=document.createElement('div');
+  t.className='thumb'+(i===0?' active':'');
+  t.innerHTML=`<img src="${s.img}" alt="${s.name}" onerror="this.style.display='none'"/>`;
+  t.onclick=()=>{
+    document.querySelectorAll('.hero-thumbs .thumb').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('heroShoeImg').src=s.img;
+    document.getElementById('heroName').textContent=s.name;
+    document.getElementById('heroPrice').textContent=s.price;
+    document.getElementById('heroDesc').textContent=s.desc;
+  };
+  thumbsEl.appendChild(t);
+});
+
+/* ── FEATURED CARDS ── */
+const fg=document.getElementById('featGrid');
+FEATURED.forEach(f=>{
+  fg.innerHTML+=`
+  <div class="feat-card" style="background:${f.bg};min-height:220px">
+    <div class="feat-inner">
       <div>
         <div class="feat-logo">⬤ SOLECRAFT</div>
         <div class="feat-price">${f.price}</div>
         <div class="feat-name">${f.name}</div>
         <div class="feat-desc">${f.desc}</div>
       </div>
-      <button class="feat-buy" onclick="addToCart()">Buy Now</button>
+      <button class="feat-buy" onclick="addToCartNamed('${f.name}','${f.price}','${f.img}')">Buy Now</button>
     </div>
-    <img class="feat-shoe" src="${f.img}" alt="${f.name}" loading="lazy"
-      onerror="this.style.display='none'"/>
+    <img class="feat-shoe" src="${f.img}" alt="${f.name}" loading="lazy" onerror="this.style.display='none'"/>
   </div>`;
 });
 
-const products = [
-  {name:"Air Jordan 6 Retro BG",  price:"₱9,500",  img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80"},
-  {name:"Air Pippen 1 Vast Grey",  price:"₱11,000", img:"https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&q=80"},
-  {name:"Air Jordan 13 Retro Grey",price:"₱15,989", img:"https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?w=400&q=80"},
-  {name:"Air More Uptempo",        price:"₱13,500", img:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=400&q=80"},
-  {name:"Air Max 720 Sunrise",     price:"₱14,200", img:"https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&q=80"},
-  {name:"Air Max 95 Green Red",    price:"₱12,800", img:"https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&q=80"},
-  {name:"Air Jordan 12 Retro",     price:"₱16,500", img:"https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&q=80"},
-  {name:"Air Presto Safari Gold",  price:"₱9,999",  img:"https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=400&q=80"},
-  {name:"Air Max 270 Blue Orange", price:"₱13,200", img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80"},
-  {name:"Air Zoom Vomero 14",      price:"₱11,500", img:"https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&q=80"},
-  {name:"Air Force 1 Low Custom",  price:"₱8,990",  img:"https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?w=400&q=80"},
-  {name:"Air Monarch IV Snow Day", price:"₱7,500",  img:"https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&q=80"},
-];
+/* ── FILTER COLORS ── */
+const fcols=['#3498db','#f1c40f','#e74c3c','#9b59b6','#2ecc71'];
+const fcEl=document.getElementById('filterColors');
+fcols.forEach(c=>{
+  const d=document.createElement('div');
+  d.className='cf-dot';
+  d.style.background=c;
+  d.onclick=()=>d.classList.toggle('active');
+  fcEl.appendChild(d);
+});
 
-const pg = document.getElementById('prodGrid');
-products.forEach((p,i) => {
-  pg.innerHTML += `
-  <div class="prod-card">
-    <div class="prod-img">
-      <img src="${p.img}" alt="${p.name}" loading="lazy"
-        onerror="this.parentElement.style.background='#eee'"/>
-      <div class="prod-hover">
-        <button class="ph-btn" onclick="event.stopPropagation();addToCart()">Buy</button>
-        <div class="ph-icon" onclick="event.stopPropagation();this.textContent=this.textContent==='🤍'?'❤️':'🤍'">🤍</div>
-      </div>
+/* ── PRODUCT GRID ── */
+const pg=document.getElementById('prodGrid');
+PRODUCTS.forEach((p,i)=>{
+  const card=document.createElement('div');
+  card.className='prod-card';
+  card.innerHTML=`
+  <div class="prod-img-wrap">
+    <img src="${p.img}" alt="${p.n}" loading="lazy" onerror="this.parentElement.style.background='#eee';this.style.display='none'"/>
+    <div class="prod-hover">
+      <button class="ph-add" onclick="event.stopPropagation();addToCartNamed('${p.n}','${p.p}','${p.img}')">Add to Cart</button>
+      <div class="ph-wish" onclick="event.stopPropagation();this.textContent=this.textContent==='🤍'?'❤️':'🤍'">🤍</div>
     </div>
-    <div class="prod-name">${p.name}</div>
-    <div class="prod-price">${p.price}</div>
-  </div>`;
+  </div>
+  <div class="prod-name">${p.n}</div>
+  <div class="prod-price">${p.p}</div>`;
+  card.onclick=()=>showToast(`👟 Viewing ${p.n}`);
+  pg.appendChild(card);
 });
 
-// Thumbnail switcher
-document.querySelectorAll('.thumb').forEach((t,i) => {
-  t.addEventListener('click', () => {
-    document.querySelectorAll('.thumb').forEach(x => x.classList.remove('active'));
-    t.classList.add('active');
-  });
-});
+/* ── CART ── */
+let cartItems=[];
+function toggleCart(){
+  document.getElementById('cartDrawer').classList.toggle('open');
+}
+function renderCart(){
+  const el=document.getElementById('cartItems');
+  const footer=document.getElementById('cartFooter');
+  const count=document.getElementById('cartCount');
+  const badge=document.getElementById('cartBadge');
+  count.textContent=cartItems.length;
+  badge.textContent=cartItems.length;
+  if(cartItems.length===0){
+    el.innerHTML='<div class="cart-empty"><div>👟</div>Your cart is empty</div>';
+    footer.style.display='none';
+    return;
+  }
+  footer.style.display='block';
+  el.innerHTML=cartItems.map((item,i)=>`
+  <div class="cart-item">
+    <div class="cart-item-img">
+      <img src="${item.img}" alt="${item.name}" onerror="this.style.display='none'"/>
+    </div>
+    <div class="cart-item-info">
+      <div class="cart-item-name">${item.name}</div>
+      <div class="cart-item-price">${item.price}</div>
+    </div>
+    <button class="cart-item-remove" onclick="removeFromCart(${i})">✕ Remove</button>
+  </div>`).join('');
+  const total=cartItems.reduce((sum,i)=>sum+parseInt(i.price.replace(/[₱,]/g,'')),0);
+  document.getElementById('cartTotal').textContent='₱'+total.toLocaleString();
+}
+function addToCartNamed(name,price,img){
+  cartItems.push({name,price,img});
+  renderCart();
+  showToast(`🛒 ${name} added to cart!`);
+  document.getElementById('cartDrawer').classList.add('open');
+}
+function addHeroToCart(){
+  const name=document.getElementById('heroName').textContent;
+  const price=document.getElementById('heroPrice').textContent;
+  const img=document.getElementById('heroShoeImg').src;
+  addToCartNamed(name,price,img);
+}
+function removeFromCart(i){
+  const name=cartItems[i].name;
+  cartItems.splice(i,1);
+  renderCart();
+  showToast(`🗑️ ${name} removed`);
+}
+function doCheckout(){
+  if(!currentScUser){openModal('login');return}
+  cartItems=[];
+  renderCart();
+  document.getElementById('cartDrawer').classList.remove('open');
+  showToast('🎉 Order placed! Thank you, '+currentScUser.split(' ')[0]+'!');
+}
 
-// Pagination
-document.querySelectorAll('.pg-btn').forEach(b => {
-  b.addEventListener('click', () => {
-    document.querySelectorAll('.pg-btn').forEach(x => x.classList.remove('active'));
-    b.classList.add('active');
-  });
-});
-
+/* ── SIZE SELECT ── */
 function selectSize(el){
-  document.querySelectorAll('.sz-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.sz-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
+  showToast('Size '+el.textContent+' selected');
 }
-function selectColor(el){
-  document.querySelectorAll('.hero-colors .color-dot').forEach(d => d.classList.remove('active'));
-  el.classList.add('active');
+
+/* ── AUTH ── */
+let currentScUser=null;
+const modalTemplates={
+  login:`<h2>Welcome back</h2>
+    <p class="modal-sub">Log in to your SOLECRAFT account</p>
+    <div class="social-login">
+      <button class="social-btn-modal" onclick="scSocialLogin('Google')"><span>G</span> Continue with Google</button>
+      <button class="social-btn-modal" onclick="scSocialLogin('Facebook')"><span>📘</span> Continue with Facebook</button>
+    </div>
+    <div class="modal-divider"><span>or</span></div>
+    <div class="form-field"><label>Email</label><input type="email" id="scEmail" placeholder="you@email.com"/></div>
+    <div class="form-field"><label>Password</label><input type="password" id="scPass" placeholder="••••••••"/></div>
+    <button class="modal-submit" onclick="scLogin()">Log In</button>
+    <div class="modal-footer">New here? <a onclick="openModal('signup')">Create account</a></div>`,
+
+  signup:`<h2>Create account</h2>
+    <p class="modal-sub">Join SOLECRAFT today</p>
+    <div class="social-login">
+      <button class="social-btn-modal" onclick="scSocialLogin('Google')"><span>G</span> Continue with Google</button>
+      <button class="social-btn-modal" onclick="scSocialLogin('Facebook')"><span>📘</span> Continue with Facebook</button>
+    </div>
+    <div class="modal-divider"><span>or</span></div>
+    <div class="form-field"><label>Full Name</label><input type="text" id="scName" placeholder="Kenneth Bernal"/></div>
+    <div class="form-field"><label>Email</label><input type="email" id="scEmail2" placeholder="you@email.com"/></div>
+    <div class="form-field"><label>Password</label><input type="password" id="scPass2" placeholder="••••••••"/></div>
+    <button class="modal-submit" onclick="scSignup()">Create Account</button>
+    <div class="modal-footer">Already have an account? <a onclick="openModal('login')">Log in</a></div>`,
+};
+
+function openModal(type){
+  document.getElementById('modalContent').innerHTML=modalTemplates[type];
+  document.getElementById('modalOverlay').classList.add('show');
 }
-function filterColor(el){
-  el.classList.toggle('active');
+function closeModal(){document.getElementById('modalOverlay').classList.remove('show')}
+function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal()}
+
+function scLogin(){
+  const e=document.getElementById('scEmail')?.value||'';
+  const p=document.getElementById('scPass')?.value||'';
+  if(!e||!p){showToast('⚠️ Fill in all fields');return}
+  const name=e.split('@')[0].replace(/[._]/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+  scSetUser(name);
 }
-function addToCart(){
-  cart++;
-  document.getElementById('cartBadge').textContent = cart;
+function scSignup(){
+  const n=document.getElementById('scName')?.value||'';
+  const e=document.getElementById('scEmail2')?.value||'';
+  const p=document.getElementById('scPass2')?.value||'';
+  if(!n||!e||!p){showToast('⚠️ Fill in all fields');return}
+  scSetUser(n);
+}
+function scSocialLogin(provider){scSetUser(provider==='Google'?'Google User':'Facebook User')}
+function scSetUser(name){
+  currentScUser=name;
+  closeModal();
+  updateScNav();
+  showToast(`👟 Welcome, ${name.split(' ')[0]}!`);
+}
+function updateScNav(){
+  const nr=document.getElementById('scNavRight');
+  if(currentScUser){
+    nr.innerHTML=`<button class="nav-icon" onclick="showToast('🔍 Search')">🔍</button>
+    <button class="nav-icon" style="position:relative" onclick="toggleCart()">🛒<span class="cart-badge" id="cartBadge">${cartItems.length}</span></button>
+    <span style="color:rgba(255,255,255,.85);font-size:.88rem;font-weight:600">Hi, ${currentScUser.split(' ')[0]}!</span>
+    <div class="nav-avatar-sc" onclick="scLogout()" title="Click to log out">${currentScUser[0]}</div>`;
+  } else {
+    nr.innerHTML=`<button class="nav-icon" onclick="showToast('🔍 Search')">🔍</button>
+    <button class="nav-icon" style="position:relative" onclick="toggleCart()">🛒<span class="cart-badge" id="cartBadge">0</span></button>
+    <button class="nav-btn-auth" onclick="openModal('login')">Log In</button>
+    <button class="nav-btn-auth signup" onclick="openModal('signup')">Sign Up</button>`;
+  }
+}
+function scLogout(){currentScUser=null;updateScNav();showToast('👋 Logged out!')}
+
+/* ── TOAST ── */
+let toastTimer;
+function showToast(msg){
+  const t=document.getElementById('scToast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2800);
 }
 </script>
 </body>
