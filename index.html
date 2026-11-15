@@ -8,6 +8,33 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Live website previews inside the project cards */
+    .project-img-wrap {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .project-img-wrap .project-live-preview {
+      position: absolute;
+      inset: 0 auto auto 0;
+      display: block;
+      width: 400%;
+      height: 400%;
+      border: 0;
+      transform: scale(0.25);
+      transform-origin: top left;
+      pointer-events: none;
+      z-index: 0;
+      background: #fff;
+    }
+
+    .project-img-wrap .project-overlay {
+      position: absolute;
+      z-index: 2;
+    }
+  </style>
 </head>
 <body>
 
@@ -88,7 +115,14 @@
             <div class="project-list">
               <div class="project-item">
                 <div class="project-img-wrap">
-                  <img src="assets/staynest.png" alt="StayNest" />
+                  <iframe
+                    class="project-live-preview"
+                    src="assets/staynest.html"
+                    title="Live preview of StayNest"
+                    loading="lazy"
+                    scrolling="no"
+                    tabindex="-1"
+                    aria-hidden="true"></iframe>
                   <div class="project-overlay">
                     <a href="assets/staynest.html" target="_blank" class="pill-btn">Live →</a>
                   </div>
@@ -101,7 +135,14 @@
               </div>
               <div class="project-item">
                 <div class="project-img-wrap">
-                  <img src="assets/solecraft.png" alt="SoleCraft" />
+                  <iframe
+                    class="project-live-preview"
+                    src="assets/solecraft.html"
+                    title="Live preview of SoleCraft"
+                    loading="lazy"
+                    scrolling="no"
+                    tabindex="-1"
+                    aria-hidden="true"></iframe>
                   <div class="project-overlay">
                     <a href="assets/solecraft.html" target="_blank" class="pill-btn">Live →</a>
                   </div>
