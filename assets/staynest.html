@@ -104,17 +104,17 @@ button{font-family:inherit;cursor:pointer}
 .homes-scroll{display:flex;gap:1.4rem;overflow-x:auto;scrollbar-width:none;padding:2px 2px .7rem;scroll-behavior:smooth;scroll-snap-type:x proximity}
 .homes-scroll::-webkit-scrollbar{display:none}
 .home-card{flex:0 0 300px;min-width:300px;cursor:default;scroll-snap-align:start}
-.home-img{border-radius:14px;overflow:hidden;width:100%;height:200px;background:#eee;position:relative}
-.home-img img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .4s}
+.home-img{border-radius:14px;overflow:hidden;width:100%;height:auto;aspect-ratio:3 / 2;background:#f2f3f4;position:relative}
+.home-img img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:#f2f3f4;transition:transform .4s}
 .selectable-photo{cursor:pointer;outline:2px solid transparent;outline-offset:2px;transition:outline-color .2s,box-shadow .2s}
 .selectable-photo:hover{outline-color:var(--red);box-shadow:0 0 0 4px rgba(255,56,92,.12)}
 .selectable-photo:focus-visible{outline:3px solid var(--red);outline-offset:3px}
-.home-card:hover .home-img img{transform:scale(1.04)}
+.home-card:hover .home-img img{transform:none}
 .heart-btn{position:absolute;top:10px;right:10px;background:none;border:none;font-size:1.3rem;cursor:pointer;filter:drop-shadow(0 1px 3px rgba(0,0,0,.3));z-index:2}
-.home-info{padding:.6rem .2rem 0}
-.home-top{display:flex;justify-content:space-between;align-items:start}
-.home-title{font-weight:600;font-size:.9rem;flex:1;margin-right:.5rem}
-.home-rating{font-size:.82rem;white-space:nowrap}
+.home-info{padding:.6rem .2rem 0;width:100%;min-width:0}
+.home-top{display:grid;grid-template-columns:minmax(0,1fr) max-content;column-gap:.5rem;align-items:start;width:100%;min-width:0}
+.home-title{font-weight:600;font-size:.9rem;min-width:0;overflow-wrap:anywhere}
+.home-rating{font-size:.82rem;white-space:nowrap;display:block;min-width:max-content;flex-shrink:0;text-align:right;line-height:1.35}
 .home-sub{font-size:.82rem;color:var(--muted);margin:.15rem 0}
 .home-price{font-size:.88rem;margin-top:.3rem}
 .home-price strong{font-weight:700}
