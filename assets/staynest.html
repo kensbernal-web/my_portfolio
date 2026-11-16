@@ -84,44 +84,40 @@ button{font-family:inherit;cursor:pointer}
 .section{padding:2.2rem 2.5rem;max-width:1340px;margin:1.3rem auto;background:rgba(255,255,255,.97);border:1px solid rgba(220,225,230,.85);border-radius:18px;box-shadow:0 8px 28px rgba(30,50,70,.06);scroll-margin-top:100px}
 .section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.4rem}
 .section-head h2{font-size:1.4rem;font-weight:700}
-.see-all{font-size:.88rem;font-weight:600;color:var(--dark);text-decoration:underline;text-underline-offset:3px;cursor:pointer;background:transparent;border:0;padding:.25rem 0;font-family:inherit}
-.see-all:hover{color:var(--red)}
-.see-all:focus-visible{outline:2px solid var(--red);outline-offset:4px;border-radius:3px}
+.see-all{font-size:.88rem;font-weight:600;color:var(--dark);text-decoration:underline;cursor:pointer}
 /* EXPERIENCE CARDS */
-.exp-scroll{display:flex;gap:1.2rem;overflow-x:auto;scrollbar-width:none;padding:2px 2px .7rem;scroll-behavior:smooth;scroll-snap-type:x proximity}
+.exp-scroll{display:flex;gap:1.2rem;overflow-x:auto;scrollbar-width:none;padding-bottom:.5rem}
 .exp-scroll::-webkit-scrollbar{display:none}
-.exp-card{flex:0 0 220px;min-width:220px;cursor:default;scroll-snap-align:start}
-.exp-img{border-radius:12px;overflow:hidden;width:100%;height:160px;background:#eee;position:relative;flex:0 0 auto}
-.exp-img img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .3s}
+.exp-card{min-width:220px;cursor:pointer}
+.background-select-card .exp-img{outline:2px solid transparent;transition:outline-color .2s,box-shadow .2s}
+.background-select-card:hover .exp-img,.background-select-card:focus-visible .exp-img{outline-color:var(--red);box-shadow:0 0 0 4px rgba(255,56,92,.14)}
+.background-select-card:focus-visible{outline:none}
+.exp-img{border-radius:12px;overflow:hidden;width:220px;height:160px;background:#eee;position:relative}
+.exp-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
 .exp-card:hover .exp-img img{transform:scale(1.04)}
-.exp-card .exp-img{scroll-snap-align:start}
 .exp-price{font-size:.9rem;margin-top:.6rem}
 .exp-price strong{font-weight:600}
 .exp-desc{font-size:.82rem;color:var(--muted);margin:.2rem 0;line-height:1.4;max-width:200px}
 .exp-stars{display:flex;align-items:center;gap:4px;font-size:.78rem;color:var(--muted)}
 .exp-stars span{color:#FFB400}
 /* HOME CARDS */
-.homes-scroll{display:flex;gap:1.4rem;overflow-x:auto;scrollbar-width:none;padding:2px 4px .7rem;scroll-behavior:smooth;scroll-snap-type:x proximity}
+.homes-scroll{display:flex;gap:1.4rem;overflow-x:auto;scrollbar-width:none;padding-bottom:.5rem}
 .homes-scroll::-webkit-scrollbar{display:none}
-.home-card{flex:0 0 300px;width:300px;min-width:0;cursor:default;scroll-snap-align:start}
-.home-img{border-radius:14px;overflow:hidden;width:100%;height:auto;aspect-ratio:3 / 2;background:#f2f3f4;position:relative}
-/* Keep the whole original listing photo visible; do not crop it to fill the frame. */
-.home-img img{display:block;width:100%;height:100%;object-fit:contain !important;object-position:center;background:#f2f3f4;transition:none}
-.selectable-photo{cursor:pointer;outline:2px solid transparent;outline-offset:2px;transition:outline-color .2s,box-shadow .2s}
-.selectable-photo:hover{outline-color:var(--red);box-shadow:0 0 0 4px rgba(255,56,92,.12)}
-.selectable-photo:focus-visible{outline:3px solid var(--red);outline-offset:3px}
-.home-card:hover .home-img img{transform:none}
+.home-card{min-width:300px;cursor:pointer}
+.home-img{border-radius:14px;overflow:hidden;width:300px;height:200px;background:#eee;position:relative}
+.home-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.home-card:hover .home-img img{transform:scale(1.04)}
 .heart-btn{position:absolute;top:10px;right:10px;background:none;border:none;font-size:1.3rem;cursor:pointer;filter:drop-shadow(0 1px 3px rgba(0,0,0,.3));z-index:2}
-.home-info{padding:.6rem .2rem 0;width:100%;min-width:0}
-.home-top{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;width:100%;min-width:0}
-.home-title{font-weight:600;font-size:.9rem;line-height:1.35;flex:1 1 auto;min-width:0;overflow-wrap:break-word}
-.home-rating{font-size:.82rem;white-space:nowrap;display:inline-flex;align-items:center;justify-content:flex-end;flex:0 0 auto;min-width:3.5rem;text-align:right;line-height:1.35;margin-left:auto}
+.home-info{padding:.6rem .2rem 0}
+.home-top{display:flex;justify-content:space-between;align-items:start}
+.home-title{font-weight:600;font-size:.9rem;flex:1;margin-right:.5rem}
+.home-rating{font-size:.82rem;white-space:nowrap}
 .home-sub{font-size:.82rem;color:var(--muted);margin:.15rem 0}
 .home-price{font-size:.88rem;margin-top:.3rem}
 .home-price strong{font-weight:700}
 .superhost{display:inline-block;font-size:.7rem;font-weight:600;border:1px solid var(--dark);border-radius:4px;padding:1px 5px;margin-top:.3rem}
 /* DESTINATIONS */
-.dest-grid{display:flex;gap:1rem;overflow-x:auto;scrollbar-width:none;scroll-behavior:smooth;scroll-snap-type:x proximity}
+.dest-grid{display:flex;gap:1rem;overflow-x:auto;scrollbar-width:none}
 .dest-grid::-webkit-scrollbar{display:none}
 .dest-card{min-width:140px;cursor:pointer;border-radius:12px;overflow:hidden;position:relative;transition:transform .3s}
 .dest-card:hover{transform:scale(1.03)}
@@ -146,10 +142,6 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;justi
   .tabs{padding:0 1rem;overflow-x:auto}
   footer{padding:2rem 1rem}
   .section{margin:1rem .75rem;padding:1.5rem 1rem}
-  .home-card{flex:0 0 min(340px,calc(100vw - 64px));width:min(340px,calc(100vw - 64px))}
-  .home-top{gap:.4rem}
-  .home-title{font-size:.9rem}
-  .home-rating{font-size:.8rem;min-width:3.4rem}
   .modal{padding:1.5rem;max-height:90vh;overflow:auto}
 }
 </style>
@@ -221,7 +213,7 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;justi
 <div class="section" id="experiencesSection">
   <div class="section-head">
     <h2>Experiences</h2>
-    <button type="button" class="see-all" onclick="scrollNext('expScroll')">See all →</button>
+    <span class="see-all" onclick="showToast('Showing all experiences...')">See all →</span>
   </div>
   <div class="exp-scroll" id="expScroll"></div>
 </div>
@@ -229,7 +221,7 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;justi
 <div class="section" id="homesSection">
   <div class="section-head">
     <h2>Homes</h2>
-    <button type="button" class="see-all" onclick="scrollNext('homesScroll')">See all →</button>
+    <span class="see-all" onclick="showToast('Showing all homes...')">See all →</span>
   </div>
   <div class="homes-scroll" id="homesScroll"></div>
 </div>
@@ -237,7 +229,7 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;justi
 <div class="section" id="placesSection">
   <div class="section-head">
     <h2>Featured destinations</h2>
-    <button type="button" class="see-all" onclick="scrollNext('destGrid')">See all →</button>
+    <span class="see-all" onclick="showToast('Showing all destinations...')">See all →</span>
   </div>
   <div class="dest-grid" id="destGrid"></div>
 </div>
@@ -269,7 +261,7 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;justi
 <script>
 /* ── IMAGE DATA ── */
 const DEFAULT_HERO_BG = "https://images.trvl-media.com/lodging/125000000/124450000/124445000/124444902/e4c47761_z.jpg";
-const TAAL_HERO_BG = "https://upload.wikimedia.org/wikipedia/commons/0/0d/TaalVolcanoTagaytayPhilippines.jpg"; // Taal Volcano & Lake photo, Wikimedia Commons (public domain)
+const TAAL_HERO_BG = "https://gttp.images.tshiftcdn.com/416379/x/0/a-scenic-view-of-taal-lake-and-taal-volcano-that-is-best-seen-during-a-tagaytay-city-highlands-tour.jpg?ar=1.91%3A1&fit=crop&w=1200";
 // Using direct Unsplash source URLs — these work when online (Vercel)
 // Fallback gradient colours show when offline (local file://)
 const EXP = [
@@ -320,43 +312,9 @@ function makeImg(src,fallback,w,h,alt){
   const i=document.createElement('img');
   i.src=src; i.alt=alt||'';
   i.style.cssText='width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block';
-  i.onerror=()=>i.remove();
+  i.onerror=()=>{i.style.display='none'};
   d.appendChild(i);
   return d;
-}
-
-// Clicking a listing photo uses that same photo as the hero background.
-function enableBackgroundSelection(photoFrame, imageUrl, label){
-  photoFrame.classList.add('selectable-photo');
-  photoFrame.setAttribute('role','button');
-  photoFrame.setAttribute('tabindex','0');
-  photoFrame.setAttribute('aria-label',`Use ${label} as the website background`);
-  const selectBackground = () => setHeroBackground(imageUrl);
-  photoFrame.addEventListener('click',selectBackground);
-  photoFrame.addEventListener('keydown',event=>{
-    if(event.key==='Enter' || event.key===' '){
-      event.preventDefault();
-      selectBackground();
-    }
-  });
-}
-
-// Advance one card at a time; once the end is reached, the next press returns to the first card.
-function scrollNext(scrollerId){
-  const scroller=document.getElementById(scrollerId);
-  if(!scroller) return;
-  const firstCard=scroller.firstElementChild;
-  if(!firstCard) return;
-  const style=window.getComputedStyle(scroller);
-  const gap=parseFloat(style.columnGap || style.gap || '0') || 0;
-  const step=firstCard.getBoundingClientRect().width + gap;
-  const maxScroll=Math.max(0,scroller.scrollWidth-scroller.clientWidth);
-  if(maxScroll < 4) return;
-  if(scroller.scrollLeft + step > maxScroll + 4){
-    scroller.scrollTo({left:0,behavior:'smooth'});
-  }else{
-    scroller.scrollBy({left:step,behavior:'smooth'});
-  }
 }
 // Render experiences
 const expEl=document.getElementById('expScroll');
@@ -369,13 +327,25 @@ EXP.forEach(e=>{
   const img=document.createElement('img');
   img.src=e.img; img.alt=e.desc;
   img.style.cssText='width:100%;height:100%;object-fit:cover';
-  img.onerror=()=>img.remove();
+  img.onerror=()=>{img.style.display='none'};
   imgWrap.appendChild(img);
-  card.innerHTML=`<div class="exp-price"><strong>${e.price}</strong></div>
+  card.appendChild(imgWrap);
+  card.innerHTML+=`<div class="exp-price"><strong>${e.price}</strong></div>
   <div class="exp-desc">${e.desc}</div>
   <div class="exp-stars"><span>★</span> ${e.stars} · ${e.rev} reviews</div>`;
-  card.prepend(imgWrap);
-  enableBackgroundSelection(imgWrap,e.img,e.desc);
+  if (e.desc === "Sunrise hike to Taal Volcano with breakfast by the lake.") {
+    card.classList.add('background-select-card');
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', 'Set the Taal Volcano sunrise image as the page background');
+    card.addEventListener('click', () => setHeroBackground(TAAL_HERO_BG, e.desc));
+    card.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        setHeroBackground(TAAL_HERO_BG, e.desc);
+      }
+    });
+  }
   expEl.appendChild(card);
 });
 // Render homes
@@ -388,19 +358,18 @@ HOMES.forEach(h=>{
   imgWrap.style.background=h.fb;
   const img=document.createElement('img');
   img.src=h.img; img.alt=h.title;
-  img.style.cssText='display:block;width:100%;height:100%;object-fit:contain;object-position:center';
-  img.onerror=()=>img.remove();
-  imgWrap.innerHTML=`<button class="heart-btn" type="button" aria-label="Save this home" onclick="event.stopPropagation();this.textContent=this.textContent==='🤍'?'❤️':'🤍'">🤍</button>`;
+  img.style.cssText='width:100%;height:100%;object-fit:cover';
+  img.onerror=()=>{img.style.display='none'};
+  imgWrap.innerHTML=`<button class="heart-btn" onclick="this.textContent=this.textContent==='🤍'?'❤️':'🤍'">🤍</button>`;
   imgWrap.insertBefore(img,imgWrap.firstChild);
-  card.innerHTML=`<div class="home-info">
-    <div class="home-top"><div class="home-title">${h.title}</div><div class="home-rating" aria-label="${h.rating} out of 5 stars">★ ${h.rating}</div></div>
+  card.appendChild(imgWrap);
+  card.innerHTML+=`<div class="home-info">
+    <div class="home-top"><div class="home-title">${h.title}</div><div class="home-rating">★ ${h.rating}</div></div>
     <div class="home-sub">${h.type}</div>
     <div class="home-sub">${h.rev} reviews</div>
     <div class="home-price"><strong>${h.price}</strong> / night</div>
     ${h.sh?'<div class="superhost">Superhost</div>':''}
   </div>`;
-  card.prepend(imgWrap);
-  enableBackgroundSelection(imgWrap,h.img,h.title);
   homesEl.appendChild(card);
 });
 // Render destinations
@@ -585,11 +554,13 @@ function showToast(msg){
   clearTimeout(toastTimer);
   toastTimer=setTimeout(()=>t.classList.remove('show'),2800);
 }
-function setHeroBackground(imageUrl){
-  const hero=document.querySelector('.hero');
-  if(!hero || !imageUrl) return;
-  hero.style.backgroundImage=`linear-gradient(90deg, rgba(0,0,0,.58), rgba(0,0,0,.14)), url("${imageUrl}")`;
-  hero.style.backgroundPosition='center center';
+function setHeroBackground(imageUrl, description){
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  hero.style.backgroundImage = `linear-gradient(90deg, rgba(0,0,0,.58), rgba(0,0,0,.14)), url("${imageUrl}")`;
+  hero.style.backgroundPosition = 'center center';
+  showToast('Background changed to the Taal Volcano experience.');
+  hero.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 function sendPasswordReset(){
