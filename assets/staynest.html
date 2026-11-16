@@ -103,7 +103,10 @@ button{font-family:inherit;cursor:pointer}
 /* HOME CARDS */
 .homes-scroll{display:flex;gap:1.4rem;overflow-x:auto;scrollbar-width:none;padding:2px 2px .7rem;scroll-behavior:smooth;scroll-snap-type:x proximity}
 .homes-scroll::-webkit-scrollbar{display:none}
-.home-card{flex:0 0 300px;min-width:300px;cursor:default;scroll-snap-align:start}
+/* Extra room after the last home so its picture can scroll fully into view */
+.homes-scroll::after{content:'';flex:0 0 .5rem;scroll-snap-align:end}
+/* Card is 300px wide, but never wider than the row itself on small screens */
+.home-card{flex:0 0 min(300px,88%);min-width:0;cursor:default;scroll-snap-align:start}
 .home-img{border-radius:14px;overflow:hidden;width:100%;height:200px;background:#eee;position:relative}
 .home-img img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .4s}
 .selectable-photo{cursor:pointer;outline:2px solid transparent;outline-offset:2px;transition:outline-color .2s,box-shadow .2s}
@@ -113,7 +116,8 @@ button{font-family:inherit;cursor:pointer}
 .heart-btn{position:absolute;top:10px;right:10px;background:none;border:none;font-size:1.3rem;cursor:pointer;filter:drop-shadow(0 1px 3px rgba(0,0,0,.3));z-index:2}
 .home-info{padding:.6rem .2rem 0}
 .home-top{display:flex;justify-content:space-between;align-items:start}
-.home-title{font-weight:600;font-size:.9rem;flex:1;margin-right:.5rem}
+/* Titles always reserve two lines, so type, reviews and price line up across every card */
+.home-title{font-weight:600;font-size:.9rem;flex:1;margin-right:.5rem;line-height:1.35;min-height:2.7em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .home-rating{font-size:.82rem;white-space:nowrap}
 .home-sub{font-size:.82rem;color:var(--muted);margin:.15rem 0}
 .home-price{font-size:.88rem;margin-top:.3rem}
@@ -336,7 +340,8 @@ function enableBackgroundSelection(photoFrame, imageUrl, label){
   });
 }
 
-// Advance one card at a time; once the end is reached, the next press returns to the first card.
+// "See all": move one card at a time. The last press always lands on the true end of the row
+// (so the final picture is fully visible), and the press after that returns to the first card.
 function scrollNext(scrollerId){
   const scroller=document.getElementById(scrollerId);
   if(!scroller) return;
@@ -347,10 +352,12 @@ function scrollNext(scrollerId){
   const step=firstCard.getBoundingClientRect().width + gap;
   const maxScroll=Math.max(0,scroller.scrollWidth-scroller.clientWidth);
   if(maxScroll < 4) return;
-  if(scroller.scrollLeft + step > maxScroll + 4){
+  const atEnd = scroller.scrollLeft >= maxScroll - 4;
+  if(atEnd){
     scroller.scrollTo({left:0,behavior:'smooth'});
   }else{
-    scroller.scrollBy({left:step,behavior:'smooth'});
+    const target = Math.min(scroller.scrollLeft + step, maxScroll);
+    scroller.scrollTo({left:target,behavior:'smooth'});
   }
 }
 // Render experiences
