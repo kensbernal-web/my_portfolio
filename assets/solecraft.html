@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0097D5" />
   <title>SOLECRAFT — Move With Air</title>
-  <link rel="preload" as="image" href="air-max-speed-turf-blue.png" />
+  <link rel="preload" as="image" href="assets/air-max-speed-turf-blue.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -213,12 +213,206 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
     }
+
+    /* Product selection, quantity and checkout additions */
+    .site-wrap { width: min(1600px, calc(100% - clamp(28px, 4vw, 80px))); }
+    .topbar { grid-template-columns: minmax(170px, 1fr) auto minmax(160px, 1fr); gap: clamp(12px, 2vw, 30px); }
+    .hero { min-height: 700px; height: clamp(700px, calc(100svh - 82px), 840px); }
+    .hero-copy { max-width: 620px; padding-bottom: 145px; }
+    .hero-visual { inset: 0 0 112px 29%; }
+    .hero-product, .mini-product img, .product-photo img, .cart-row img { mix-blend-mode: normal !important; }
+    .hero-buy-options { display: flex; align-items: end; flex-wrap: wrap; gap: 18px; margin-top: 18px; }
+    .hero-size-block { min-width: 0; }
+    .control-label, .option-label { display: block; margin-bottom: 7px; color: var(--blue-dark); font-size: 9px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+    .size-options { display: flex; flex-wrap: wrap; gap: 5px; }
+    .size-chip { min-width: 29px; height: 29px; padding: 0 6px; border: 1px solid rgba(26,26,46,.18); border-radius: 3px; color: var(--ink); background: rgba(255,255,255,.8); font-size: 10px; font-weight: 700; transition: .18s ease; }
+    .size-chip:hover, .size-chip.active { border-color: var(--blue); color: #fff; background: var(--blue); }
+    .quantity-control { display: inline-flex; align-items: center; justify-content: space-between; height: 29px; min-width: 94px; border: 1px solid rgba(26,26,46,.18); border-radius: 3px; background: #fff; }
+    .quantity-control button { width: 29px; height: 27px; border: 0; color: var(--ink); background: transparent; font-size: 17px; line-height: 1; }
+    .quantity-control button:hover { color: var(--blue-dark); }
+    .quantity-control output { min-width: 24px; text-align: center; font-size: 11px; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .hero-cta-row { gap: 10px; margin-top: 17px; }
+    .btn-dark { min-width: 125px; }
+    .btn-cart-plain { min-height: 47px; display: inline-flex; align-items: center; justify-content: center; padding: 0 14px; border: 1px solid var(--blue); border-radius: 4px; color: var(--blue-dark); background: transparent; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; transition: .2s ease; }
+    .btn-cart-plain:hover { color: #fff; background: var(--blue); }
+    .product-grid { align-items: start; }
+    .product-card { display: flex; flex-direction: column; }
+    .product-photo { background: linear-gradient(145deg, #f3f4f5, #fafbfc); }
+    .product-info { display: flex; flex: 1; flex-direction: column; }
+    .product-option-block { margin-top: 14px; }
+    .product-size-options { gap: 4px; }
+    .product-size-options .size-chip { min-width: 27px; height: 27px; padding-inline: 4px; font-size: 9px; }
+    .product-control-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 13px; }
+    .product-control-row .control-label { margin: 0; }
+    .product-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .product-buy-btn, .product-add-btn { min-height: 36px; display: inline-flex; align-items: center; justify-content: center; border-radius: 3px; font-size: 9px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .product-buy-btn { border: 1px solid var(--blue); color: #fff; background: var(--blue); }
+    .product-buy-btn:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
+    .product-add-btn { border: 1px solid var(--blue); color: var(--blue-dark); background: transparent; }
+    .product-add-btn:hover { color: #fff; background: var(--blue); }
+    .product-info h3 { font-size: 13px; }
+    .product-info p { font-size: 11px; }
+    .product-price { color: var(--ink); font-size: 13px; }
+    .cart-drawer { width: min(500px, 100vw); padding: 22px 26px; overflow-y: auto; }
+    .cart-items { flex: 1 0 auto; min-height: 100px; }
+    .cart-row { grid-template-columns: 82px minmax(0,1fr) auto; }
+    .cart-row img { width: 82px; height: 72px; background: transparent; }
+    .cart-item-controls { display: flex; align-items: center; gap: 8px; margin-top: 7px; }
+    .cart-item-controls .quantity-control { min-width: 82px; height: 25px; }
+    .cart-item-controls .quantity-control button { width: 25px; height: 23px; }
+    .cart-item-controls .quantity-control output { font-size: 10px; }
+    .drawer-foot.checkout-form { display: block; max-height: none; flex: 0 0 auto; padding-top: 16px; margin-top: 12px; border-top: 1px solid var(--line); }
+    .checkout-heading { margin: 17px 0 11px; font-family: var(--display); font-size: 22px; text-transform: uppercase; }
+    .checkout-field { display: block; margin-bottom: 11px; }
+    .checkout-field span { display: block; margin-bottom: 5px; color: var(--ink); font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .checkout-field input, .checkout-field textarea { width: 100%; border: 1px solid var(--paper-deep); border-radius: 3px; padding: 10px 11px; color: var(--ink); background: #fff; outline: 0; font: 12px var(--body); resize: vertical; }
+    .checkout-field input { height: 40px; }
+    .checkout-field input:focus, .checkout-field textarea:focus { border-color: var(--blue); }
+    .checkout-note { margin: 9px 0 0; color: var(--muted); font-size: 9px; line-height: 1.5; }
+    .checkout:disabled { opacity: .45; cursor: not-allowed; }
+    .thank-you-modal { text-align: center; }
+    .thank-you-mark { width: 54px; height: 54px; display: grid; place-items: center; margin: 0 auto 17px; border-radius: 50%; color: #fff; background: var(--blue); font-size: 28px; font-weight: 800; }
+    .thank-you-modal .section-kicker { margin-bottom: 8px; }
+    .thank-you-modal h2 { font-size: 42px; }
+    .thank-you-order { margin: 15px 0 20px; padding: 13px; border-radius: 5px; color: var(--ink); background: var(--paper); font-size: 10px; line-height: 1.7; text-align: left; white-space: pre-line; }
+    .thank-you-modal .modal-submit { margin-top: 4px; }
+
+    @media (min-width: 1500px) {
+      .site-wrap { width: min(1680px, calc(100% - 96px)); }
+      .hero { min-height: 740px; }
+      .hero-product { width: min(84%, 900px); }
+      .product-grid { gap: 20px; }
+    }
+    @media (max-width: 1180px) {
+      .site-wrap { width: calc(100% - 40px); }
+      .topbar { grid-template-columns: minmax(140px,1fr) auto minmax(120px,1fr); gap: 12px; }
+      .nav-links { gap: 18px; }
+      .nav-links a { font-size: 10px; }
+      .nav-actions { gap: 10px; }
+      .hero { grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr); min-height: 690px; }
+      .hero-copy { padding-left: 38px; }
+      .hero-visual { left: 27%; }
+      .hero-product { width: 88%; }
+      .product-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    }
+    @media (max-width: 850px) {
+      .topbar { grid-template-columns: 1fr auto; }
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; padding: 18px; flex-direction: column; align-items: flex-start; gap: 18px; background: var(--blue-dark); box-shadow: 0 12px 20px rgba(26,26,46,.08); }
+      .nav-links.open { display: flex; }
+      .menu-toggle { display: grid; }
+      .hero { min-height: 720px; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); }
+      .hero-copy { padding-left: 28px; padding-right: 12px; }
+      .hero-visual { left: 30%; }
+      .hero-product { width: 94%; }
+      .hero-watermark { font-size: 28vw; }
+      .product-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 600px) {
+      .site-wrap { width: calc(100% - 20px); }
+      .topbar { height: 66px; }
+      .brand-logo { width: 138px; max-height: 38px; }
+      .nav-actions { gap: 5px; }
+      .icon-btn { width: 30px; height: 32px; }
+      .hero { height: auto; min-height: 980px; max-height: none; display: block; }
+      .hero-copy { position: relative; padding: 38px 20px 0; max-width: none; }
+      h1 { font-size: clamp(62px, 17vw, 100px); }
+      .hero-sub { max-width: 290px; margin-top: 17px; font-size: 12px; }
+      .hero-price-row { margin-top: 12px; }
+      .hero-buy-options { gap: 14px; margin-top: 15px; }
+      .hero-size-options { max-width: 250px; }
+      .hero-visual { inset: 470px -5px 132px 0; place-items: center; }
+      .hero-watermark { left: 1%; top: 46%; font-size: 38vw; }
+      .hero-product { width: 100%; height: 100%; max-height: 360px; transform: perspective(1000px) rotateY(-4deg) rotateZ(-7deg); }
+      .side-social { top: auto; right: 12px; bottom: 135px; flex-direction: row; }
+      .hero-bottom-line { height: 118px; padding: 10px 10px; gap: 7px; }
+      .strip-label { display: none; }
+      .mini-product { min-width: 185px; flex-basis: 185px; height: 88px; grid-template-columns: 75px 1fr; padding: 7px; }
+      .mini-product img { width: 75px; }
+      .strip-arrow { flex-basis: 30px; width: 30px; height: 30px; }
+      .section { padding: 55px 0 62px; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .product-grid { grid-template-columns: 1fr; gap: 15px; }
+      .product-photo { aspect-ratio: 1.28 / 1; padding: 12px; }
+      .product-info { padding: 14px; }
+      .product-size-options .size-chip { min-width: 31px; }
+      .product-buy-btn, .product-add-btn { min-height: 40px; }
+      .story-band { grid-template-columns: 1fr; padding: 36px 22px; }
+      .story-band .btn-light { width: max-content; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+      .cart-drawer { padding: 18px 16px; }
+      .cart-row { grid-template-columns: 65px minmax(0,1fr) auto; gap: 8px; }
+      .cart-row img { width: 65px; height: 60px; }
+      .modal { padding: 28px 22px; }
+    }
+
+    
+    /* Full-width desktop layout, original SOLECRAFT logo, and social links below the hero shoe */
+    .site-wrap {
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 !important;
+    }
+    .topbar {
+      width: 100%;
+      padding-inline: clamp(20px, 3.4vw, 64px);
+    }
+    .brand-logo {
+      width: clamp(190px, 16vw, 245px);
+      max-height: 58px;
+      object-fit: contain;
+    }
+    .section {
+      padding-left: clamp(20px, 3.8vw, 72px);
+      padding-right: clamp(20px, 3.8vw, 72px);
+    }
+    footer {
+      padding-left: clamp(20px, 3.8vw, 72px);
+      padding-right: clamp(20px, 3.8vw, 72px);
+    }
+    /* Place the social links in a horizontal row below the shoe instead of beside it. */
+    .side-social {
+      top: auto;
+      left: 66%;
+      right: auto;
+      bottom: 122px;
+      transform: translateX(-50%);
+      flex-direction: row;
+      gap: 12px;
+    }
+    .side-social a {
+      width: 36px;
+      height: 36px;
+      font-size: 13px;
+    }
+    @media (max-width: 1180px) {
+      .topbar { padding-inline: 22px; }
+      .brand-logo { width: clamp(180px, 18vw, 215px); }
+      .side-social { left: 66%; bottom: 122px; }
+    }
+    @media (max-width: 850px) {
+      .topbar { padding-inline: 18px; }
+      .brand-logo { width: 178px; max-height: 44px; }
+      .side-social {
+        left: auto;
+        right: 18px;
+        bottom: 128px;
+        transform: none;
+      }
+    }
+    @media (max-width: 600px) {
+      .topbar { padding-inline: 12px; }
+      .brand-logo { width: 142px; max-height: 38px; }
+      .section { padding-left: 14px; padding-right: 14px; }
+      footer { padding-left: 16px; padding-right: 16px; }
+      .side-social { right: 16px; bottom: 128px; gap: 8px; }
+      .side-social a { width: 32px; height: 32px; font-size: 12px; }
+    }
   </style>
 </head>
 <body>
   <div class="site-wrap">
     <header class="topbar">
-      <a class="brand" href="#top" aria-label="Solecraft home"><img class="brand-logo" src="solecraft-logo-white.png" alt="SOLECRAFT" /></a>
+      <a class="brand" href="#top" aria-label="Solecraft home"><img class="brand-logo" src="assets/solecraft-logo-white.png" alt="SOLECRAFT original logo" /></a>
       <nav class="nav-links" id="navLinks" aria-label="Main navigation">
         <a href="#products">Men</a><a href="#products">Women</a><a href="#products">Kids</a><a href="#collections">Collections</a><a href="#products">Sale</a>
       </nav>
@@ -245,14 +439,38 @@
           <h1><span id="heroTitleTop">AIR MAX</span><span class="outline" id="heroTitleBottom">SPEED TURF</span></h1>
           <p class="hero-sub" id="heroDescription">Feel the future. Move with Air. A bold classic built for all-day comfort, responsive cushioning, and unmistakable street style.</p>
           <div class="hero-price-row"><span class="hero-price" id="heroPrice">₱17,999</span><span class="hero-code" id="heroCode">Game Royal / Blue</span></div>
+          <div class="hero-buy-options">
+            <div class="hero-size-block">
+              <span class="control-label">Available sizes</span>
+              <div class="size-options hero-size-options" id="heroSizes" aria-label="Select shoe size">
+                <button type="button" class="size-chip" data-size="38">38</button>
+                <button type="button" class="size-chip" data-size="39">39</button>
+                <button type="button" class="size-chip" data-size="40">40</button>
+                <button type="button" class="size-chip active" data-size="41" aria-pressed="true">41</button>
+                <button type="button" class="size-chip" data-size="42">42</button>
+                <button type="button" class="size-chip" data-size="43">43</button>
+                <button type="button" class="size-chip" data-size="44">44</button>
+                <button type="button" class="size-chip" data-size="45">45</button>
+              </div>
+            </div>
+            <div class="hero-qty-block">
+              <span class="control-label">Quantity</span>
+              <div class="quantity-control" id="heroQuantity">
+                <button type="button" data-qty-change="-1" aria-label="Decrease quantity">−</button>
+                <output data-qty-value>1</output>
+                <button type="button" data-qty-change="1" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+          </div>
           <div class="hero-cta-row">
-            <button class="btn-dark" id="heroAdd">Shop now <svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button>
-            <button class="text-link" id="discoverBtn">Discover the shoe</button>
+            <button class="btn-dark" id="heroBuy" type="button">Buy now <svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></button>
+            <button class="btn-cart-plain" id="heroAdd" type="button">Add to cart</button>
+            <button class="text-link" id="discoverBtn" type="button">View all shoes</button>
           </div>
         </div>
         <div class="hero-visual" aria-hidden="true">
           <div class="hero-watermark" id="heroWatermark">AIR MAX</div>
-          <img class="hero-product" id="heroImage" src="air-max-speed-turf-blue.png" alt="Nike Air Max Speed Turf in royal blue" />
+          <img class="hero-product" id="heroImage" src="assets/air-max-speed-turf-blue.png" alt="Nike Air Max Speed Turf in royal blue" />
         </div>
         <div class="side-social" aria-label="Social links">
           <a href="#" aria-label="Instagram" title="Instagram">◎</a><a href="#" aria-label="Facebook" title="Facebook">f</a><a href="#" aria-label="Pinterest" title="Pinterest">p</a>
@@ -293,7 +511,15 @@
   <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart" aria-hidden="true">
     <div class="drawer-head"><h2>Your bag (<span id="drawerCount">0</span>)</h2><button class="close-btn" id="cartClose" aria-label="Close cart">×</button></div>
     <div class="cart-items" id="cartItems"><div class="cart-empty">Your bag is waiting for something good.<br/>Add a pair to get started.</div></div>
-    <div class="drawer-foot" id="drawerFoot" hidden><div class="subtotal"><span>Subtotal</span><span id="cartTotal">₱0</span></div><button class="checkout" id="checkoutBtn">Continue to checkout</button></div>
+    <form class="drawer-foot checkout-form" id="checkoutForm" hidden>
+      <div class="subtotal"><span>Subtotal</span><span id="cartTotal">₱0</span></div>
+      <div class="checkout-heading">Delivery information</div>
+      <label class="checkout-field"><span>Customer name</span><input id="customerName" name="customerName" type="text" autocomplete="name" placeholder="Full name" required /></label>
+      <label class="checkout-field"><span>Contact number</span><input id="customerPhone" name="customerPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XXXXXXXXX" minlength="10" maxlength="13" required /></label>
+      <label class="checkout-field"><span>Delivery address</span><textarea id="customerAddress" name="customerAddress" rows="3" autocomplete="street-address" placeholder="House / unit, street, barangay, city, province" required></textarea></label>
+      <button class="checkout" id="checkoutBtn" type="submit">Confirm order</button>
+      <p class="checkout-note">Demo checkout only. No payment will be collected and no order is sent to a server.</p>
+    </form>
   </aside>
 
   <div class="modal-wrap" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
@@ -310,44 +536,57 @@
     </div>
   </div>
 
+
+  <div class="modal-wrap" id="thankYouModal" role="dialog" aria-modal="true" aria-labelledby="thankYouTitle">
+    <div class="modal thank-you-modal">
+      <button class="close-btn" id="thankYouClose" aria-label="Close">×</button>
+      <div class="thank-you-mark" aria-hidden="true">✓</div>
+      <div class="section-kicker">SOLECRAFT order confirmation</div>
+      <h2 id="thankYouTitle">Thank you!</h2>
+      <p id="thankYouMessage">Thank you for shopping with SOLECRAFT. Your order details have been confirmed in this demo.</p>
+      <div class="thank-you-order" id="thankYouOrder"></div>
+      <button class="modal-submit" id="thankYouDone" type="button">Continue shopping</button>
+    </div>
+  </div>
   <div class="search-panel" id="searchPanel"><input id="searchInput" type="search" placeholder="Search shoes and collections..." aria-label="Search products" /><button id="searchClose" aria-label="Close search">×</button></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
+    const availableSizes = ['38', '39', '40', '41', '42', '43', '44', '45'];
     const shoes = [
       {
         id: 'speed-turf', name: 'Nike Air Max Speed Turf Blue', shortName: 'Air Max Speed Turf',
         titleTop: 'AIR MAX', titleBottom: 'SPEED TURF', price: 17999, priceLabel: '₱17,999',
         code: 'Game Royal / Blue', description: 'Feel the future. Move with Air. A bold classic built for all-day comfort, responsive cushioning, and unmistakable street style.',
-        image: 'air-max-speed-turf-blue.png',
-        alt: 'Royal blue Air Max Speed Turf high-top trainer', tag: 'Featured', cutout: true,
+        image: 'assets/air-max-speed-turf-blue.png', alt: 'Royal blue Air Max Speed Turf-style high-top trainer', tag: 'Featured', cutout: true,
         details: 'Royal blue upper, adjustable midfoot strap, visible Air cushioning, and durable turf-ready traction.'
       },
       {
         id: 'air-max-270', name: 'Nike Air Max 270 Red', shortName: 'Air Max 270',
         titleTop: 'AIR MAX', titleBottom: '270 RED', price: 12995, priceLabel: '₱12,995',
-        code: 'Gym Red / White', description: 'A bold everyday look with a breathable upper and the signature oversized Air unit made for comfort from morning to night.',
-        image: 'https://cdn.shopify.com/s/files/1/0603/3031/1875/files/main-square_67429d12-6b8d-4e1f-b207-8a7fc0a09795.jpg?v=1708101693',
-        alt: 'Nike Air Max 270 in red', tag: 'Popular', details: 'Red mesh upper, responsive Air cushioning, and a lightweight everyday profile.'
+        code: 'Gym Red / White', description: 'A bold red look with layered panels, a supportive strap, responsive cushioning, and rugged traction.',
+        image: 'assets/nike-air-max-270-red.png', alt: 'Red Air Max high-top sneaker cutout', tag: 'Popular', cutout: true,
+        details: 'Red upper, black woven side panel, white midsole, and visible Air cushioning.'
       },
       {
         id: 'air-max-alpha', name: 'Nike Air Max Alpha Black', shortName: 'Air Max Alpha',
         titleTop: 'AIR MAX', titleBottom: 'ALPHA', price: 8995, priceLabel: '₱8,995',
-        code: 'Triple Black', description: 'A clean training silhouette with a supportive fit and an all-black finish that works from the gym to the street.',
-        image: 'https://a.allegroimg.com/original/11513a/ffc9f6524a1884763fcc88dd4314/Buty-Meskie-Sportowe-Nike-Air-Max-Alpha-Trainer-5-Czarne-DM0829-010-R-45-5-Marka-Nike',
-        alt: 'Nike Air Max Alpha Trainer in black', tag: 'Training', details: 'Black mesh upper, supportive construction, and a stable training outsole.'
+        code: 'Triple Black', description: 'A clean all-black training look with supportive layered construction and a rugged, stable outsole.',
+        image: 'assets/nike-air-max-alpha-black.png', alt: 'Black Air Max high-top sneaker cutout', tag: 'Training', cutout: true,
+        details: 'Black upper, tonal panels, dark outsole, and visible heel cushioning.'
       },
       {
         id: 'air-max-excee', name: 'Nike Air Max Excee White', shortName: 'Air Max Excee',
         titleTop: 'AIR MAX', titleBottom: 'EXCEE', price: 9995, priceLabel: '₱9,995',
-        code: 'White / Black', description: 'A fresh, versatile classic with layered lines, a crisp white finish, and visible Air cushioning for everyday comfort.',
-        image: 'https://www.nike.com.kw/dw/image/v2/BDVB_PRD/on/demandware.static/-/Sites-akeneo-master-catalog/default/dw0f0f3f01/nk/b80/8/b/3/a/a/b808b3aa_5b71_46b9_bf2f_24f8634e256f.png',
-        alt: 'Nike Air Max Excee in white and black', tag: 'Everyday', details: 'White and platinum upper with a black Swoosh and visible Air-Sole cushioning.'
+        code: 'White / Black', description: 'A crisp white and black look with textured panels, a supportive strap, and visible Air cushioning.',
+        image: 'assets/nike-air-max-excee-white.png', alt: 'White and black Air Max high-top sneaker cutout', tag: 'Everyday', cutout: true,
+        details: 'White upper, black accents, grey woven side panel, and visible Air-Sole cushioning.'
       }
     ];
 
     let activeShoe = shoes[0];
     let selectedSize = '41';
+    let heroQuantity = 1;
     let cart = [];
     let authMode = 'login';
     let currentUser = '';
@@ -361,11 +600,39 @@
       toast.textContent = message;
       toast.classList.add('show');
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+
+    function bindQuantityControl(control, getValue, setValue) {
+      control.querySelectorAll('[data-qty-change]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const next = Math.max(1, Math.min(20, getValue() + Number(button.dataset.qtyChange)));
+          setValue(next);
+          control.querySelector('[data-qty-value]').textContent = String(next);
+        });
+      });
+    }
+
+    function bindSizeOptions(container, initialSize, onSelect) {
+      container.querySelectorAll('[data-size]').forEach((button) => {
+        const selected = button.dataset.size === String(initialSize);
+        button.classList.toggle('active', selected);
+        button.setAttribute('aria-pressed', String(selected));
+        button.addEventListener('click', () => {
+          container.querySelectorAll('[data-size]').forEach((candidate) => {
+            const active = candidate === button;
+            candidate.classList.toggle('active', active);
+            candidate.setAttribute('aria-pressed', String(active));
+          });
+          onSelect(button.dataset.size);
+        });
+      });
     }
 
     function setActiveShoe(shoe) {
       activeShoe = shoe;
+      selectedSize = '41';
+      heroQuantity = 1;
       byId('heroTitleTop').textContent = shoe.titleTop;
       byId('heroTitleBottom').textContent = shoe.titleBottom;
       byId('heroDescription').textContent = shoe.description;
@@ -373,13 +640,16 @@
       byId('heroCode').textContent = shoe.code;
       byId('heroWatermark').textContent = shoe.titleBottom;
       const image = byId('heroImage');
-      const heroVisual = document.querySelector('.hero-visual');
-      // Transparent cutouts keep the AIR MAX watermark behind the shoe; flat product photos
-      // use a subtle multiply blend with the watermark hidden so lettering never bleeds through.
-      heroVisual.classList.toggle('no-watermark', !shoe.cutout);
-      image.style.mixBlendMode = shoe.cutout ? 'normal' : 'multiply';
       image.style.opacity = '0';
-      setTimeout(() => { image.src = shoe.image; image.alt = shoe.alt; image.style.opacity = '1'; }, 120);
+      image.style.mixBlendMode = 'normal';
+      document.querySelector('.hero-visual').classList.remove('no-watermark');
+      setTimeout(() => { image.src = shoe.image; image.alt = shoe.alt; image.style.opacity = '1'; }, 100);
+      byId('heroSizes').querySelectorAll('[data-size]').forEach((button) => {
+        const selected = button.dataset.size === selectedSize;
+        button.classList.toggle('active', selected);
+        button.setAttribute('aria-pressed', String(selected));
+      });
+      byId('heroQuantity').querySelector('[data-qty-value]').textContent = '1';
       document.querySelectorAll('.mini-product').forEach((button) => {
         const selected = button.dataset.id === shoe.id;
         button.classList.toggle('active', selected);
@@ -400,25 +670,65 @@
 
     function renderProducts() {
       byId('productGrid').innerHTML = shoes.map((shoe) => `
-        <article class="product-card">
-          <div class="product-photo"><span class="product-tag">${shoe.tag}</span><img src="${shoe.image}" alt="${shoe.alt}" loading="lazy" /></div>
+        <article class="product-card" data-product="${shoe.id}">
+          <div class="product-photo">
+            <span class="product-tag">${shoe.tag}</span>
+            <img src="${shoe.image}" alt="${shoe.alt}" loading="lazy" />
+          </div>
           <div class="product-info">
-            <h3>${shoe.name}</h3><p>${shoe.code}</p>
-            <div class="product-bottom"><span class="product-price">${shoe.priceLabel}</span><button class="add-btn" data-add="${shoe.id}">Add to bag +</button></div>
+            <h3>${shoe.name}</h3>
+            <p>${shoe.code}</p>
+            <div class="product-option-block">
+              <span class="option-label">Available sizes</span>
+              <div class="size-options product-size-options" data-size-group="${shoe.id}" aria-label="Available shoe sizes">
+                ${availableSizes.map((size) => `<button type="button" class="size-chip ${size === '41' ? 'active' : ''}" data-size="${size}" aria-pressed="${size === '41'}">${size}</button>`).join('')}
+              </div>
+            </div>
+            <div class="product-control-row">
+              <span class="product-price">${shoe.priceLabel}</span>
+              <div class="quantity-control" data-product-quantity="${shoe.id}" aria-label="Quantity">
+                <button type="button" data-qty-change="-1" aria-label="Decrease quantity">−</button>
+                <output data-qty-value>1</output>
+                <button type="button" data-qty-change="1" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+            <div class="product-actions">
+              <button class="product-buy-btn" type="button" data-buy="${shoe.id}">Buy now</button>
+              <button class="product-add-btn" type="button" data-add="${shoe.id}">Add to cart</button>
+            </div>
           </div>
         </article>`).join('');
-      byId('productGrid').querySelectorAll('[data-add]').forEach((button) => {
-        button.addEventListener('click', () => addToCart(shoes.find((shoe) => shoe.id === button.dataset.add)));
+
+      byId('productGrid').querySelectorAll('.product-card').forEach((card) => {
+        const shoe = shoes.find((item) => item.id === card.dataset.product);
+        let size = '41';
+        let quantity = 1;
+        bindSizeOptions(card.querySelector('.product-size-options'), size, (next) => { size = next; });
+        bindQuantityControl(card.querySelector('[data-product-quantity]'), () => quantity, (next) => { quantity = next; });
+        card.querySelector('[data-add]').addEventListener('click', () => addToCart(shoe, size, quantity));
+        card.querySelector('[data-buy]').addEventListener('click', () => buyNow(shoe, size, quantity));
       });
     }
 
-    function addToCart(shoe) {
-      const existing = cart.find((item) => item.id === shoe.id && item.size === selectedSize);
-      if (existing) existing.quantity += 1;
-      else cart.push({ ...shoe, size: selectedSize, quantity: 1 });
+    function addToCart(shoe, size = selectedSize, quantity = 1, openDrawer = false) {
+      const existing = cart.find((item) => item.id === shoe.id && item.size === String(size));
+      if (existing) existing.quantity += Number(quantity);
+      else cart.push({ ...shoe, size: String(size), quantity: Number(quantity) });
       renderCart();
-      showToast(`${shoe.shortName} added to your bag · Size ${selectedSize}`);
-      openCart();
+      showToast(`${shoe.shortName} added to your bag · Size ${size}`);
+      if (openDrawer) openCart();
+    }
+
+    function buyNow(shoe, size = selectedSize, quantity = 1) {
+      addToCart(shoe, size, quantity, true);
+      setTimeout(() => byId('customerName').focus({ preventScroll: true }), 300);
+    }
+
+    function changeCartQuantity(index, delta) {
+      if (!cart[index]) return;
+      cart[index].quantity += delta;
+      if (cart[index].quantity <= 0) cart.splice(index, 1);
+      renderCart();
     }
 
     function renderCart() {
@@ -427,21 +737,47 @@
       byId('drawerCount').textContent = count;
       if (!cart.length) {
         byId('cartItems').innerHTML = '<div class="cart-empty">Your bag is waiting for something good.<br/>Add a pair to get started.</div>';
-        byId('drawerFoot').hidden = true;
+        byId('checkoutForm').hidden = true;
         return;
       }
-      byId('drawerFoot').hidden = false;
+      byId('checkoutForm').hidden = false;
       byId('cartItems').innerHTML = cart.map((item, index) => `
-        <div class="cart-row"><img src="${item.image}" alt="${item.alt}"/><div><strong>${item.shortName}</strong><small>Size ${item.size} · Qty ${item.quantity}</small><small>${item.priceLabel}</small></div><button class="remove-item" data-remove="${index}">Remove</button></div>`).join('');
+        <div class="cart-row">
+          <img src="${item.image}" alt="${item.alt}" />
+          <div>
+            <strong>${item.shortName}</strong>
+            <small>Size ${item.size} · ${item.code}</small>
+            <small>${item.priceLabel} each</small>
+            <div class="cart-item-controls">
+              <div class="quantity-control" aria-label="Change item quantity">
+                <button type="button" data-cart-qty="-1" data-index="${index}" aria-label="Decrease quantity">−</button>
+                <output>${item.quantity}</output>
+                <button type="button" data-cart-qty="1" data-index="${index}" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+          </div>
+          <button class="remove-item" type="button" data-remove="${index}">Remove</button>
+        </div>`).join('');
       const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
       byId('cartTotal').textContent = peso(total);
-      byId('cartItems').querySelectorAll('[data-remove]').forEach((button) => button.addEventListener('click', () => {
-        cart.splice(Number(button.dataset.remove), 1); renderCart();
-      }));
+      byId('cartItems').querySelectorAll('[data-remove]').forEach((button) => {
+        button.addEventListener('click', () => { cart.splice(Number(button.dataset.remove), 1); renderCart(); });
+      });
+      byId('cartItems').querySelectorAll('[data-cart-qty]').forEach((button) => {
+        button.addEventListener('click', () => changeCartQuantity(Number(button.dataset.index), Number(button.dataset.cartQty)));
+      });
     }
 
-    function openCart() { byId('overlay').classList.add('show'); byId('cartDrawer').classList.add('open'); byId('cartDrawer').setAttribute('aria-hidden', 'false'); }
-    function closeCart() { byId('overlay').classList.remove('show'); byId('cartDrawer').classList.remove('open'); byId('cartDrawer').setAttribute('aria-hidden', 'true'); }
+    function openCart() {
+      byId('overlay').classList.add('show');
+      byId('cartDrawer').classList.add('open');
+      byId('cartDrawer').setAttribute('aria-hidden', 'false');
+    }
+    function closeCart() {
+      byId('overlay').classList.remove('show');
+      byId('cartDrawer').classList.remove('open');
+      byId('cartDrawer').setAttribute('aria-hidden', 'true');
+    }
 
     function openAuth(mode = 'login') {
       authMode = mode;
@@ -456,8 +792,13 @@
       byId('authModal').classList.add('show');
     }
     function closeAuth() { byId('authModal').classList.remove('show'); }
+    function closeThankYou() { byId('thankYouModal').classList.remove('show'); }
 
-    byId('heroAdd').addEventListener('click', () => addToCart(activeShoe));
+    bindSizeOptions(byId('heroSizes'), selectedSize, (size) => { selectedSize = size; });
+    bindQuantityControl(byId('heroQuantity'), () => heroQuantity, (next) => { heroQuantity = next; });
+
+    byId('heroBuy').addEventListener('click', () => buyNow(activeShoe, selectedSize, heroQuantity));
+    byId('heroAdd').addEventListener('click', () => addToCart(activeShoe, selectedSize, heroQuantity));
     byId('discoverBtn').addEventListener('click', () => byId('products').scrollIntoView({ behavior: 'smooth' }));
     byId('stripNext').addEventListener('click', () => byId('stripItems').scrollBy({ left: 250, behavior: 'smooth' }));
     byId('cartOpen').addEventListener('click', openCart);
@@ -474,20 +815,47 @@
       closeAuth();
       showToast(`Welcome to SOLECRAFT, ${currentUser}!`);
     });
-    byId('checkoutBtn').addEventListener('click', () => {
-      if (!currentUser) { closeCart(); openAuth('login'); showToast('Log in to continue to checkout.'); return; }
-      showToast('Demo checkout only — connect a payment service to accept orders.');
+
+    byId('checkoutForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!cart.length) { showToast('Your bag is empty.'); return; }
+      const customerName = byId('customerName').value.trim();
+      const customerPhone = byId('customerPhone').value.trim();
+      const customerAddress = byId('customerAddress').value.trim();
+      if (!customerName || !customerPhone || !customerAddress) {
+        byId('checkoutForm').reportValidity();
+        return;
+      }
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const summary = cart.map((item) => `${item.shortName} · Size ${item.size} · Qty ${item.quantity}`).join('\n');
+      byId('thankYouMessage').textContent = `Thank you, ${customerName}! Your order has been confirmed in this SOLECRAFT demo.`;
+      byId('thankYouOrder').textContent = `${summary}
+
+Total: ${peso(total)}
+Contact: ${customerPhone}
+Delivery address: ${customerAddress}`;
+      cart = [];
+      renderCart();
+      byId('checkoutForm').reset();
+      closeCart();
+      byId('thankYouModal').classList.add('show');
     });
+
+    byId('thankYouClose').addEventListener('click', closeThankYou);
+    byId('thankYouDone').addEventListener('click', closeThankYou);
+    byId('thankYouModal').addEventListener('click', (event) => { if (event.target === byId('thankYouModal')) closeThankYou(); });
     byId('searchOpen').addEventListener('click', () => { byId('searchPanel').classList.add('show'); byId('searchInput').focus(); });
     byId('searchClose').addEventListener('click', () => byId('searchPanel').classList.remove('show'));
     byId('searchInput').addEventListener('input', (event) => {
-      const q = event.target.value.toLowerCase().trim();
-      document.querySelectorAll('.product-card').forEach((card) => { card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none'; });
-      byId('products').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const query = event.target.value.toLowerCase().trim();
+      document.querySelectorAll('.product-card').forEach((card) => { card.style.display = card.textContent.toLowerCase().includes(query) ? '' : 'none'; });
+      if (query) byId('products').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     byId('menuToggle').addEventListener('click', () => byId('navLinks').classList.toggle('open'));
     byId('navLinks').querySelectorAll('a').forEach((link) => link.addEventListener('click', () => byId('navLinks').classList.remove('open')));
-    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { closeCart(); closeAuth(); byId('searchPanel').classList.remove('show'); } });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') { closeCart(); closeAuth(); closeThankYou(); byId('searchPanel').classList.remove('show'); }
+    });
 
     renderStrip();
     renderProducts();
