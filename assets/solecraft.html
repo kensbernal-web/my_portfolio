@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0097D5" />
   <title>SOLECRAFT — Move With Air</title>
-  <link rel="preload" as="image" href="assets/air-max-speed-turf-blue.png" />
+  <link rel="preload" as="image" href="air-max-speed-turf-blue.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -412,7 +412,7 @@
 <body>
   <div class="site-wrap">
     <header class="topbar">
-      <a class="brand" href="#top" aria-label="Solecraft home"><img class="brand-logo" src="assets/solecraft-logo-white.png" alt="SOLECRAFT original logo" /></a>
+      <a class="brand" href="#top" aria-label="Solecraft home"><img class="brand-logo" src="solecraft-logo-white.png" alt="SOLECRAFT original logo" onerror="retrySolecraftAsset(this)" /></a>
       <nav class="nav-links" id="navLinks" aria-label="Main navigation">
         <a href="#products">Men</a><a href="#products">Women</a><a href="#products">Kids</a><a href="#collections">Collections</a><a href="#products">Sale</a>
       </nav>
@@ -470,7 +470,7 @@
         </div>
         <div class="hero-visual" aria-hidden="true">
           <div class="hero-watermark" id="heroWatermark">AIR MAX</div>
-          <img class="hero-product" id="heroImage" src="assets/air-max-speed-turf-blue.png" alt="Nike Air Max Speed Turf in royal blue" />
+          <img class="hero-product" id="heroImage" src="air-max-speed-turf-blue.png" alt="Nike Air Max Speed Turf in royal blue" onerror="retrySolecraftAsset(this)" />
         </div>
         <div class="side-social" aria-label="Social links">
           <a href="#" aria-label="Instagram" title="Instagram">◎</a><a href="#" aria-label="Facebook" title="Facebook">f</a><a href="#" aria-label="Pinterest" title="Pinterest">p</a>
@@ -558,28 +558,28 @@
         id: 'speed-turf', name: 'Nike Air Max Speed Turf Blue', shortName: 'Air Max Speed Turf',
         titleTop: 'AIR MAX', titleBottom: 'SPEED TURF', price: 17999, priceLabel: '₱17,999',
         code: 'Game Royal / Blue', description: 'Feel the future. Move with Air. A bold classic built for all-day comfort, responsive cushioning, and unmistakable street style.',
-        image: 'assets/air-max-speed-turf-blue.png', alt: 'Royal blue Air Max Speed Turf-style high-top trainer', tag: 'Featured', cutout: true,
+        image: 'air-max-speed-turf-blue.png', alt: 'Royal blue Air Max Speed Turf-style high-top trainer', tag: 'Featured', cutout: true,
         details: 'Royal blue upper, adjustable midfoot strap, visible Air cushioning, and durable turf-ready traction.'
       },
       {
         id: 'air-max-270', name: 'Nike Air Max 270 Red', shortName: 'Air Max 270',
         titleTop: 'AIR MAX', titleBottom: '270 RED', price: 12995, priceLabel: '₱12,995',
         code: 'Gym Red / White', description: 'A bold red look with layered panels, a supportive strap, responsive cushioning, and rugged traction.',
-        image: 'assets/nike-air-max-270-red.png', alt: 'Red Air Max high-top sneaker cutout', tag: 'Popular', cutout: true,
+        image: 'nike-air-max-270-red.png', alt: 'Red Air Max high-top sneaker cutout', tag: 'Popular', cutout: true,
         details: 'Red upper, black woven side panel, white midsole, and visible Air cushioning.'
       },
       {
         id: 'air-max-alpha', name: 'Nike Air Max Alpha Black', shortName: 'Air Max Alpha',
         titleTop: 'AIR MAX', titleBottom: 'ALPHA', price: 8995, priceLabel: '₱8,995',
         code: 'Triple Black', description: 'A clean all-black training look with supportive layered construction and a rugged, stable outsole.',
-        image: 'assets/nike-air-max-alpha-black.png', alt: 'Black Air Max high-top sneaker cutout', tag: 'Training', cutout: true,
+        image: 'nike-air-max-alpha-black.png', alt: 'Black Air Max high-top sneaker cutout', tag: 'Training', cutout: true,
         details: 'Black upper, tonal panels, dark outsole, and visible heel cushioning.'
       },
       {
         id: 'air-max-excee', name: 'Nike Air Max Excee White', shortName: 'Air Max Excee',
         titleTop: 'AIR MAX', titleBottom: 'EXCEE', price: 9995, priceLabel: '₱9,995',
         code: 'White / Black', description: 'A crisp white and black look with textured panels, a supportive strap, and visible Air cushioning.',
-        image: 'assets/nike-air-max-excee-white.png', alt: 'White and black Air Max high-top sneaker cutout', tag: 'Everyday', cutout: true,
+        image: 'nike-air-max-excee-white.png', alt: 'White and black Air Max high-top sneaker cutout', tag: 'Everyday', cutout: true,
         details: 'White upper, black accents, grey woven side panel, and visible Air-Sole cushioning.'
       }
     ];
@@ -591,6 +591,29 @@
     let authMode = 'login';
     let currentUser = '';
     let toastTimer;
+
+    // Image-path recovery: supports the intended my_portfolio/assets layout and
+    // common cases where the update ZIP was extracted into an extra folder.
+    function retrySolecraftAsset(img) {
+      const source = img.getAttribute('src') || '';
+      const filename = source.split('/').pop();
+      if (!filename) return;
+      // The user's portfolio stores solecraft.html and its PNG files together in /assets.
+      const candidates = [filename, `./${filename}`, `../assets/${filename}`, `../${filename}`];
+      const tried = new Set((img.dataset.solecraftTried || '').split('|').filter(Boolean));
+      tried.add(source);
+      for (const candidate of candidates) {
+        if (!tried.has(candidate)) {
+          tried.add(candidate);
+          img.dataset.solecraftTried = Array.from(tried).join('|');
+          img.src = candidate;
+          return;
+        }
+      }
+      img.onerror = null;
+      img.style.display = 'none';
+      console.error(`[SOLECRAFT] Could not load image: ${filename}. Keep the PNG files in the same assets folder as solecraft.html.`);
+    }
 
     const byId = (id) => document.getElementById(id);
     const peso = (value) => '₱' + Number(value).toLocaleString('en-PH');
@@ -660,7 +683,7 @@
     function renderStrip() {
       byId('stripItems').innerHTML = shoes.slice(1).concat(shoes[0]).map((shoe) => `
         <button class="mini-product ${shoe.id === activeShoe.id ? 'active' : ''}" data-id="${shoe.id}" aria-pressed="${shoe.id === activeShoe.id}">
-          <img src="${shoe.image}" alt="${shoe.alt}" loading="lazy" />
+          <img src="${shoe.image}" alt="${shoe.alt}" loading="lazy" onerror="retrySolecraftAsset(this)" />
           <span><span class="mini-name">${shoe.shortName}</span><span class="mini-price">${shoe.priceLabel}</span></span>
         </button>`).join('');
       byId('stripItems').querySelectorAll('.mini-product').forEach((button) => {
@@ -673,7 +696,7 @@
         <article class="product-card" data-product="${shoe.id}">
           <div class="product-photo">
             <span class="product-tag">${shoe.tag}</span>
-            <img src="${shoe.image}" alt="${shoe.alt}" loading="lazy" />
+            <img src="${shoe.image}" alt="${shoe.alt}" loading="lazy" onerror="retrySolecraftAsset(this)" />
           </div>
           <div class="product-info">
             <h3>${shoe.name}</h3>
@@ -743,7 +766,7 @@
       byId('checkoutForm').hidden = false;
       byId('cartItems').innerHTML = cart.map((item, index) => `
         <div class="cart-row">
-          <img src="${item.image}" alt="${item.alt}" />
+          <img src="${item.image}" alt="${item.alt}" onerror="retrySolecraftAsset(this)" />
           <div>
             <strong>${item.shortName}</strong>
             <small>Size ${item.size} · ${item.code}</small>
